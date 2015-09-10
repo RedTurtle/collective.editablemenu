@@ -1,0 +1,3 @@
+<registry>
+    <records interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings" />
+</registry>

@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  metal:use-macro="here/main_template/macros/master"
+  i18n:domain="collective.editablemenu"
+  lang="en">
+
+<body>
+  <metal:block fill-slot="top_slot"
+           tal:define="dummy python:request.set('disable_border',1)" />
+  <metal:block metal:fill-slot="style_slot">
+     <link rel="stylesheet" href="css/gmap.css"
+       tal:attributes="href string:${portal_url}/++resource++collective.editablemenu/editablemenu.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  </metal:block>
+  <metal:block fill-slot="main">
+    <h1 class="documentFirstHeading"
+          i18n:translate="editablemenu_controlpanel_title">Editable menu control panel</h1>
+    <div id="content-core">
+      <!-- <p class="discreet"
+         i18n:translate="stats_updates_view_help">
+        Show statistics about a selected folder in a defined time interval.
+      </p> -->
+      <div id="stored-settings"
+           tal:condition="stored_settings"
+           tal:define="stored_settings view/form_instance/get_stored_settings">
+        <h2 i18n:translate="">Stored settings</h2>
+        <div tal:repeat="setting stored_settings" class="menuTabPreview">
+          <div class="tabActions">
+            <a tal:attributes="href string:${context/portal_url}/@@editable-menu-settings?selected_entry=${repeat/setting/index}"
+               title="Edit tab"
+               i18n:attributes="title;">
+               <i class="fa fa-pencil">
+            </a>
+            <a tal:attributes="href string:${context/portal_url}/@@editable-menu-settings?delete_entry=${repeat/setting/index}"
+               title="Delete tab"
+               i18n:attributes="title;">
+               <i class="fa fa-trash-o">
+            </a>
+          </div>
+          <div class="tabValues">
+            <p tal:condition="setting/tab_title"
+                tal:replace="structure setting/tab_title" />
+            <p tal:define="navigation_folder python:setting.get('navigation_folder')"
+               tal:condition="navigation_folder">
+              <strong>
+                <tal:label i18n:translate="navigation_folder_label">Navigation folder</tal:label>:
+              </strong>
+              <br />
+              <a class="navigationFolderPreview" tal:content="navigation_folder/Title"
+                 tal:attributes="href navigation_folder/absolute_url;
+                                 title navigation_folder/Description"/>
+            </p>
+            <div tal:define="additional_columns setting/additional_columns"
+                 tal:condition="additional_columns">
+              <strong>
+                <tal:label i18n:translate="additional_columns_label">Additional columns</tal:label>:
+              </strong>
+              <ul tal:repeat="column additional_columns">
+                <li>
+                  <a tal:content="column/Title"
+                     tal:attributes="href column/absolute_url;
+                                     title column/Description"/>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="menu-form-input">
+          <h2 tal:condition="python:not request.get('selected_entry')"
+              i18n:translate="new_entry_label">New entry</h2>
+          <h2 tal:condition="python:request.get('selected_entry')"
+              i18n:translate="edit_entry_label">Edit entry</h2>
+          <span tal:replace="structure view/contents" />
+      </div>
+    </div>
+</metal:block>
+</body>
+
+</html>

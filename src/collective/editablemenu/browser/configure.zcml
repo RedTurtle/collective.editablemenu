@@ -1,0 +1,49 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.editablemenu">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+      />
+
+  <!-- Publish static files -->
+  <browser:resourceDirectory
+      name="collective.editablemenu"
+      directory="static"
+      />
+  <browser:page
+        name="editable-menu-settings"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.EditableMenuSettingsView"
+        permission="collective.editablemenu.permissions.ManageSettings"
+        layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+        />
+  <browser:viewlet
+      name="plone.global_sections"
+      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+      class=".viewlets.CustomGlobalSectionsViewlet"
+      template="templates/custom_sections.pt"
+      layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+      permission="zope2.View"
+      />
+  <browser:page
+    name="menu_support_view"
+    for="*"
+    class=".menu_support_view.MenuSupportView"
+    permission="zope2.View"
+    layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+    />
+    <browser:page
+      name="submenu_detail_view"
+      for="*"
+      class=".menu_support_view.SubMenuDetailView"
+      template="templates/submenu_detail_view.pt"
+      permission="zope2.View"
+      layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+      />
+</configure>

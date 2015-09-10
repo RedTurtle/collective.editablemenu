@@ -1,0 +1,5 @@
+<registry>
+    <record interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings"
+            field="menu_tabs"
+            delete="True"/>
+</registry>

@@ -1,0 +1,5 @@
+====================
+collective.editablemenu
+====================
+
+User documentation
