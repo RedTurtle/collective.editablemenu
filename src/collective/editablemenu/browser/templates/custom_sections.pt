@@ -5,14 +5,14 @@
   <div class="globalnavWrapper">
       <ul id="portal-globalnav">
       <tal:tabs tal:repeat="tab menu_tabs">
-        <li tal:define="tid tab/index"
+        <li tal:define="tid python: tab.get('index')"
             tal:attributes="id string:portaltab-${tid};
                             class python:tab.get('selected') and 'selected' or 'plain'">
           <a href=""
              tal:content="structure tab/title"
              class="menuTabLink"
              tal:attributes="href tab/url;
-                             data-tabid tid">
+                             data-tabid tid;">
             Tab Name
           </a>
         </li>
