@@ -31,7 +31,7 @@ class MenuSupportView(BrowserView):
             # because it wraps all inside a <p> tag.
             # I wrap every row inside a span, so they can be easily styled
             rows = ["<span>%s</span>" % x for x in tab_title.split("\r\n")]
-            formatted_tab_title = "<br/>".join(rows)
+            formatted_tab_title = "".join(rows)
             navigation_folder = self.get_navigation_folder(tab_settings)
             if not navigation_folder:
                 continue

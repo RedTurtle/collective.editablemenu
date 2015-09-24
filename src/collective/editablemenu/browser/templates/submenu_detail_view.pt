@@ -8,34 +8,36 @@
 <body tal:define="subitems view/get_menu_subitems;
                   dynamic_items subitems/dynamic_items;
                   static_items subitems/static_items">
-  <div tal:condition="dynamic_items" class="submenuDynamicWrapper">
-    <p class="dynamicSectionLabel"
-       i18n:translate="dynamic_section_label">
-      In this section
-    </p>
-    <ul class="submenuDynamicItems">
-      <li tal:repeat="item dynamic_items">
-        <a tal:attributes="href item/url;
-                           title item/description;
-                           class python:item.get('selected') and 'subitem subitemSelected' or 'subitem'"
-           tal:content="item/title" />
-      </li>
-    </ul>
-    <p class="dynamicSectionExploreLabel"
-       i18n:translate="dynamic_section_explore_label">
-      &rarr; Explore all the contents of this section
-    </p>
-  </div>
-  <div tal:condition="static_items" class="submenuStaticWrapper">
-    <tal:items tal:repeat="item static_items">
-      <div tal:attributes="class string:${item/id} staticItem">
-        <p tal:replace="structure item/text" />
-      </div>
-    </tal:items>
-  </div>
-  <div class="closeSubmenu">
-    <a class="closeSubmenuLink"
-       href="#">Close x</a>
+  <div class="submenuDetailsContent">                  
+    <div tal:condition="dynamic_items" class="submenuDynamicWrapper">
+      <h5 class="dynamicSectionLabel"
+         i18n:translate="dynamic_section_label">
+        In this section
+      </h5>
+      <ul class="submenuDynamicItems">
+        <li tal:repeat="item dynamic_items">
+          <a tal:attributes="href item/url;
+                             title item/description;
+                             class python:item.get('selected') and 'subitem subitemSelected' or 'subitem'"
+             tal:content="item/title" />
+        </li>
+      </ul>
+      <a class="dynamicSectionExploreLabel" href="#"
+         i18n:translate="dynamic_section_explore_label">
+        Explore all the contents of this section
+      </a>
+    </div>
+    <div tal:condition="static_items" class="submenuStaticWrapper">
+      <tal:items tal:repeat="item static_items">
+        <div tal:attributes="class string:${item/id} staticItem">
+          <p tal:replace="structure item/text" />
+        </div>
+      </tal:items>
+    </div>
+    <div class="closeSubmenu">
+      <a class="closeSubmenuLink"
+         href="#">Close</a>
+    </div>
   </div>
 </body>
 </html>

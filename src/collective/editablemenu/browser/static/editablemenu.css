@@ -17,3 +17,5 @@
 /*.navigationFolderPreview {
   display: block;
 }*/
+
+#portal-globalnav li a span { display: block; }
