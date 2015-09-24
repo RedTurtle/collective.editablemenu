@@ -26,6 +26,7 @@ class EditableMenuEditForm(form.Form):
     fields['additional_columns'].widgetFactory = MultiContentTreeFieldWidget
     menu_tabs = "collective.editablemenu.browser.interfaces.IEditableMenuSettings.menu_tabs"
     ignoreContext = True
+    control_panel_view = "@@editable-menu-settings"
 
     def render(self):
         if self.request.form.get('delete_entry'):
@@ -34,7 +35,8 @@ class EditableMenuEditForm(form.Form):
                 api.portal.show_message(
                     message='Entry deleted',
                     request=self.request)
-            return self.context.REQUEST.RESPONSE.redirect("@@editable-menu-settings")
+            self.request.response.redirect("%s/%s" % (self.context.absolute_url(),
+                                                  self.control_panel_view))
         return super(EditableMenuEditForm, self).render()
 
     @button.buttonAndHandler(_(u'Save'))
@@ -47,11 +49,13 @@ class EditableMenuEditForm(form.Form):
             api.portal.show_message(message='Changes saved', request=self.request)
         else:
             return False
-        self.context.REQUEST.RESPONSE.redirect("@@editable-menu-settings")
+        self.request.response.redirect("%s/%s" % (self.context.absolute_url(),
+                                                  self.control_panel_view))
 
     @button.buttonAndHandler(_(u'Cancel'))
     def handleCancel(self, action):
-        self.context.REQUEST.RESPONSE.redirect("@@editable-menu-settings")
+        self.request.response.redirect("%s/%s" % (self.context.absolute_url(),
+                                                  self.control_panel_view))
 
     def updateWidgets(self):
         if self.request.get('selected_entry'):

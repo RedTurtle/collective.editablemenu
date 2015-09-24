@@ -1,5 +1,15 @@
 (function($) {
   $(document).ready(function() {
+    $('a.menuTabLink').blur(function(e) {
+      var tabid = $(this).data().tabid;
+      var submenu_links = $('.globalnavWrapper .submenu-' + tabid + ' a');
+      if (submenu_links.length !== 0) {
+        e.preventDefault();
+        //set the focus to first element in the submenu
+        $(submenu_links[0]).focus();
+        return;
+      }
+    });
     $('a.menuTabLink').click(function(e) {
       e.preventDefault();
       var $this = $(this);
@@ -8,7 +18,9 @@
       if (container.hasClass("tabOpen")) {
         //close the submenu
         container.removeClass("tabOpen");
-        $(".globalnavWrapper #submenu-details").slideUp();
+        $(".globalnavWrapper #submenu-details").slideUp(function() {
+            $(".globalnavWrapper #submenu-details").remove();
+          });
         return;
       }
       //update open class
@@ -34,11 +46,26 @@
           $(".globalnavWrapper").append(result_html);
           $(".globalnavWrapper #submenu-details").hide().slideDown();
         }
+        // var submenu_links = $(".globalnavWrapper #submenu-details a");
+        // if (submenu_links.length !== 0) {
+          //set the focus to first element in the submenu
+          //$(submenu_links[0]).focus();
+        // }
       });
     });
     $('.globalnavWrapper').on('click', 'a.closeSubmenuLink', function(e) {
       e.preventDefault();
       $(".globalnavWrapper #submenu-details").slideUp();
+      var parent = $($(this).parents("#submenu-details"));
+      if (parent.length === 0) {
+        return;
+      }
+      // the class starts with "submenu-"
+      var link_id = parent.attr("class").slice(8);
+      var focus_link = $('*[data-tabid="' + link_id + '"]');
+      if (focus_link.length === 1) {
+        $(focus_link).focus();
+      }
     });
   });
 })(jQuery);

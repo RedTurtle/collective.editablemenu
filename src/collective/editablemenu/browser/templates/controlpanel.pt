@@ -29,12 +29,12 @@
             <a tal:attributes="href string:${context/portal_url}/@@editable-menu-settings?selected_entry=${repeat/setting/index}"
                title="Edit tab"
                i18n:attributes="title;">
-               <i class="fa fa-pencil">
+               <img tal:attributes="src string:${context/portal_url}/++resource++collective.editablemenu/edit_tab.png">
             </a>
             <a tal:attributes="href string:${context/portal_url}/@@editable-menu-settings?delete_entry=${repeat/setting/index}"
                title="Delete tab"
                i18n:attributes="title;">
-               <i class="fa fa-trash-o">
+               <img tal:attributes="src string:${context/portal_url}/++resource++collective.editablemenu/delete_tab.png">
             </a>
           </div>
           <div class="tabValues">

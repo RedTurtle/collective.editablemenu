@@ -9,7 +9,7 @@
         appId="collective.editablemenu"
         category="Products"
         condition_expr=""
-        icon_expr="string:${portal_url}/++resource++collective.editablemenu.resources/editablemenu.png"
+        icon_expr="string:${portal_url}/++resource++collective.editablemenu/editablemenu.png"
         url_expr="string:${portal_url}/@@editable-menu-settings"
         visible="True"
         i18n:attributes="title">
