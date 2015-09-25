@@ -8,12 +8,14 @@
     });
     $('a.menuTabLink').blur(function(e) {
       var tabid = $(this).data().tabid;
-      var submenu_links = $('.globalnavWrapper .submenu-' + tabid + ' a');
-      if (submenu_links.length !== 0) {
-        e.preventDefault();
-        //set the focus to first element in the submenu
-        $(submenu_links[0]).focus();
-        return;
+      if (tabid !== undefined) {
+        var submenu_links = $('.globalnavWrapper .submenu-' + tabid + ' a');
+        if ((submenu_links.length !== 0) && ($(".globalnavWrapper #submenu-details").is(":visible"))) {
+          e.preventDefault();
+          //set the focus to first element in the submenu
+          $(submenu_links[0]).focus();
+          return;
+        }
       }
     });
     $('a.menuTabLink').click(function(e) {
@@ -51,10 +53,22 @@
         }
         if (submenu.length !== 0) {
           //we need to remove old submenu and replace with new
-          submenu.remove();
+          if (submenu.is(":visible")) {
+            submenu.fadeOut("fast").remove();
+            $(".globalnavWrapper").append(result_html);
+            $(".globalnavWrapper #submenu-details").fadeIn();
+          }
+          else {
+            submenu.remove();
+            $(".globalnavWrapper").append(result_html);
+            $(".globalnavWrapper #submenu-details").slideDown();
+          }
         }
-        $(".globalnavWrapper").append(result_html);
-        $(".globalnavWrapper #submenu-details").slideDown();
+        else {
+          $(".globalnavWrapper").append(result_html);
+          $(".globalnavWrapper #submenu-details").slideDown();
+        }
+
         // var submenu_links = $(".globalnavWrapper #submenu-details a");
         // if (submenu_links.length !== 0) {
           //set the focus to first element in the submenu
