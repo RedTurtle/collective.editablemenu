@@ -1,5 +1,11 @@
 (function($) {
   $(document).ready(function() {
+    $(document).click(function(event) {
+      if(!$(event.target).closest('.globalnavWrapper').length) {
+        $(".globalnavWrapper #submenu-details").slideUp();
+        $(".tabOpen").removeClass("tabOpen");
+      }
+    });
     $('a.menuTabLink').blur(function(e) {
       var tabid = $(this).data().tabid;
       var submenu_links = $('.globalnavWrapper .submenu-' + tabid + ' a');
@@ -15,37 +21,40 @@
       var $this = $(this);
       var tabid = $this.data().tabid;
       var container = $this.parent();
-      if (container.hasClass("tabOpen")) {
-        //close the submenu
-        container.removeClass("tabOpen");
-        $(".globalnavWrapper #submenu-details").slideUp(function() {
-            $(".globalnavWrapper #submenu-details").remove();
-          });
-        return;
-      }
-      //update open class
-      $(".tabOpen").each(function() {
-        $(this).removeClass("tabOpen");
-      });
-      container.addClass("tabOpen");
+      var submenu = $(".globalnavWrapper #submenu-details");
       if (tabid === undefined) {
         return;
       }
+      if (container.hasClass("tabOpen")) {
+        //close the submenu
+        $(".tabOpen").removeClass("tabOpen");
+        submenu.slideUp();
+        return;
+      }
+      //else, we need to open a menu
+      $(".tabOpen").removeClass("tabOpen");
+      container.addClass("tabOpen");
+      if (submenu.length === 1) {
+        submenu_tabid = parseInt(submenu.attr('class').slice(8), 10);
+        if (submenu_tabid === tabid) {
+          //we reopen the already loaded submenu
+          submenu.slideDown();
+          return;
+        }
+      }
       var absolute_url = $('base').attr('href');
       $.get(absolute_url + "/@@submenu_detail_view?tab_id=" + tabid, function(data) {
-        var result_html = $('<div id="submenu-details" class="submenu-' + tabid +'"></div>').html(data);
+        var result_html = $('<div id="submenu-details" class="submenu-' + tabid +'" style="display: none;"></div>').html(data);
         if ($(result_html).children().length === 0) {
           //no results.
           return;
         }
-        if ($(".globalnavWrapper #submenu-details").length !== 0) {
-          $(".globalnavWrapper #submenu-details").remove();
-          $(".globalnavWrapper").append(result_html);
+        if (submenu.length !== 0) {
+          //we need to remove old submenu and replace with new
+          submenu.remove();
         }
-        else {
-          $(".globalnavWrapper").append(result_html);
-          $(".globalnavWrapper #submenu-details").hide().slideDown();
-        }
+        $(".globalnavWrapper").append(result_html);
+        $(".globalnavWrapper #submenu-details").slideDown();
         // var submenu_links = $(".globalnavWrapper #submenu-details a");
         // if (submenu_links.length !== 0) {
           //set the focus to first element in the submenu

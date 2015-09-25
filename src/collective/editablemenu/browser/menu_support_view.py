@@ -32,12 +32,13 @@ class MenuSupportView(BrowserView):
             # because it wraps all inside a <p> tag.
             # I wrap every row inside a span, so they can be easily styled
             rows = ["<span>%s</span>" % x for x in tab_title.split("\r\n")]
-            tab_dict['title'] = "<br/>".join(rows)
-            # formatted_tab_title = "".join(rows)
+            # tab_dict['title'] = "<br/>".join(rows)
+            tab_dict['title'] = "".join(rows)
             navigation_folder = self.get_navigation_folder(tab_settings)
             if navigation_folder:
                 tab_dict['url'] = navigation_folder.absolute_url()
-                tab_dict['selected'] = "/".join(navigation_folder.getPhysicalPath())
+                tab_dict['selected'] = context_path.startswith(
+                    "/".join(navigation_folder.getPhysicalPath()))
             results.append(tab_dict)
             # results.append(
             #     {'index': i,
