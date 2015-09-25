@@ -33,6 +33,7 @@ class MenuSupportView(BrowserView):
             # I wrap every row inside a span, so they can be easily styled
             rows = ["<span>%s</span>" % x for x in tab_title.split("\r\n")]
             tab_dict['title'] = "<br/>".join(rows)
+            # formatted_tab_title = "".join(rows)
             navigation_folder = self.get_navigation_folder(tab_settings)
             if navigation_folder:
                 tab_dict['url'] = navigation_folder.absolute_url()
