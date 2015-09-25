@@ -32,7 +32,7 @@
         return;
       }
       var absolute_url = $('base').attr('href');
-      $.get(absolute_url + "@@submenu_detail_view?tab_id=" + tabid, function(data) {
+      $.get(absolute_url + "/@@submenu_detail_view?tab_id=" + tabid, function(data) {
         var result_html = $('<div id="submenu-details" class="submenu-' + tabid +'"></div>').html(data);
         if ($(result_html).children().length === 0) {
           //no results.
@@ -55,6 +55,9 @@
     });
     $('.globalnavWrapper').on('click', 'a.closeSubmenuLink', function(e) {
       e.preventDefault();
+      $(".tabOpen").each(function() {
+        $(this).removeClass("tabOpen");
+      });
       $(".globalnavWrapper #submenu-details").slideUp();
       var parent = $($(this).parents("#submenu-details"));
       if (parent.length === 0) {

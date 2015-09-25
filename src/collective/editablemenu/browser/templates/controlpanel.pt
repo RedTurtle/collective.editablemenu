@@ -2,20 +2,15 @@
   xmlns:tal="http://xml.zope.org/namespaces/tal"
   xmlns:metal="http://xml.zope.org/namespaces/metal"
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  metal:use-macro="here/main_template/macros/master"
+  metal:use-macro="context/prefs_main_template/macros/master"
   i18n:domain="collective.editablemenu"
   lang="en">
 
 <body>
-  <metal:block fill-slot="top_slot"
-           tal:define="dummy python:request.set('disable_border',1)" />
-  <metal:block metal:fill-slot="style_slot">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  </metal:block>
-  <metal:block fill-slot="main">
-    <h1 class="documentFirstHeading"
-          i18n:translate="editablemenu_controlpanel_title">Editable menu control panel</h1>
+  <metal:main fill-slot="prefs_configlet_main">
     <div id="content-core">
+      <h1 class="documentFirstHeading"
+            i18n:translate="editablemenu_controlpanel_title">Editable menu control panel</h1>
       <!-- <p class="discreet"
          i18n:translate="stats_updates_view_help">
         Show statistics about a selected folder in a defined time interval.
@@ -29,12 +24,14 @@
             <a tal:attributes="href string:${context/portal_url}/@@editable-menu-settings?selected_entry=${repeat/setting/index}"
                title="Edit tab"
                i18n:attributes="title;">
-               <img tal:attributes="src string:${context/portal_url}/++resource++collective.editablemenu/edit_tab.png">
+               <img tal:attributes="src string:${context/portal_url}/++resource++collective.editablemenu/edit_tab.png"
+                     alt="Edit"/>
             </a>
             <a tal:attributes="href string:${context/portal_url}/@@editable-menu-settings?delete_entry=${repeat/setting/index}"
                title="Delete tab"
                i18n:attributes="title;">
-               <img tal:attributes="src string:${context/portal_url}/++resource++collective.editablemenu/delete_tab.png">
+               <img tal:attributes="src string:${context/portal_url}/++resource++collective.editablemenu/delete_tab.png"
+                     alt="Delete"/>
             </a>
           </div>
           <div class="tabValues">
@@ -74,7 +71,7 @@
           <span tal:replace="structure view/contents" />
       </div>
     </div>
-</metal:block>
+  </metal:main>
 </body>
 
 </html>

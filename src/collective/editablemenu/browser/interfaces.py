@@ -40,7 +40,7 @@ class IMenuEntrySubitem(Interface):
             'navigation_folder_help',
             u'Select the folder that should list its contents in the menu.'),
         source=UUIDSourceBinder(is_folderish=True),
-        required=True,
+        required=False
     )
     additional_columns = schema.List(
         title=_('additional_columns_label', u'Additional columns'),
@@ -50,7 +50,8 @@ class IMenuEntrySubitem(Interface):
         value_type=schema.Choice(
             title=_(u"Additional column"),
             source=UUIDSourceBinder(portal_type='Document')
-        )
+        ),
+        required=False
     )
 
 

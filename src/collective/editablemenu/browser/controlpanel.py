@@ -154,13 +154,13 @@ class EditableMenuEditForm(form.Form):
                 # I wrap every row inside a span, so they can be easily styled
                 rows = ["<span>%s</span>" % x for x in entry.tab_title.split("\r\n")]
                 res_dict['tab_title'] = "<br/>".join(rows)
-            navigation_folder = api.content.get(
-                UID=getattr(entry, 'navigation_folder', '')
-                )
-            if navigation_folder:
-                res_dict['navigation_folder'] = navigation_folder
+            navigation_folder_uid = getattr(entry, 'navigation_folder', '')
+            if navigation_folder_uid:
+                navigation_folder = api.content.get(UID=navigation_folder_uid)
+                if navigation_folder:
+                    res_dict['navigation_folder'] = navigation_folder
             for additional_column_uid in getattr(entry, 'additional_columns', ()):
-                additional_content =  api.content.get(
+                additional_content = api.content.get(
                     UID=additional_column_uid)
                 if additional_content:
                     res_dict['additional_columns'].append(additional_content)
@@ -185,11 +185,12 @@ class EditableMenuEditForm(form.Form):
             if getattr(selected_settings, 'tab_title', None):
                 self.request.form['form.widgets.tab_title'] = selected_settings.tab_title
             self.request.form['form.widgets.selected_entry'] = selected_entry
-            navigation_folder =  api.content.get(
-                UID=getattr(selected_settings, 'navigation_folder', '')
+            if getattr(selected_settings, 'navigation_folder', ''):
+                navigation_folder =  api.content.get(
+                    UID=getattr(selected_settings, 'navigation_folder', '')
                 )
-            if navigation_folder:
-                self.request.form['form.widgets.navigation_folder'] = "/".join(navigation_folder.getPhysicalPath())
+                if navigation_folder:
+                    self.request.form['form.widgets.navigation_folder'] = "/".join(navigation_folder.getPhysicalPath())
             for additional_column_uid in getattr(selected_settings, 'additional_columns', ()):
                 additional_content =  api.content.get(
                     UID=additional_column_uid)
