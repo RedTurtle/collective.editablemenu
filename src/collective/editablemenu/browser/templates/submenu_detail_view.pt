@@ -6,9 +6,10 @@
   lang="en">
 
 <body tal:define="subitems view/get_menu_subitems;
-                  dynamic_items subitems/dynamic_items;
-                  static_items subitems/static_items">
-  <div class="submenuDetailsContent">                  
+                  dynamic_items subitems/dynamic_items|nothing;
+                  static_items subitems/static_items|nothing;
+                  navigation_folder nocall:subitems/navigation_folder|nothing;">
+  <div class="submenuDetailsContent">
     <div tal:condition="dynamic_items" class="submenuDynamicWrapper">
       <h5 class="dynamicSectionLabel"
          i18n:translate="dynamic_section_label">
@@ -22,8 +23,12 @@
              tal:content="item/title" />
         </li>
       </ul>
-      <a class="dynamicSectionExploreLabel" href="#"
-         i18n:translate="dynamic_section_explore_label">
+      <a class="dynamicSectionExploreLabel"
+         tal:attributes="href navigation_folder/absolute_url;
+                         title string:Explore all the contents of this section"
+         i18n:translate=""
+         i18n:attributes="title;"
+         tal:condition="navigation_folder">
         Explore all the contents of this section
       </a>
     </div>

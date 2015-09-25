@@ -47,12 +47,14 @@ class MenuSupportView(BrowserView):
             # )
         return results
 
+    @view.memoize
     def get_navigation_folder(self, tab_settings):
         folder_uid = getattr(tab_settings, "navigation_folder", "")
         if not folder_uid:
             return None
         return api.content.get(UID=folder_uid)
 
+    @view.memoize
     def get_additional_columns(self, tab_settings):
         columns_uids = getattr(tab_settings, "additional_columns", [])
         results = []
@@ -74,7 +76,8 @@ class SubMenuDetailView(MenuSupportView):
         settings = self.get_selected_tab(tab_id)
         if not settings:
             return {}
-        return {'dynamic_items': self.get_dynamic_items(settings),
+        return {'navigation_folder': self.get_navigation_folder(settings),
+                'dynamic_items': self.get_dynamic_items(settings),
                 'static_items': self.get_static_items(settings)}
 
     def get_selected_tab(self, tab_id):
