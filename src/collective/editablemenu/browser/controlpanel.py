@@ -115,19 +115,24 @@ class EditableMenuEditForm(form.Form):
                 type="error")
             return False
         settings_entry.tab_title = data.get('tab_title', None)
-        navigation_folder = api.content.get(
-            UID=data.get('navigation_folder')
-            )
-        if navigation_folder:
-            settings_entry.navigation_folder = api.content.get_uuid(obj=navigation_folder)
+        if data.get('navigation_folder'):
+            navigation_folder = api.content.get(
+                UID=data.get('navigation_folder')
+                )
+            if navigation_folder:
+                settings_entry.navigation_folder = api.content.get_uuid(
+                    obj=navigation_folder)
+            else:
+                settings_entry.navigation_folder = ""
         else:
             settings_entry.navigation_folder = ""
         additional_columns = []
         for additional_column_uid in data.get('additional_columns'):
-            additional_content =  api.content.get(
+            additional_content = api.content.get(
                 UID=additional_column_uid)
             if additional_content:
-                additional_columns.append(api.content.get_uuid(obj=additional_content))
+                additional_columns.append(
+                    api.content.get_uuid(obj=additional_content))
         settings_entry.additional_columns = additional_columns
         return True
 
