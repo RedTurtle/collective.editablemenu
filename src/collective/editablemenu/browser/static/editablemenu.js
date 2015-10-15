@@ -7,6 +7,13 @@
       }
     });
     $('a.menuTabLink').blur(function(e) {
+      /*when a menutab link loses the focus, set the focus to the first
+      submenu link. Except if the event is a "close menu" event.
+      */
+      if ($(e.relatedTarget).attr('class') === 'closeSubmenuLink') {
+        $(this).focus();
+        return;
+      }
       var tabid = $(this).data().tabid;
       if (tabid !== undefined) {
         var submenu_links = $('.globalnavWrapper .submenu-' + tabid + ' a');
@@ -75,6 +82,9 @@
           //$(submenu_links[0]).focus();
         // }
       });
+    });
+    $('#portal-top').on('click', '.submenuDetailsContent a', function(e) {
+      $(this).focus();
     });
     $('.globalnavWrapper').on('click', 'a.closeSubmenuLink', function(e) {
       e.preventDefault();
