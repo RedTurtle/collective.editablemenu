@@ -40,12 +40,6 @@ class MenuSupportView(BrowserView):
                 tab_dict['selected'] = context_path.startswith(
                     "/".join(navigation_folder.getPhysicalPath()))
             results.append(tab_dict)
-            # results.append(
-            #     {'index': i,
-            #     'title': formatted_tab_title,
-            #     'url': navigation_folder.absolute_url(),
-            #     'selected': context_path.startswith(navigation_folder_path)}
-            # )
         return results
 
     @view.memoize
