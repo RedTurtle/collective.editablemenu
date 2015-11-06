@@ -105,14 +105,15 @@ class SubMenuDetailView(MenuSupportView):
         context_path = "/".join(context.getPhysicalPath())
         if IFolderish.providedBy(navigation_folder):
             for item in navigation_folder.listFolderContents():
-                item_path = "/".join(item.getPhysicalPath())
-                result_dict = {
-                    'title': item.Title(),
-                    'description': item.Description() or item.Title(),
-                    'url': item.absolute_url(),
-                    'selected': context_path.startswith(item_path)
-                }
-                results.append(result_dict)
+                if not item.exclude_from_nav():
+                    item_path = "/".join(item.getPhysicalPath())
+                    result_dict = {
+                        'title': item.Title(),
+                        'description': item.Description() or item.Title(),
+                        'url': item.absolute_url(),
+                        'selected': context_path.startswith(item_path)
+                    }
+                    results.append(result_dict)
         return results
 
     def get_static_items(self, settings):
