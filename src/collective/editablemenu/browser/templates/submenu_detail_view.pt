@@ -41,6 +41,7 @@
     </div>
     <div class="closeSubmenu">
       <a class="closeSubmenuLink"
+         i18n:translate="close_label"
          href="#">Close</a>
     </div>
   </div>

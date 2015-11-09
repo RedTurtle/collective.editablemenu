@@ -93,7 +93,7 @@ class EditableMenuEditForm(form.Form):
             )
             api.portal.show_message(
                 message=_(
-                    'no_settings_label',
+                    'invalid_entry_label',
                     'Unable to delete entry. Invalid entry number.'),
                 request=self.request,
                 type="error")

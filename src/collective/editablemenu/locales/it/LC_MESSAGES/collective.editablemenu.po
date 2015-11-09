@@ -19,128 +19,127 @@ msgstr ""
 
 #: ../browser/interfaces.py:51
 msgid "Additional column"
-msgstr ""
+msgstr "Colonna aggiuntiva"
 
 #: ../browser/controlpanel.py:55
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #: ../browser/controlpanel.pt:36
 #: ../browser/templates/controlpanel.pt:30
 msgid "Delete tab"
-msgstr ""
+msgstr "Cancella tab"
 
 #: ../browser/controlpanel.pt:31
 #: ../browser/templates/controlpanel.pt:24
 msgid "Edit tab"
-msgstr ""
+msgstr "Modifica tab"
 
 #: ../profiles/default/controlpanel.xml
 #: ../profiles/uninstall/controlpanel.xml
 msgid "Editable menu configuration"
-msgstr ""
+msgstr "Impostazioni del menu configurabile"
 
 #: ../browser/templates/submenu_detail_view.pt:26
 msgid "Explore all the contents of this section"
-msgstr ""
+msgstr "Esplora tutti i contenuti della sezione"
 
 #: ../browser/controlpanel.py:42
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #: ../browser/controlpanel.pt:28
 #: ../browser/templates/controlpanel.pt:21
 msgid "Stored settings"
-msgstr ""
+msgstr "Settaggi salvati"
 
 #: ../browser/interfaces.py:82
 msgid "Tab infos"
-msgstr ""
+msgstr "Informazioni dei tab"
 
 #. Default: "For every menu tab, select some documents that contains text for additional static columns"
 #: ../browser/interfaces.py:47
 msgid "additional_columns_help"
-msgstr ""
+msgstr "Per ogni tab del menu, seleziona dei documenti che contengono del testo per popolare le colone statiche aggiuntive."
 
 #. Default: "Additional columns"
 #: ../browser/controlpanel.pt:58
 #: ../browser/interfaces.py:46
 #: ../browser/templates/controlpanel.pt:53
 msgid "additional_columns_label"
-msgstr ""
+msgstr "Colonne aggiuntive"
 
 #. Default: "Close"
 #: ../browser/templates/submenu_detail_view.pt:43
 msgid "close_label"
-msgstr ""
+msgstr "Chiudi"
 
 #. Default: "In this section"
 #: ../browser/templates/submenu_detail_view.pt:14
 msgid "dynamic_section_label"
-msgstr ""
+msgstr "In questa sezione"
 
 #. Default: "Edit entry"
 #: ../browser/controlpanel.pt:74
 #: ../browser/templates/controlpanel.pt:69
 msgid "edit_entry_label"
-msgstr ""
+msgstr "Modifica voce"
 
 #. Default: "Editable menu control panel"
 #: ../browser/controlpanel.pt:18
 #: ../browser/templates/controlpanel.pt:12
 msgid "editablemenu_controlpanel_title"
-msgstr ""
+msgstr "Panello di controllo del menu personalizzabile"
 
 #. Default: "Unable to delete entry. Invalid entry number."
 #: ../browser/controlpanel.py:95
 msgid "invalid_entry_label"
-msgstr ""
+msgstr "Impossibile cancellare l'elemento. Identificativo non valido."
 
 #. Default: "For every menu tab, provide some additional infos"
 #: ../browser/interfaces.py:77
 msgid "menu_tabs_help"
-msgstr ""
+msgstr "Per ogni tab del menu, fornisci qualche informazione aggiuntiva"
 
 #. Default: "Menu tab entry"
 #: ../browser/interfaces.py:76
 msgid "menu_tabs_label"
-msgstr ""
+msgstr "Tab del menu"
 
 #. Default: "Select the folder that should list its contents in the menu."
 #: ../browser/interfaces.py:39
 msgid "navigation_folder_help"
-msgstr ""
+msgstr "Seleziona la cartella di cui mostrare i contenuti di primo livello nel menu."
 
 #. Default: "Navigation folder"
 #: ../browser/controlpanel.pt:48
 #: ../browser/interfaces.py:38
 #: ../browser/templates/controlpanel.pt:43
 msgid "navigation_folder_label"
-msgstr ""
+msgstr "Cartella di navigazione"
 
 #. Default: "New entry"
 #: ../browser/controlpanel.pt:72
 #: ../browser/templates/controlpanel.pt:67
 msgid "new_entry_label"
-msgstr ""
+msgstr "Nuovo elemento"
 
 #. Default: "Unable to delete entry. Empty settings"
 #: ../browser/controlpanel.py:82
 msgid "no_settings_label"
-msgstr ""
+msgstr "Impossibile cancellare l'elemento. I settaggi sono vuoti."
 
 #. Default: "Selected entry"
 #: ../browser/interfaces.py:67
 msgid "selected_entry_label"
-msgstr ""
+msgstr "Elemento selezionato"
 
 #. Default: "Insert the title of this tab."
 #: ../browser/interfaces.py:30
 msgid "tab_title_help"
-msgstr ""
+msgstr "Inserisci il titol odel tab."
 
 #. Default: "Tab title"
 #: ../browser/interfaces.py:29
 msgid "tab_title_label"
-msgstr ""
-
+msgstr "Titolo tab"
