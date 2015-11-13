@@ -105,7 +105,13 @@ class SubMenuDetailView(MenuSupportView):
         context_path = "/".join(context.getPhysicalPath())
         if IFolderish.providedBy(navigation_folder):
             for item in navigation_folder.listFolderContents():
-                if not item.exclude_from_nav():
+                try:
+                    # Archetypes
+                    exclude_from_nav = item.exclude_from_nav()
+                except TypeError:
+                    # DX Item
+                    exclude_from_nav = getattr(item, 'exclude_from_nav', False)
+                if not exclude_from_nav:
                     item_path = "/".join(item.getPhysicalPath())
                     result_dict = {
                         'title': item.Title(),
