@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.2.0 (unreleased)
+0.2.0 (2016-01-11)
 ------------------
 
 - Fix registry problems [cekk]
