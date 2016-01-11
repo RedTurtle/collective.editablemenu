@@ -44,20 +44,24 @@ class MenuSupportView(BrowserView):
 
     @view.memoize
     def get_navigation_folder(self, tab_settings):
-        folder_uid = getattr(tab_settings, "navigation_folder", "")
-        if not folder_uid:
+        folder_path = getattr(tab_settings, "navigation_folder", "")
+        if not folder_path:
             return None
-        return api.content.get(UID=folder_uid)
+        return api.content.get(path=folder_path.encode('utf-8'))
 
     @view.memoize
     def get_additional_columns(self, tab_settings):
-        columns_uids = getattr(tab_settings, "additional_columns", [])
-        results = []
-        for uid in columns_uids:
-            item = api.content.get(UID=uid)
-            if item:
-                results.append(item)
-        return results
+        """
+        return additional columns set in the settings,
+        except the items excluded from nav
+        """
+        folder_path = getattr(tab_settings, "additional_columns", [])
+        if not folder_path:
+            return []
+        folder = api.content.get(path=folder_path.encode('utf-8'))
+        if not folder:
+            return []
+        return [x for x in folder.listFolderContents() if not x.getExcludeFromNav()]
 
 
 class SubMenuDetailView(MenuSupportView):

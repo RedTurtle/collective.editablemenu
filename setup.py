@@ -45,8 +45,6 @@ setup(
     install_requires=[
         'plone.api',
         'setuptools',
-        'plone.directives.form',
-        'plone.formwidget.contenttree',
     ],
     extras_require={
         'test': [

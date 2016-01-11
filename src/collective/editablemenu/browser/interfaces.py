@@ -6,20 +6,16 @@ from zope.interface import Interface
 from zope.interface import implementer
 from plone.registry.field import PersistentField
 from z3c.form.object import registerFactoryAdapter
-from plone.formwidget.contenttree import UUIDSourceBinder
-from plone.supermodel import model
-from plone.directives import form
-from plone.formwidget.contenttree import ContentTreeFieldWidget
-from plone.formwidget.contenttree.widget import ContentTreeWidget
-from plone.app.textfield.value import RichTextValue
 
 
 class IMenuEntryPersistentObject(Interface):
     pass
 
+
 @implementer(IMenuEntryPersistentObject)
 class MenuEntryPersistentObject(PersistentField, schema.Object):
     pass
+
 
 class IMenuEntrySubitem(Interface):
     """Single entry for the editable menu configuration
@@ -34,24 +30,21 @@ class IMenuEntrySubitem(Interface):
         required=True,
     )
 
-    navigation_folder = schema.Choice(
+    navigation_folder = schema.TextLine(
         title=_("navigation_folder_label", u"Navigation folder"),
         description=_(
             'navigation_folder_help',
-            u'Select the folder that should list its contents in the menu.'),
-        source=UUIDSourceBinder(is_folderish=True),
-        required=False
+            u'Insert a path of the folder that should list its contents in the menu.'),
+        required=False,
+        default=u"",
     )
-    additional_columns = schema.List(
+    additional_columns = schema.TextLine(
         title=_('additional_columns_label', u'Additional columns'),
         description=_(
             'additional_columns_help',
-            default=u"For every menu tab, select some documents that contains text for additional static columns"),
-        value_type=schema.Choice(
-            title=_(u"Additional column"),
-            source=UUIDSourceBinder(portal_type='Document')
-        ),
-        required=False
+            default=u"Insert a path of the folder that contains pages for additional static columns"),
+        required=False,
+        default=u"",
     )
 
 
@@ -60,13 +53,6 @@ class MenuEntrySubitem(object):
     """ """
 
 registerFactoryAdapter(IMenuEntrySubitem, MenuEntrySubitem)
-
-
-class IControlpanelSchema(IMenuEntrySubitem):
-    selected_entry = schema.Int(
-        title=_("selected_entry_label", u"Selected entry"),
-        required=False,
-    )
 
 
 class IEditableMenuSettings(Interface):

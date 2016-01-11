@@ -14,6 +14,7 @@
         />
 
   <include package=".browser" />
+  <include file="upgrades.zcml" />
 
 
   <genericsetup:registerProfile
@@ -30,7 +31,6 @@
       description="Uninstalls the collective.editablemenu add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-
   <genericsetup:importStep
       name="collective.editablemenu-postInstall"
       title="collective.editablemenu post_install import step"
