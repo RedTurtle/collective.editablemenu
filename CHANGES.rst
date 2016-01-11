@@ -5,7 +5,7 @@ Changelog
 0.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix js call [cekk]
 
 
 0.2.0 (2016-01-11)
