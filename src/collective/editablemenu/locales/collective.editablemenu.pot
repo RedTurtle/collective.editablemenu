@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-10-16 14:34+0000\n"
+"POT-Creation-Date: 2016-01-11 13:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,6 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.editablemenu\n"
 
-#: ../browser/interfaces.py:51
-msgid "Additional column"
-msgstr ""
-
-#: ../browser/controlpanel.py:55
-msgid "Cancel"
-msgstr ""
-
 #: ../browser/controlpanel.pt:36
 #: ../browser/templates/controlpanel.pt:30
 msgid "Delete tab"
@@ -33,6 +25,10 @@ msgstr ""
 #: ../browser/controlpanel.pt:31
 #: ../browser/templates/controlpanel.pt:24
 msgid "Edit tab"
+msgstr ""
+
+#: ../browser/controlpanel.py:12
+msgid "Editable Menu Settings"
 msgstr ""
 
 #: ../profiles/default/controlpanel.xml
@@ -44,27 +40,23 @@ msgstr ""
 msgid "Explore all the contents of this section"
 msgstr ""
 
-#: ../browser/controlpanel.py:42
-msgid "Save"
-msgstr ""
-
 #: ../browser/controlpanel.pt:28
 #: ../browser/templates/controlpanel.pt:21
 msgid "Stored settings"
 msgstr ""
 
-#: ../browser/interfaces.py:82
+#: ../browser/interfaces.py:68
 msgid "Tab infos"
 msgstr ""
 
-#. Default: "For every menu tab, select some documents that contains text for additional static columns"
-#: ../browser/interfaces.py:47
+#. Default: "Insert a path of the folder that contains pages for additional static columns."
+#: ../browser/interfaces.py:43
 msgid "additional_columns_help"
 msgstr ""
 
 #. Default: "Additional columns"
 #: ../browser/controlpanel.pt:58
-#: ../browser/interfaces.py:46
+#: ../browser/interfaces.py:42
 #: ../browser/templates/controlpanel.pt:53
 msgid "additional_columns_label"
 msgstr ""
@@ -91,29 +83,24 @@ msgstr ""
 msgid "editablemenu_controlpanel_title"
 msgstr ""
 
-#. Default: "Unable to delete entry. Invalid entry number."
-#: ../browser/controlpanel.py:95
-msgid "invalid_entry_label"
-msgstr ""
-
 #. Default: "For every menu tab, provide some additional infos"
-#: ../browser/interfaces.py:77
+#: ../browser/interfaces.py:63
 msgid "menu_tabs_help"
 msgstr ""
 
 #. Default: "Menu tab entry"
-#: ../browser/interfaces.py:76
+#: ../browser/interfaces.py:62
 msgid "menu_tabs_label"
 msgstr ""
 
-#. Default: "Select the folder that should list its contents in the menu."
-#: ../browser/interfaces.py:39
+#. Default: "Insert a path of the folder that should list its contents in the menu."
+#: ../browser/interfaces.py:35
 msgid "navigation_folder_help"
 msgstr ""
 
 #. Default: "Navigation folder"
 #: ../browser/controlpanel.pt:48
-#: ../browser/interfaces.py:38
+#: ../browser/interfaces.py:34
 #: ../browser/templates/controlpanel.pt:43
 msgid "navigation_folder_label"
 msgstr ""
@@ -124,23 +111,13 @@ msgstr ""
 msgid "new_entry_label"
 msgstr ""
 
-#. Default: "Unable to delete entry. Empty settings"
-#: ../browser/controlpanel.py:82
-msgid "no_settings_label"
-msgstr ""
-
-#. Default: "Selected entry"
-#: ../browser/interfaces.py:67
-msgid "selected_entry_label"
-msgstr ""
-
 #. Default: "Insert the title of this tab."
-#: ../browser/interfaces.py:30
+#: ../browser/interfaces.py:26
 msgid "tab_title_help"
 msgstr ""
 
 #. Default: "Tab title"
-#: ../browser/interfaces.py:29
+#: ../browser/interfaces.py:25
 msgid "tab_title_label"
 msgstr ""
 

@@ -42,7 +42,7 @@ class IMenuEntrySubitem(Interface):
         title=_('additional_columns_label', u'Additional columns'),
         description=_(
             'additional_columns_help',
-            default=u"Insert a path of the folder that contains pages for additional static columns"),
+            default=u"Insert a path of the folder that contains pages for additional static columns."),
         required=False,
         default=u"",
     )

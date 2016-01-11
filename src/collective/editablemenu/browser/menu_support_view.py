@@ -47,6 +47,8 @@ class MenuSupportView(BrowserView):
         folder_path = getattr(tab_settings, "navigation_folder", "")
         if not folder_path:
             return None
+        if not folder_path.startswith("/"):
+            folder_path = "/" + folder_path
         return api.content.get(path=folder_path.encode('utf-8'))
 
     @view.memoize
@@ -58,6 +60,8 @@ class MenuSupportView(BrowserView):
         folder_path = getattr(tab_settings, "additional_columns", [])
         if not folder_path:
             return []
+        if not folder_path.startswith("/"):
+            folder_path = "/" + folder_path
         folder = api.content.get(path=folder_path.encode('utf-8'))
         if not folder:
             return []
