@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.2.1 (unreleased)
+0.2.1 (2016-01-11)
 ------------------
 
 - Fix js call [cekk]
