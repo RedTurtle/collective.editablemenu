@@ -19,14 +19,14 @@ long_description = (
 
 setup(
     name='collective.editablemenu',
-    version='0.2.2.dev0',
+    version='0.9.0',
     description="A customizable editable menu",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.3.6",
+        "Framework :: Plone :: 4.3",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
         "Operating System :: OS Independent",

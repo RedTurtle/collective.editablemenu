@@ -2,10 +2,11 @@ Changelog
 =========
 
 
-0.2.2 (unreleased)
+0.9.0 (2016-03-15)
 ------------------
 
-- Nothing changed yet.
+- Fix MANIFEST.in and trove classifiers in order to release package on PyPI
+  [ale-rt]
 
 
 0.2.1 (2016-01-11)

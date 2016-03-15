@@ -1,5 +1,5 @@
 graft src/cciaapd
-graft docs/
+graft docs
 include *.cfg *.rst *.in
 include *.py
 include .coveragerc
