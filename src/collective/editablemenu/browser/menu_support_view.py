@@ -16,6 +16,14 @@ class MenuSupportView(BrowserView):
     def menu_settings(self):
         return api.portal.get_registry_record(self.registry)
 
+    def exclude_from_nav(self, item):
+        try:
+            # Archetypes
+            return item.exclude_from_nav()
+        except (TypeError, AttributeError):
+            # DX Item
+            return getattr(item, 'exclude_from_nav', False)
+
     def get_menu_tabs(self):
         context = self.context.aq_inner
         context_path = "/".join(context.getPhysicalPath())
@@ -65,7 +73,11 @@ class MenuSupportView(BrowserView):
         folder = api.content.get(path=folder_path.encode('utf-8'))
         if not folder:
             return []
-        return [x for x in folder.listFolderContents() if not x.getExcludeFromNav()]
+        # return [x for x in folder.listFolderContents() if not self.exclude_from_nav(x)]
+        return filter(
+            lambda x: not self.exclude_from_nav(x),
+            folder.listFolderContents()
+        )
 
 
 class SubMenuDetailView(MenuSupportView):
@@ -113,13 +125,7 @@ class SubMenuDetailView(MenuSupportView):
         context_path = "/".join(context.getPhysicalPath())
         if IFolderish.providedBy(navigation_folder):
             for item in navigation_folder.listFolderContents():
-                try:
-                    # Archetypes
-                    exclude_from_nav = item.exclude_from_nav()
-                except TypeError:
-                    # DX Item
-                    exclude_from_nav = getattr(item, 'exclude_from_nav', False)
-                if not exclude_from_nav:
+                if not self.exclude_from_nav(item):
                     item_path = "/".join(item.getPhysicalPath())
                     result_dict = {
                         'title': item.Title(),
@@ -136,9 +142,18 @@ class SubMenuDetailView(MenuSupportView):
             return []
         results = []
         for item in additional_columns:
-            if item.getText():
-                results.append(
-                 {'id': item.getId(),
-                  'text': item.getText()}
-                )
+            text = ""
+            try:
+                # AT
+                text = item.getText()
+            except AttributeError:
+                # DX
+                text = getattr(item, 'text', None)
+                if text:
+                    text = text.output
+            if text:
+                results.append({
+                    'id': item.getId(),
+                    'text': text
+                })
         return results
