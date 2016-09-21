@@ -51,7 +51,12 @@
           return;
         }
       }
-      var baseUrl = portal_url ? portal_url : $('body').data().baseUrl;
+      var baseUrl = $('body').data().baseUrl;
+      if (!baseUrl) {
+        //plone4
+        baseUrl = portal_url;
+      }
+      // var baseUrl = portal_url ? portal_url : $('body').data().baseUrl;
       $.get(baseUrl + "/@@submenu_detail_view?tab_id=" + tabid, function(data) {
         var result_html = $('<div id="submenu-details" class="submenu-' + tabid +'" style="display: none;"></div>').html(data);
         if ($(result_html).children().length === 0) {
