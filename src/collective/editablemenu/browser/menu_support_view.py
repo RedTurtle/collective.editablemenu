@@ -65,7 +65,18 @@ class MenuSupportView(BrowserView):
         folder = api.content.get(path=folder_path.encode('utf-8'))
         if not folder:
             return []
-        return [x for x in folder.listFolderContents() if not x.getExcludeFromNav()]
+        folder_contents = folder.listFolderContents()
+        results = []
+        for element in folder_contents:
+            try:
+                # Archetypes
+                exclude_from_nav = element.exclude_from_nav()
+            except TypeError:
+                # DX Item
+                exclude_from_nav = getattr(element, 'exclude_from_nav', False)
+            if not exclude_from_nav:
+                results.append(element)
+        return results
 
 
 class SubMenuDetailView(MenuSupportView):
@@ -136,9 +147,17 @@ class SubMenuDetailView(MenuSupportView):
             return []
         results = []
         for item in additional_columns:
-            if item.getText():
-                results.append(
-                 {'id': item.getId(),
-                  'text': item.getText()}
-                )
+            try:
+                # Archetypes
+                text = item.getText()
+            except AttributeError:
+                # DX Item
+                text_attr = getattr(item, 'text', False)
+                if text_attr:
+                    text = text_attr.output
+            if text:
+                results.append({
+                    'id': item.getId(),
+                    'text': text,
+                    })
         return results
