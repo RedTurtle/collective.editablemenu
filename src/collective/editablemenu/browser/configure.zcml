@@ -20,7 +20,6 @@
       name="plone.global_sections"
       manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
       class=".viewlets.CustomGlobalSectionsViewlet"
-      template="templates/custom_sections.pt"
       layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
       permission="zope2.View"
       />

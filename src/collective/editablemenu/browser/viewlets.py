@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets import common
 
 
 class CustomGlobalSectionsViewlet(common.GlobalSectionsViewlet):
     """
     """
+    index = ViewPageTemplateFile('templates/custom_sections.pt')
 
     @property
     def menu_tabs(self):
