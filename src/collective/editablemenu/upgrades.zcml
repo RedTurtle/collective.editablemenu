@@ -11,4 +11,13 @@
         destination="1100"
         handler=".upgrades.to_1100"
         profile="collective.editablemenu:default" />
+
+  <gs:upgradeStep
+        title="Upgrade collective.editablemenu 1200"
+        description="collective.editablemenu upgrade step"
+        source="1100"
+        destination="1200"
+        handler=".upgrades.from_1100_to_1200"
+        profile="collective.editablemenu:default" />
+
 </configure>

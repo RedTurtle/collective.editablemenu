@@ -39,6 +39,9 @@ class MenuSupportView(BrowserView):
                 tab_dict['url'] = navigation_folder.absolute_url()
                 tab_dict['selected'] = context_path.startswith(
                     "/".join(navigation_folder.getPhysicalPath()))
+            if tab_settings.simple_link:
+                tab_dict['url'] = tab_settings.simple_link
+                tab_dict['clickandgo'] = True
             results.append(tab_dict)
         return results
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-01-11 13:07+0000\n"
+"POT-Creation-Date: 2016-09-29 10:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,18 +45,18 @@ msgstr "Esplora tutti i contenuti della sezione"
 msgid "Stored settings"
 msgstr "Settaggi salvati"
 
-#: ../browser/interfaces.py:68
+#: ../browser/interfaces.py:80
 msgid "Tab infos"
 msgstr "Informazioni dei tab"
 
 #. Default: "Insert a path of the folder that contains pages for additional static columns."
-#: ../browser/interfaces.py:43
+#: ../browser/interfaces.py:44
 msgid "additional_columns_help"
 msgstr "Inserisci il percorso di una cartella che contiene un elenco di pagine per le colonne aggiuntive del tab."
 
 #. Default: "Additional columns"
 #: ../browser/controlpanel.pt:58
-#: ../browser/interfaces.py:42
+#: ../browser/interfaces.py:43
 #: ../browser/templates/controlpanel.pt:53
 msgid "additional_columns_label"
 msgstr "Colonne aggiuntive"
@@ -84,12 +84,12 @@ msgid "editablemenu_controlpanel_title"
 msgstr "Panello di controllo del menu personalizzabile"
 
 #. Default: "For every menu tab, provide some additional infos"
-#: ../browser/interfaces.py:63
+#: ../browser/interfaces.py:75
 msgid "menu_tabs_help"
 msgstr "Per ogni tab del menu, fornisci qualche informazione aggiuntiva"
 
 #. Default: "Menu tab entry"
-#: ../browser/interfaces.py:62
+#: ../browser/interfaces.py:74
 msgid "menu_tabs_label"
 msgstr "Tab del menu"
 
@@ -111,6 +111,16 @@ msgstr "Cartella di navigazione"
 msgid "new_entry_label"
 msgstr "Nuovo elemento"
 
+#. Default: "Insert a path of an element; this will override previous settings and you will see just a single link in menu without submenu."
+#: ../browser/interfaces.py:53
+msgid "simple_link_help"
+msgstr "Inserire un url interno o esterno al sito; questo sovrascriverà le altre impostazioni e la voce di menù sara cliccabile senza aprire un sottomenu"
+
+#. Default: "Simple Link"
+#: ../browser/interfaces.py:52
+msgid "simple_link_label"
+msgstr "Link Semplice"
+
 #. Default: "Insert the title of this tab."
 #: ../browser/interfaces.py:26
 msgid "tab_title_help"
@@ -120,3 +130,4 @@ msgstr "Inserisci il titol odel tab."
 #: ../browser/interfaces.py:25
 msgid "tab_title_label"
 msgstr "Titolo tab"
+

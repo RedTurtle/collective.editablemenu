@@ -26,6 +26,9 @@
       }
     });
     $('a.menuTabLink').click(function(e) {
+      if ($(e.currentTarget).hasClass('clickandgo')){
+          return true;
+      }
       e.preventDefault();
       var $this = $(this);
       var tabid = $this.data().tabid;

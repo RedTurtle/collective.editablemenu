@@ -34,7 +34,8 @@ class IMenuEntrySubitem(Interface):
         title=_("navigation_folder_label", u"Navigation folder"),
         description=_(
             'navigation_folder_help',
-            u'Insert a path of the folder that should list its contents in the menu.'),
+            u'Insert a path of the folder that should list'
+            ' its contents in the menu.'),
         required=False,
         default=u"",
     )
@@ -42,7 +43,18 @@ class IMenuEntrySubitem(Interface):
         title=_('additional_columns_label', u'Additional columns'),
         description=_(
             'additional_columns_help',
-            default=u"Insert a path of the folder that contains pages for additional static columns."),
+            default=u"Insert a path of the folder that contains pages for"
+                    " additional static columns."),
+        required=False,
+        default=u"",
+    )
+    simple_link = schema.TextLine(
+        title=_('simple_link_label', u'Simple Link'),
+        description=_(
+            'simple_link_help',
+            default=u"Insert a path of an element; this will override previous"
+                    " settings and you will see just a single link in menu"
+                    " without submenu."),
         required=False,
         default=u"",
     )
