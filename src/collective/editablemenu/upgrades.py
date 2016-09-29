@@ -43,14 +43,8 @@ def generate_new_settings_for_1200():
         new_entry.additional_columns = u""
         new_entry.navigation_folder = u""
         new_entry.simple_link = u""
-        navigation_folder = None
-        if setting.navigation_folder:
-            navigation_folder = api.content.get(UID=setting.navigation_folder)
-        if navigation_folder:
-            new_entry.navigation_folder = "/".join(
-                          navigation_folder.getPhysicalPath()).decode('utf-8')
-        # we don't migrate additional columns because we can't know what's the
-        # common folder.
+        for key in setting.__dict__:
+            setattr(new_entry, key, getattr(setting, key))
         new_settings.append(new_entry)
     return tuple(new_settings)
 
