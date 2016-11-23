@@ -7,6 +7,8 @@ Changelog
 
 - Added Dexterity support for the static portion of the menu [pnicolli]
 - Page template now loaded inside the class to allow easier viewlet cloning [pnicolli]
+- Add simple "not expansible" link in menu [lucabel]
+- Add possibility to condition tab visibility the same way portal_tabs did it [lucabel]
 
 
 0.9.0 (2016-03-15)
