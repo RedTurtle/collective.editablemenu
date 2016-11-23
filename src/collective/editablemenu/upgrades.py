@@ -29,6 +29,13 @@ def from_1100_to_1200(context):
     setup_tool.runImportStepFromProfile(default_profile, 'plone.app.registry')
     api.portal.set_registry_record(REGISTRY_NAME, new_settings)
 
+def from_1200_to_1300(context):
+    logger.info('Upgrading collective.editablemenu to version 1200')
+    setup_tool = getToolByName(context, 'portal_setup')
+    new_settings = generate_new_settings_for_1300()
+    setup_tool.runImportStepFromProfile(default_profile, 'plone.app.registry')
+    api.portal.set_registry_record(REGISTRY_NAME, new_settings)
+
 
 def generate_new_settings_for_1200():
     """
@@ -48,6 +55,24 @@ def generate_new_settings_for_1200():
         new_settings.append(new_entry)
     return tuple(new_settings)
 
+def generate_new_settings_for_1300():
+    """
+    """
+    old_settings = api.portal.get_registry_record(REGISTRY_NAME)
+    if not old_settings:
+        return
+    new_settings = []
+    for setting in old_settings:
+        new_entry = MenuEntrySubitem()
+        new_entry.tab_title = setting.tab_title
+        new_entry.additional_columns = u""
+        new_entry.navigation_folder = u""
+        new_entry.simple_link = u""
+        for key in setting.__dict__:
+            setattr(new_entry, key, getattr(setting, key))
+        new_entry.condition = u'python: True'
+        new_settings.append(new_entry)
+    return tuple(new_settings)
 
 def generate_new_settings():
     """

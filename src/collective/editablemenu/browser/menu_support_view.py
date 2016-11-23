@@ -4,6 +4,7 @@ from plone import api
 from collective.editablemenu import logger
 from plone.memoize import view
 from Products.CMFCore.interfaces import IFolderish
+from Products.CMFCore.Expression import Expression, getExprContext
 
 
 class MenuSupportView(BrowserView):
@@ -23,7 +24,20 @@ class MenuSupportView(BrowserView):
         if not settings:
             return []
         results = []
+
         for i, tab_settings in enumerate(settings):
+            # evaluate condition
+            condition = tab_settings.condition or ''
+            expression = Expression(condition)
+            expression_context = getExprContext(self.context, self.context)
+            value = expression(expression_context)
+
+            if isinstance(value, basestring) and value.strip() == "":
+                value = True
+
+            if not value:
+                continue
+
             tab_title = getattr(tab_settings, "tab_title", '')
             if not tab_title:
                 continue

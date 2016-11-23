@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-09-29 10:41+0000\n"
+"POT-Creation-Date: 2016-11-23 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr "Esplora tutti i contenuti della sezione"
 msgid "Stored settings"
 msgstr "Settaggi salvati"
 
-#: ../browser/interfaces.py:80
+#: ../browser/interfaces.py:91
 msgid "Tab infos"
 msgstr "Informazioni dei tab"
 
@@ -66,6 +66,16 @@ msgstr "Colonne aggiuntive"
 msgid "close_label"
 msgstr "Chiudi"
 
+#. Default: "Insert condition (you can use variables like object,portal, request, here, member... See complete list here: http://docs.plone.org/develop/plone/functionality/expressions.html#expression-variables)"
+#: ../browser/interfaces.py:63
+msgid "condition_help"
+msgstr "Inserire una condizione di visibilità del tab (si possono usare variabili come 'object', 'portal', 'request', 'here', 'member', etc... Se ne può vedere una lista qui: http://docs.plone.org/develop/plone/functionality/expressions.html#expression-variables)"
+
+#. Default: "Condition"
+#: ../browser/interfaces.py:62
+msgid "condition_label"
+msgstr "Condizione"
+
 #. Default: "In this section"
 #: ../browser/templates/submenu_detail_view.pt:14
 msgid "dynamic_section_label"
@@ -84,12 +94,12 @@ msgid "editablemenu_controlpanel_title"
 msgstr "Panello di controllo del menu personalizzabile"
 
 #. Default: "For every menu tab, provide some additional infos"
-#: ../browser/interfaces.py:75
+#: ../browser/interfaces.py:86
 msgid "menu_tabs_help"
 msgstr "Per ogni tab del menu, fornisci qualche informazione aggiuntiva"
 
 #. Default: "Menu tab entry"
-#: ../browser/interfaces.py:74
+#: ../browser/interfaces.py:85
 msgid "menu_tabs_label"
 msgstr "Tab del menu"
 

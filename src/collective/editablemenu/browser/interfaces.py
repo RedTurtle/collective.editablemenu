@@ -58,6 +58,17 @@ class IMenuEntrySubitem(Interface):
         required=False,
         default=u"",
     )
+    condition = schema.TextLine(
+        title=_('condition_label', u'Condition'),
+        description=_(
+            'condition_help',
+            default=u"Insert condition (you can use variables like object,"
+                    "portal, request, here, member... See complete list here:"
+                    " http://docs.plone.org/develop/plone/functionality/expres"
+                    "sions.html#expression-variables)"),
+        required=False,
+        default=u"python: True",
+    )
 
 
 @implementer(IMenuEntrySubitem)
