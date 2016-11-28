@@ -5,6 +5,7 @@ from collective.editablemenu import logger
 from plone.memoize import view
 from Products.CMFCore.interfaces import IFolderish
 from Products.CMFCore.Expression import Expression, getExprContext
+from AccessControl import Unauthorized
 
 
 class MenuSupportView(BrowserView):
@@ -16,6 +17,14 @@ class MenuSupportView(BrowserView):
     @view.memoize
     def menu_settings(self):
         return api.portal.get_registry_record(self.registry)
+
+    def exclude_from_nav(self, item):
+        try:
+            # Archetypes
+            return item.exclude_from_nav()
+        except (TypeError, AttributeError):
+            # DX Item
+            return getattr(item, 'exclude_from_nav', False)
 
     def get_menu_tabs(self):
         context = self.context.aq_inner
@@ -41,6 +50,7 @@ class MenuSupportView(BrowserView):
             tab_title = getattr(tab_settings, "tab_title", '')
             if not tab_title:
                 continue
+
             tab_dict = {'index': i}
             # this text is used inside a link, so i can't use portal_transorms
             # because it wraps all inside a <p> tag.
@@ -48,7 +58,12 @@ class MenuSupportView(BrowserView):
             rows = ["<span>%s</span>" % x for x in tab_title.split("\r\n")]
             # tab_dict['title'] = "<br/>".join(rows)
             tab_dict['title'] = "".join(rows)
+
             navigation_folder = self.get_navigation_folder(tab_settings)
+            #need to do something better
+            if navigation_folder == '__skip_this_folder__':
+                continue
+
             if navigation_folder:
                 tab_dict['url'] = navigation_folder.absolute_url()
                 tab_dict['selected'] = context_path.startswith(
@@ -66,7 +81,13 @@ class MenuSupportView(BrowserView):
             return None
         if not folder_path.startswith("/"):
             folder_path = "/" + folder_path
-        return api.content.get(path=folder_path.encode('utf-8'))
+        try:
+            obj = api.content.get(path=folder_path.encode('utf-8'))
+        except Unauthorized:
+            return '__skip_this_folder__'
+        # don't want to check for other exception! need to know if this menu
+        # breaks
+        return obj
 
     @view.memoize
     def get_additional_columns(self, tab_settings):
@@ -82,18 +103,11 @@ class MenuSupportView(BrowserView):
         folder = api.content.get(path=folder_path.encode('utf-8'))
         if not folder:
             return []
-        folder_contents = folder.listFolderContents()
-        results = []
-        for element in folder_contents:
-            try:
-                # Archetypes
-                exclude_from_nav = element.exclude_from_nav()
-            except TypeError:
-                # DX Item
-                exclude_from_nav = getattr(element, 'exclude_from_nav', False)
-            if not exclude_from_nav:
-                results.append(element)
-        return results
+        # return [x for x in folder.listFolderContents() if not self.exclude_from_nav(x)]
+        return filter(
+            lambda x: not self.exclude_from_nav(x),
+            folder.listFolderContents()
+        )
 
 
 class SubMenuDetailView(MenuSupportView):
@@ -141,13 +155,7 @@ class SubMenuDetailView(MenuSupportView):
         context_path = "/".join(context.getPhysicalPath())
         if IFolderish.providedBy(navigation_folder):
             for item in navigation_folder.listFolderContents():
-                try:
-                    # Archetypes
-                    exclude_from_nav = item.exclude_from_nav()
-                except TypeError:
-                    # DX Item
-                    exclude_from_nav = getattr(item, 'exclude_from_nav', False)
-                if not exclude_from_nav:
+                if not self.exclude_from_nav(item):
                     item_path = "/".join(item.getPhysicalPath())
                     result_dict = {
                         'title': item.Title(),
@@ -164,17 +172,18 @@ class SubMenuDetailView(MenuSupportView):
             return []
         results = []
         for item in additional_columns:
+            text = ""
             try:
-                # Archetypes
+                # AT
                 text = item.getText()
             except AttributeError:
-                # DX Item
-                text_attr = getattr(item, 'text', False)
-                if text_attr:
-                    text = text_attr.output
+                # DX
+                text = getattr(item, 'text', None)
+                if text:
+                    text = text.output
             if text:
                 results.append({
                     'id': item.getId(),
-                    'text': text,
-                    })
+                    'text': text
+                })
         return results

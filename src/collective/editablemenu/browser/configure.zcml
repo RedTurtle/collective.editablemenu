@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.editablemenu">
 
   <!-- Publish static files -->
@@ -16,13 +17,27 @@
         permission="collective.editablemenu.permissions.ManageSettings"
         layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
         />
+
+
   <browser:viewlet
+      zcml:condition="have plone-4"
       name="plone.global_sections"
       manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
       class=".viewlets.CustomGlobalSectionsViewlet"
       layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
       permission="zope2.View"
       />
+
+  <browser:viewlet
+      zcml:condition="have plone-5"
+      name="plone.global_sections"
+      manager="plone.app.layout.viewlets.interfaces.IMainNavigation"
+      class=".viewlets.CustomGlobalSectionsViewlet"
+      template="templates/custom_sections.pt"
+      layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+      permission="zope2.View"
+      />
+
   <browser:page
     name="menu_support_view"
     for="*"

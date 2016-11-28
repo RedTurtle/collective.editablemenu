@@ -9,6 +9,8 @@ Changelog
 - Page template now loaded inside the class to allow easier viewlet cloning [pnicolli]
 - Add simple "not expansible" link in menu [lucabel]
 - Add possibility to condition tab visibility the same way portal_tabs did it [lucabel]
+- Add Plone5 compatibility (no resourse registry)
+  [cekk]
 
 
 0.9.0 (2016-03-15)
