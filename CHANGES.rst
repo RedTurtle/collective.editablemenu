@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.9.1 (unreleased)
+0.9.1 (2016-12-02)
 ------------------
 
 - Added Dexterity support for the static portion of the menu [pnicolli]
