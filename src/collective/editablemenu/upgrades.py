@@ -30,7 +30,7 @@ def from_1100_to_1200(context):
     api.portal.set_registry_record(REGISTRY_NAME, new_settings)
 
 def from_1200_to_1300(context):
-    logger.info('Upgrading collective.editablemenu to version 1200')
+    logger.info('Upgrading collective.editablemenu to version 1300')
     setup_tool = getToolByName(context, 'portal_setup')
     new_settings = generate_new_settings_for_1300()
     setup_tool.runImportStepFromProfile(default_profile, 'plone.app.registry')
