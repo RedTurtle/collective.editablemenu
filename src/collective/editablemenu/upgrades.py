@@ -5,7 +5,8 @@ from plone import api
 from collective.editablemenu.browser.interfaces import MenuEntrySubitem
 
 default_profile = 'profile-collective.editablemenu:default'
-REGISTRY_NAME = "collective.editablemenu.browser.interfaces.IEditableMenuSettings.menu_tabs"
+REGISTRY_NAME = "collective.editablemenu.browser.interfaces." + \
+    "IEditableMenuSettings.menu_tabs"
 
 
 def to_1100(context):
@@ -28,6 +29,7 @@ def from_1100_to_1200(context):
     new_settings = generate_new_settings_for_1200()
     setup_tool.runImportStepFromProfile(default_profile, 'plone.app.registry')
     api.portal.set_registry_record(REGISTRY_NAME, new_settings)
+
 
 def from_1200_to_1300(context):
     logger.info('Upgrading collective.editablemenu to version 1300')
@@ -55,6 +57,7 @@ def generate_new_settings_for_1200():
         new_settings.append(new_entry)
     return tuple(new_settings)
 
+
 def generate_new_settings_for_1300():
     """
     """
@@ -74,6 +77,7 @@ def generate_new_settings_for_1300():
         new_settings.append(new_entry)
     return tuple(new_settings)
 
+
 def generate_new_settings():
     """
     """
@@ -88,7 +92,10 @@ def generate_new_settings():
         new_entry.navigation_folder = u""
         navigation_folder = api.content.get(UID=setting.navigation_folder)
         if navigation_folder:
-            new_entry.navigation_folder = "/".join(navigation_folder.getPhysicalPath()).decode('utf-8')
-        # we don't migrate additional columns because we can't know what's the common folder.
+            new_entry.navigation_folder = "/".join(
+                navigation_folder.getPhysicalPath()
+            ).decode('utf-8')
+        # we don't migrate additional columns because we can't
+        # know what's the common folder.
         new_settings.append(new_entry)
     return tuple(new_settings)

@@ -11,7 +11,8 @@ from AccessControl import Unauthorized
 class MenuSupportView(BrowserView):
     """
     """
-    registry = "collective.editablemenu.browser.interfaces.IEditableMenuSettings.menu_tabs"
+    registry = "collective.editablemenu.browser.interfaces." + \
+        "IEditableMenuSettings.menu_tabs"
 
     @property
     @view.memoize
@@ -60,7 +61,7 @@ class MenuSupportView(BrowserView):
             tab_dict['title'] = "".join(rows)
 
             navigation_folder = self.get_navigation_folder(tab_settings)
-            #need to do something better
+            # need to do something better
             if navigation_folder == '__skip_this_folder__':
                 continue
 
@@ -103,7 +104,7 @@ class MenuSupportView(BrowserView):
         folder = api.content.get(path=folder_path.encode('utf-8'))
         if not folder:
             return []
-        # return [x for x in folder.listFolderContents() if not self.exclude_from_nav(x)]
+        # return folder contents not excluded from navigation
         return filter(
             lambda x: not self.exclude_from_nav(x),
             folder.listFolderContents()
@@ -131,7 +132,8 @@ class SubMenuDetailView(MenuSupportView):
                 tab_id = int(tab_id)
             except ValueError:
                 logger.error(
-                    "Invalid index number (%s). Unable to retrieve configuration." % tab_id
+                    "Invalid index number " +
+                    "(%s). Unable to retrieve configuration." % tab_id
                 )
                 return None
         settings = self.menu_settings
@@ -141,7 +143,7 @@ class SubMenuDetailView(MenuSupportView):
             return settings[tab_id]
         except IndexError:
             logger.error(
-                "Index(%s) not found in menu settings. Unable to retrieve configuration." % tab_id
+                "Index(%s) not found in menu settings. Unable to retrieve configuration." % tab_id  # noqa
             )
             return None
         return None
