@@ -6,25 +6,25 @@
         $(".tabOpen").removeClass("tabOpen");
       }
     });
-    $('a.menuTabLink').blur(function(e) {
+    //$('a.menuTabLink').blur(function(e) {
       /*when a menutab link loses the focus, set the focus to the first
       submenu link. Except if the event is a "close menu" event.
       */
-      if ($(e.relatedTarget).attr('class') === 'closeSubmenuLink') {
-        $(this).focus();
-        return;
-      }
-      var tabid = $(this).data().tabid;
-      if (tabid !== undefined) {
-        var submenu_links = $('.globalnavWrapper .submenu-' + tabid + ' a');
-        if ((submenu_links.length !== 0) && ($(".globalnavWrapper #submenu-details").is(":visible"))) {
-          e.preventDefault();
-          //set the focus to first element in the submenu
-          $(submenu_links[0]).focus();
-          return;
-        }
-      }
-    });
+      //if ($(e.relatedTarget).attr('class') === 'closeSubmenuLink') {
+        //$(this).focus();
+        //return;
+      //}
+      //var tabid = $(this).data().tabid;
+      //if (tabid !== undefined) {
+        //var submenu_links = $('.globalnavWrapper .submenu-' + tabid + ' a');
+        //if ((submenu_links.length !== 0) && ($(".globalnavWrapper #submenu-details").is(":visible"))) {
+          //e.preventDefault();
+          ////set the focus to first element in the submenu
+          //$(submenu_links[0]).focus();
+          //return;
+        //}
+      //}
+    //});
     $('a.menuTabLink').click(function(e) {
       if ($(e.currentTarget).hasClass('clickandgo')){
           return true;
@@ -70,17 +70,20 @@
           //we need to remove old submenu and replace with new
           if (submenu.is(":visible")) {
             submenu.fadeOut("fast").remove();
-            $(".globalnavWrapper").append(result_html);
+            //$(".globalnavWrapper").append(result_html);
+            container.append(result_html);
             $(".globalnavWrapper #submenu-details").fadeIn();
           }
           else {
             submenu.remove();
-            $(".globalnavWrapper").append(result_html);
+            //$(".globalnavWrapper").append(result_html);
+            container.append(result_html);
             $(".globalnavWrapper #submenu-details").slideDown();
           }
         }
         else {
-          $(".globalnavWrapper").append(result_html);
+          //$(".globalnavWrapper").append(result_html);
+          container.append(result_html);
           $(".globalnavWrapper #submenu-details").slideDown();
         }
 

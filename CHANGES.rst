@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+0.10.0 (unreleased)
+-------------------
+
+- BREAKING: Submenus are now created inside the menu <li> element, instead of after the whole <ul> [pnicolli]
+
+
 0.9.1 (2016-12-02)
 ------------------
 
