@@ -19,7 +19,7 @@ long_description = (
 
 setup(
     name='collective.editablemenu',
-    version='0.10.0',
+    version='0.10.1.dev0',
     description="A customizable editable menu",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
