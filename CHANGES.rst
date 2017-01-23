@@ -5,7 +5,7 @@ Changelog
 0.10.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix upgrade steps [lucabel]
 
 
 0.10.0 (2017-01-20)
