@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.10.1 (unreleased)
+0.10.1 (2017-01-23)
 -------------------
 
 - Fix upgrade steps [lucabel]
