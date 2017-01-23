@@ -9,6 +9,25 @@ REGISTRY_NAME = "collective.editablemenu.browser.interfaces." + \
     "IEditableMenuSettings.menu_tabs"
 
 
+# fields and defaults. 'cause we need to add properties we have in
+# MenuEntrySubItems when we upgrade menu. we could have problem from oldest
+# version when we need to upgrade to different new ones
+FIELDS = {
+    'tab_title': u'',
+    'navigation_folder': u'',
+    'additional_columns': u'',
+    'simple_link': u'',
+    'condition': u'python: True'
+}
+
+
+def filler(new_entry):
+    for field in FIELDS:
+        if not hasattr(new_entry, field):
+            setattr(new_entry, field, FIELDS[field])
+    return new_entry
+
+
 def to_1100(context):
     """
     delete old registry configuration and add a new one
@@ -54,6 +73,7 @@ def generate_new_settings_for_1200():
         new_entry.simple_link = u""
         for key in setting.__dict__:
             setattr(new_entry, key, getattr(setting, key))
+        new_entry = filler(new_entry)
         new_settings.append(new_entry)
     return tuple(new_settings)
 
@@ -73,7 +93,7 @@ def generate_new_settings_for_1300():
         new_entry.simple_link = u""
         for key in setting.__dict__:
             setattr(new_entry, key, getattr(setting, key))
-        new_entry.condition = u'python: True'
+        new_entry = filler(new_entry)
         new_settings.append(new_entry)
     return tuple(new_settings)
 
