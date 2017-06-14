@@ -134,7 +134,7 @@ msgstr "Link Semplice"
 #. Default: "Insert the title of this tab."
 #: ../browser/interfaces.py:26
 msgid "tab_title_help"
-msgstr "Inserisci il titol odel tab."
+msgstr "Inserisci il titolo del tab."
 
 #. Default: "Tab title"
 #: ../browser/interfaces.py:25
