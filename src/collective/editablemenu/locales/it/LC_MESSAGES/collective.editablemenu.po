@@ -124,7 +124,7 @@ msgstr "Nuovo elemento"
 #. Default: "Insert a path of an element; this will override previous settings and you will see just a single link in menu without submenu."
 #: ../browser/interfaces.py:53
 msgid "simple_link_help"
-msgstr "Inserire un url interno o esterno al sito; questo sovrascriverà le altre impostazioni e la voce di menù sara cliccabile senza aprire un sottomenu"
+msgstr "Inserire un percorso interno o un link esterno al sito; questo sovrascriverà le altre impostazioni e la voce di menù sara cliccabile senza aprire un sottomenu"
 
 #. Default: "Simple Link"
 #: ../browser/interfaces.py:52
@@ -140,4 +140,3 @@ msgstr "Inserisci il titolo del tab."
 #: ../browser/interfaces.py:25
 msgid "tab_title_label"
 msgstr "Titolo tab"
-

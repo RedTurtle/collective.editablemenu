@@ -70,10 +70,18 @@ class MenuSupportView(BrowserView):
                 tab_dict['selected'] = context_path.startswith(
                     "/".join(navigation_folder.getPhysicalPath()))
             if tab_settings.simple_link:
-                tab_dict['url'] = tab_settings.simple_link
+                tab_dict['url'] = self.fixLink(tab_settings.simple_link)
                 tab_dict['clickandgo'] = True
             results.append(tab_dict)
         return results
+
+    def fixLink(self, link):
+        if link.startswith('http'):
+            return link
+        return "{}/{}".format(
+            api.portal.get().absolute_url(),
+            link.lstrip("/")
+        )
 
     @view.memoize
     def get_navigation_folder(self, tab_settings):

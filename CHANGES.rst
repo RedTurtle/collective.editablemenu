@@ -5,7 +5,9 @@ Changelog
 0.10.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix url generation for simple_link field. Now can handle correctly both
+  internal or external links.
+  [cekk]
 
 
 0.10.1 (2017-01-23)
