@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.10.2 (unreleased)
+0.2.0 (unreleased)
 -------------------
 
 - Fix url generation for simple_link field. Now can handle correctly both
