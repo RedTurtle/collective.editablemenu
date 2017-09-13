@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-0.2.0 (unreleased)
--------------------
+0.2.0 (2017-09-13)
+------------------
 
 - Fix url generation for simple_link field. Now can handle correctly both
   internal or external links.
