@@ -2,14 +2,7 @@ Changelog
 =========
 
 
-0.2.1 (2017-09-13)
-------------------
-
-- Fix pypi classifiers
-  [cekk]
-
-
-0.2.0 (2017-09-13)
+0.10.2 (2017-09-13)
 ------------------
 
 - Fix url generation for simple_link field. Now can handle correctly both
