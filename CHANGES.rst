@@ -5,7 +5,8 @@ Changelog
 0.10.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix zcml condition for registering the global_sections viewlet. It was adding two different viewlets simultaneously on Plone 5, now one of those is gone.
+  [pnicolli]
 
 
 0.10.2 (2017-09-13)
