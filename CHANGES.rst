@@ -7,6 +7,8 @@ Changelog
 
 - Fix zcml condition for registering the global_sections viewlet. It was adding two different viewlets simultaneously on Plone 5, now one of those is gone.
   [pnicolli]
+- plone.protect js script was being added to the submenu html, now it's removed manually from the async response.
+  [pnicolli]
 
 
 0.10.2 (2017-09-13)
