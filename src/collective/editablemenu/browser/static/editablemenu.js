@@ -61,7 +61,9 @@
       }
       // var baseUrl = portal_url ? portal_url : $('body').data().baseUrl;
       $.get(baseUrl + "/@@submenu_detail_view?tab_id=" + tabid, function(data) {
-        var result_html = $('<div id="submenu-details" class="submenu-' + tabid +'" style="display: none;"></div>').html(data);
+        var scriptRegex = /<script.*?id="protect-script".*?<\/script>/g;
+        var newData = data.replace(scriptRegex, '');
+        var result_html = $('<div id="submenu-details" class="submenu-' + tabid +'" style="display: none;"></div>').html(newData);
         if ($(result_html).children().length === 0) {
           //no results.
           return;
