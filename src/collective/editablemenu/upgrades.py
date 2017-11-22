@@ -81,7 +81,7 @@ def generate_new_settings_for_1400():
     root_site_id = '/%s' % portal.id
     tabs_item = []
     for item in menu_items:
-        tabs_item.append(menu_items[0].__dict__)
+        tabs_item.append(item.__dict__)
     menu_config.update({root_site_id: tabs_item})
     return unicode(json.dumps(menu_config))
 
