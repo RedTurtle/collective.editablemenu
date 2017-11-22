@@ -32,7 +32,7 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <genericsetup:registerProfile
-      name="clean"
+      name="from_1300_to_1400"
       title="collective.editablemenu: clean"
       directory="profiles/from_1300_to_1400"
       description="Clean registry from old field for the collective.editablemenu add-on."

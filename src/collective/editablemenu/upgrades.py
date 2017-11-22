@@ -69,7 +69,7 @@ def from_1300_to_1400(context):
     api.portal.set_registry_record(NEW_REGISTRY_NAME, new_settings)
 
     setup_tool.runAllImportStepsFromProfile(
-        'profile-collective.editablemenu:clean')
+        'profile-collective.editablemenu:from_1300_to_1400')
     logger.info("Clean old field from registry done")
 
 def generate_new_settings_for_1400():
