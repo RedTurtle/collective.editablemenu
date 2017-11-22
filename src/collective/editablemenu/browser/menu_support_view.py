@@ -12,7 +12,7 @@ class MenuSupportView(BrowserView):
     """
     """
     registry = "collective.editablemenu.browser.interfaces." + \
-        "IEditableMenuSettings.menu_tabs"
+        "IEditableMenuSettings.menu_tabs_json"
 
     @property
     @view.memoize

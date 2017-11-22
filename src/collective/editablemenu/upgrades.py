@@ -11,7 +11,7 @@ REGISTRY_NAME = "collective.editablemenu.browser.interfaces." + \
     "IEditableMenuSettings.menu_tabs"
 
 NEW_REGISTRY_NAME = "collective.editablemenu.browser.interfaces." + \
-    "IEditableMenuSettings.json_config"
+    "IEditableMenuSettings.menu_tabs_json"
 
 # fields and defaults. 'cause we need to add properties we have in
 # MenuEntrySubItems when we upgrade menu. we could have problem from oldest
