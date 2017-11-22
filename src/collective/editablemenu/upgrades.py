@@ -75,14 +75,12 @@ def from_1300_to_1400(context):
 def generate_new_settings_for_1400():
     """
     """
-    portal = api.portal.get()
     menu_config = {}
     menu_items = api.portal.get_registry_record(REGISTRY_NAME)
-    root_site_id = '/%s' % portal.id
     tabs_item = []
     for item in menu_items:
         tabs_item.append(item.__dict__)
-    menu_config.update({root_site_id: tabs_item})
+    menu_config.update({'/': tabs_item})
     return unicode(json.dumps(menu_config))
 
 def generate_new_settings_for_1200():
