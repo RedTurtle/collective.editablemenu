@@ -81,15 +81,8 @@ registerFactoryAdapter(IMenuEntrySubitem, MenuEntrySubitem)
 class IEditableMenuSettings(Interface):
     """Settings used in the control panel for cookiecosent: unified panel
     """
-    menu_tabs = schema.Tuple(
-        title=_('menu_tabs_label', u'Menu tab entry'),
-        description=_(
-            'menu_tabs_help',
-            default=u"For every menu tab, provide some additional infos"),
-        value_type=MenuEntryPersistentObject(
-            IMenuEntrySubitem,
-            title=_(u"Tab infos")),
-        required=True,
-        default=(),
-        missing_value=(),
+
+    menu_tabs = schema.Text(
+        title=_('config_tabs_label', u'Menu tab config'),
+        required=False,
     )

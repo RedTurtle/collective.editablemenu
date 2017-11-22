@@ -6,7 +6,7 @@ from plone.memoize import view
 from Products.CMFCore.interfaces import IFolderish
 from Products.CMFCore.Expression import Expression, getExprContext
 from AccessControl import Unauthorized
-
+import json
 
 class MenuSupportView(BrowserView):
     """
@@ -30,7 +30,7 @@ class MenuSupportView(BrowserView):
     def get_menu_tabs(self):
         context = self.context.aq_inner
         context_path = "/".join(context.getPhysicalPath())
-        settings = self.menu_settings
+        settings = json.loads(self.menu_settings)
         if not settings:
             return []
         results = []

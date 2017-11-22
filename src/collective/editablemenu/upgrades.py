@@ -3,11 +3,15 @@ from Products.CMFCore.utils import getToolByName
 from collective.editablemenu import logger
 from plone import api
 from collective.editablemenu.browser.interfaces import MenuEntrySubitem
+import json
+
 
 default_profile = 'profile-collective.editablemenu:default'
 REGISTRY_NAME = "collective.editablemenu.browser.interfaces." + \
     "IEditableMenuSettings.menu_tabs"
 
+NEW_REGISTRY_NAME = "collective.editablemenu.browser.interfaces." + \
+    "IEditableMenuSettings.json_config"
 
 # fields and defaults. 'cause we need to add properties we have in
 # MenuEntrySubItems when we upgrade menu. we could have problem from oldest
@@ -57,6 +61,25 @@ def from_1200_to_1300(context):
     setup_tool.runImportStepFromProfile(default_profile, 'plone.app.registry')
     api.portal.set_registry_record(REGISTRY_NAME, new_settings)
 
+def from_1300_to_1400(context):
+    logger.info('Upgrading collective.editablemenu to version 1400')
+    setup_tool = getToolByName(context, 'portal_setup')
+    new_settings = generate_new_settings_for_1400()
+    setup_tool.runImportStepFromProfile(default_profile, 'plone.app.registry')
+    api.portal.set_registry_record(NEW_REGISTRY_NAME, new_settings)
+
+def generate_new_settings_for_1400():
+    """
+    """
+    portal = api.portal.get()
+    menu_config = {}
+    menu_items = api.portal.get_registry_record(REGISTRY_NAME)
+    root_site_id = '/%s' % portal.id
+    tabs_item = []
+    for item in menu_items:
+        tabs_item.append(menu_items[0].__dict__)
+    menu_config.update({root_site_id: tabs_item})
+    return unicode(json.dumps(menu_config))
 
 def generate_new_settings_for_1200():
     """
