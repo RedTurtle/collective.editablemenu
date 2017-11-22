@@ -19,6 +19,11 @@ class MenuSupportView(BrowserView):
     def menu_settings(self):
         return api.portal.get_registry_record(self.registry)
 
+    @property
+    @view.memoize
+    def get_root_site(self):
+        return ''.join(api.portal.get().getPhysicalPath())
+
     def exclude_from_nav(self, item):
         try:
             # Archetypes
@@ -26,6 +31,27 @@ class MenuSupportView(BrowserView):
         except (TypeError, AttributeError):
             # DX Item
             return getattr(item, 'exclude_from_nav', False)
+
+    def choose_site_menu_config(self, settings):
+        path = '/'.join(self.context.getPhysicalPath())
+        root_path = self.get_root_site
+        if self.context.aq_parent.id == root_path:
+            path = '/'
+        else:
+            path = path.split(root_path)[1]
+
+        if not path:
+            return '/'
+        sites_path = settings.keys()
+        not_found = True
+        while not_found:
+            for site_path in sites_path:
+                if path == site_path:
+                    return site_path
+            path = '/'.join(path.split('/')[:-1])
+            if not path:
+                return '/'
+
 
     def get_menu_tabs(self):
         context = self.context.aq_inner
@@ -35,9 +61,11 @@ class MenuSupportView(BrowserView):
             return []
         results = []
 
-        for i, tab_settings in enumerate(settings):
+        candidate_site = self.choose_site_menu_config(settings)
+
+        for i, tab_settings in enumerate(settings[candidate_site]):
             # evaluate condition
-            condition = tab_settings.condition or ''
+            condition = tab_settings.get('condition', '')
             expression = Expression(condition)
             expression_context = getExprContext(self.context, self.context)
             value = expression(expression_context)
@@ -48,7 +76,7 @@ class MenuSupportView(BrowserView):
             if not value:
                 continue
 
-            tab_title = getattr(tab_settings, "tab_title", '')
+            tab_title = tab_settings.get('tab_title', '')
             if not tab_title:
                 continue
 
@@ -69,8 +97,8 @@ class MenuSupportView(BrowserView):
                 tab_dict['url'] = navigation_folder.absolute_url()
                 tab_dict['selected'] = context_path.startswith(
                     "/".join(navigation_folder.getPhysicalPath()))
-            if tab_settings.simple_link:
-                tab_dict['url'] = self.fixLink(tab_settings.simple_link)
+            if tab_settings.get('simple_link', ''):
+                tab_dict['url'] = self.fixLink(tab_settings.get('simple_link'))
                 tab_dict['clickandgo'] = True
             results.append(tab_dict)
         return results
@@ -84,14 +112,17 @@ class MenuSupportView(BrowserView):
         )
 
     @view.memoize
+    def get_object(self, folder_path):
+        return api.content.get(path=folder_path.encode('utf-8'))
+
     def get_navigation_folder(self, tab_settings):
-        folder_path = getattr(tab_settings, "navigation_folder", "")
+        folder_path = tab_settings.get('navigation_folder', '')
         if not folder_path:
             return None
         if not folder_path.startswith("/"):
             folder_path = "/" + folder_path
         try:
-            obj = api.content.get(path=folder_path.encode('utf-8'))
+            obj = self.get_object(folder_path)
         except Unauthorized:
             return '__skip_this_folder__'
         # don't want to check for other exception! need to know if this menu
@@ -99,17 +130,20 @@ class MenuSupportView(BrowserView):
         return obj
 
     @view.memoize
+    def get_folder(self, folder_path):
+        return api.content.get(path=folder_path.encode('utf-8'))
+
     def get_additional_columns(self, tab_settings):
         """
         return additional columns set in the settings,
         except the items excluded from nav
         """
-        folder_path = getattr(tab_settings, "additional_columns", [])
+        folder_path = tab_settings.get('additional_columns', [])
         if not folder_path:
             return []
         if not folder_path.startswith("/"):
             folder_path = "/" + folder_path
-        folder = api.content.get(path=folder_path.encode('utf-8'))
+        folder = self.get_folder
         if not folder:
             return []
         # return folder contents not excluded from navigation
@@ -144,11 +178,12 @@ class SubMenuDetailView(MenuSupportView):
                     "(%s). Unable to retrieve configuration." % tab_id
                 )
                 return None
-        settings = self.menu_settings
+        settings = json.loads(self.menu_settings)
         if not settings:
             return None
         try:
-            return settings[tab_id]
+            candidate_site = self.choose_site_menu_config(settings)
+            return settings[candidate_site][tab_id]
         except IndexError:
             logger.error(
                 "Index(%s) not found in menu settings. Unable to retrieve configuration." % tab_id  # noqa
