@@ -1,0 +1,124 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag="">
+  <div class="custom-settings-editor"
+       tal:define="settings view/menu_settings">
+    <div class="pat-autotoc autotabs"
+         data-pat-autotoc="section:fieldset;levels:legend;">
+      <fieldset tal:repeat="menu settings">
+        <legend tal:content="python: menu[1]" />
+        <div class="tab-content">
+          <label>
+            <span>Path</span>
+            <input type="text"
+                   tal:attributes="value python: menu[0];
+                                   name string:path${repeat/menu/number}" />
+          </label>
+          <div class="menu-configuration">
+            <ul class="pat-sortable">
+              <li tal:repeat="item python: menu[2]">
+                <div class="panel-group"
+                     role="tablist"
+                     aria-multiselectable="true"
+                     tal:define="menu_id python: menu[1].replace(' ', '-').lower();
+                                 accordion_id string:accordion-${menu_id}"
+                     tal:attributes="id accordion_id">
+                  <div class="panel panel-default"
+                       tal:define="collapse_id string:collapse-title-${menu_id};
+                                   heading_id string:heading-title-${menu_id}">
+                    <div class="panel-heading"
+                         role="tab"
+                         tal:attributes="id heading_id">
+                      <h4 class="panel-title">
+                        <a role="button"
+                           data-toggle="collapse"
+                           aria-expanded="false"
+                           tal:attributes="id string:#${accordion_id};
+                                           href string:#${collapse_id};
+                                           aria-controls collapse_id"
+                           tal:content="item/tab_title" />
+                      </h4>
+                    </div>
+                    <div class="panel-collapse collapse"
+                         role="tabpanel"
+                         tal:attributes="id collapse_id;
+                                         aria-labelledby heading_id">
+                      <div class="panel-body">
+                        <label>
+                          <p i18n:translate="tab_title_label">Tab title</p>
+                          <p i18n:translate="tab_title_help">Insert the title of this tab.</p>
+                          <input type="text"
+                                 tal:attributes="value item/tab_title;
+                                                 name string:title${repeat/item/number}" />
+                        </label>
+                        <label>
+                          <p i18n:translate="navigation_folder_label">Navigation folder</p>
+                          <p i18n:translate="navigation_folder_help">Insert a path of the folder that should list its contents in the menu.</p>
+                          <input type="text"
+                                 tal:attributes="value item/navigation_folder;
+                                                 name string:navfolder${repeat/item/number}" />
+                        </label>
+                        <label>
+                          <p i18n:translate="additional_columns_label">Additional columns</p>
+                          <p i18n:translate="additional_columns_help">Insert a path of the folder that contains pages for additional static columns.</p>
+                          <input type="text"
+                                 tal:attributes="value item/additional_columns;
+                                                 name string:additional${repeat/item/number}" />
+                        </label>
+                        <label>
+                          <p i18n:translate="simple_link_label">Simple Link</p>
+                          <p i18n:translate="simple_link_help">Insert a path of an element; this will override previous settings and you will see just a single link in menu without submenu.</p>
+                          <input type="text"
+                                 tal:attributes="value item/simple_link;
+                                                 name string:simple${repeat/item/number}" />
+                        </label>
+                        <label>
+                          <p i18n:translate="condition_label">Condition</p>
+                          <p i18n:translate="condition_help">Insert condition (you can use variables like object,portal, request, here, member... See complete list here: http://docs.plone.org/develop/plone/functionality/expressions.html#expression-variables)</p>
+                          <input type="text"
+                                 tal:attributes="value item/condition;
+                                                 name string:condition${repeat/item/number}" />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <textarea
+    id="" name="" class="" cols="" rows=""
+    tabindex="" disabled="" readonly="" accesskey=""
+    tal:attributes="id view/id;
+                    name view/name;
+                    class view/klass;
+                    style view/style;
+                    title view/title;
+                    lang view/lang;
+                    onclick view/onclick;
+                    ondblclick view/ondblclick;
+                    onmousedown view/onmousedown;
+                    onmouseup view/onmouseup;
+                    onmouseover view/onmouseover;
+                    onmousemove view/onmousemove;
+                    onmouseout view/onmouseout;
+                    onkeypress view/onkeypress;
+                    onkeydown view/onkeydown;
+                    onkeyup view/onkeyup;
+                    disabled view/disabled;
+                    tabindex view/tabindex;
+                    onfocus view/onfocus;
+                    onblur view/onblur;
+                    onchange view/onchange;
+                    cols view/cols;
+                    rows view/rows;
+                    readonly view/readonly;
+                    accesskey view/accesskey;
+                    onselect view/onselect"
+    tal:content="view/value" />
+</html>

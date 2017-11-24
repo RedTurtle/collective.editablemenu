@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-
+from .widgets import EditableMenuSettingsFieldWidget
 from collective.editablemenu import _
+from plone.directives import form
+from plone.supermodel import model
 from zope import schema
 from zope.interface import Interface
 from zope.interface import implementer
@@ -79,7 +81,7 @@ class MenuEntrySubitem(object):
 registerFactoryAdapter(IMenuEntrySubitem, MenuEntrySubitem)
 
 
-class IEditableMenuSettings(Interface):
+class IEditableMenuSettings(model.Schema):
     """Settings used in the control panel for cookiecosent: unified panel
     """
     # menu_tabs = schema.Tuple(
@@ -95,6 +97,7 @@ class IEditableMenuSettings(Interface):
     #     missing_value=(),
     # )
 
+    form.widget(menu_tabs_json=EditableMenuSettingsFieldWidget)
     menu_tabs_json = schema.Text(
         title=_('config_tabs_label', u'Menu tab config'),
         required=False,

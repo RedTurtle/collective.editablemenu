@@ -3,40 +3,43 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
     i18n_domain="collective.editablemenu">
 
   <!-- Publish static files -->
   <browser:resourceDirectory
-      name="collective.editablemenu"
-      directory="static"
-      />
+    name="collective.editablemenu"
+    directory="static"
+  />
+
+  <!-- VIEWLETS -->
+  <browser:viewlet
+    zcml:condition="not-have plone-5"
+    name="plone.global_sections"
+    manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+    class=".viewlets.CustomGlobalSectionsViewlet"
+    layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+    permission="zope2.View"
+  />
+
+  <browser:viewlet
+    zcml:condition="have plone-5"
+    name="plone.global_sections"
+    manager="plone.app.layout.viewlets.interfaces.IMainNavigation"
+    class=".viewlets.CustomGlobalSectionsViewlet"
+    template="templates/custom_sections.pt"
+    layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+    permission="zope2.View"
+  />
+
+  <!-- VIEWS -->
   <browser:page
-        name="editable-menu-settings"
-        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        class=".controlpanel.EditableMenuSettingsView"
-        permission="collective.editablemenu.permissions.ManageSettings"
-        layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
-        />
-
-
-  <browser:viewlet
-      zcml:condition="not-have plone-5"
-      name="plone.global_sections"
-      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
-      class=".viewlets.CustomGlobalSectionsViewlet"
-      layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
-      permission="zope2.View"
-      />
-
-  <browser:viewlet
-      zcml:condition="have plone-5"
-      name="plone.global_sections"
-      manager="plone.app.layout.viewlets.interfaces.IMainNavigation"
-      class=".viewlets.CustomGlobalSectionsViewlet"
-      template="templates/custom_sections.pt"
-      layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
-      permission="zope2.View"
-      />
+    name="editable-menu-settings"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".controlpanel.EditableMenuSettingsView"
+    permission="collective.editablemenu.permissions.ManageSettings"
+    layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+  />
 
   <browser:page
     name="menu_support_view"
@@ -44,13 +47,30 @@
     class=".menu_support_view.MenuSupportView"
     permission="zope2.View"
     layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+  />
+
+  <browser:page
+    name="submenu_detail_view"
+    for="*"
+    class=".menu_support_view.SubMenuDetailView"
+    template="templates/submenu_detail_view.pt"
+    permission="zope2.View"
+    layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
+  />
+
+  <!-- WIDGETS -->
+  <class class=".widgets.EditableMenuSettingsWidget">
+    <require
+      permission="zope.Public"
+      interface=".widgets.IEditableMenuSettingsWidget"
     />
-    <browser:page
-      name="submenu_detail_view"
-      for="*"
-      class=".menu_support_view.SubMenuDetailView"
-      template="templates/submenu_detail_view.pt"
-      permission="zope2.View"
-      layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
-      />
+  </class>
+
+  <z3c:widgetTemplate
+    mode="input"
+    widget=".widgets.IEditableMenuSettingsWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="templates/editable_menu_settings_widget.pt"
+  />
+
 </configure>
