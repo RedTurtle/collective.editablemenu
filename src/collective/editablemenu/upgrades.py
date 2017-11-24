@@ -61,6 +61,7 @@ def from_1200_to_1300(context):
     setup_tool.runImportStepFromProfile(default_profile, 'plone.app.registry')
     api.portal.set_registry_record(REGISTRY_NAME, new_settings)
 
+
 def from_1300_to_1400(context):
     logger.info('Upgrading collective.editablemenu to version 1400')
     setup_tool = getToolByName(context, 'portal_setup')
@@ -72,6 +73,16 @@ def from_1300_to_1400(context):
         'profile-collective.editablemenu:from_1300_to_1400')
     logger.info("Clean old field from registry done")
 
+
+def from_1400_to_1410(context):
+    logger.info('Upgrading collective.editablemenu to version 1410')
+    setup_tool = getToolByName(context, 'portal_setup')
+    setup_tool.runImportStepFromProfile(default_profile, 'jsregistry')
+    setup_tool.runAllImportStepsFromProfile(
+        'profile-collective.editablemenu:from_1400_to_1410')
+    logger.info("Removed non minified js file")
+
+
 def generate_new_settings_for_1400():
     """
     """
@@ -82,6 +93,7 @@ def generate_new_settings_for_1400():
         tabs_item.append(item.__dict__)
     menu_config.update({'/': tabs_item})
     return unicode(json.dumps(menu_config))
+
 
 def generate_new_settings_for_1200():
     """

@@ -8,6 +8,7 @@ from Products.CMFCore.Expression import Expression, getExprContext
 from AccessControl import Unauthorized
 import json
 
+
 class MenuSupportView(BrowserView):
     """
     """
@@ -23,6 +24,22 @@ class MenuSupportView(BrowserView):
     @view.memoize
     def get_root_site(self):
         return ''.join(api.portal.get().getPhysicalPath())
+
+    @view.memoize
+    def find_path_title(self, path):
+        if not path:
+            return ''
+        if path == '/':
+            return api.portal.get().Title()
+        search_path = '/{0}{1}'.format(
+            api.portal.get().getId(),
+            path,
+        )
+        results = api.content.find(depth=0, path=search_path)
+        if len(results) > 0:
+            return results[0].Title
+        else:
+            return ''
 
     def exclude_from_nav(self, item):
         try:
@@ -51,7 +68,6 @@ class MenuSupportView(BrowserView):
             path = '/'.join(path.split('/')[:-1])
             if not path:
                 return '/'
-
 
     def get_menu_tabs(self):
         context = self.context.aq_inner

@@ -2,12 +2,14 @@ Changelog
 =========
 
 
-0.10.3 (unreleased)
+0.11.0 (unreleased)
 -------------------
 
 - Fix zcml condition for registering the global_sections viewlet. It was adding two different viewlets simultaneously on Plone 5, now one of those is gone.
   [pnicolli]
 - plone.protect js script was being added to the submenu html, now it's removed manually from the async response.
+  [pnicolli]
+- Completely new controlpanel layout
   [pnicolli]
 
 

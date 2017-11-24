@@ -29,12 +29,12 @@ msgstr "Modifica tab"
 
 #: ../browser/controlpanel.py:12
 msgid "Editable Menu Settings"
-msgstr ""
+msgstr "Impostazioni del menù configurabile"
 
 #: ../profiles/default/controlpanel.xml
 #: ../profiles/uninstall/controlpanel.xml
 msgid "Editable menu configuration"
-msgstr "Impostazioni del menu configurabile"
+msgstr "Impostazioni del menù configurabile"
 
 #: ../browser/templates/submenu_detail_view.pt:26
 msgid "Explore all the contents of this section"

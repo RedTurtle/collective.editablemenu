@@ -36,4 +36,12 @@
         handler=".upgrades.from_1300_to_1400"
         profile="collective.editablemenu:default" />
 
+  <gs:upgradeStep
+        title="Upgrade collective.editablemenu 1410"
+        description="Remove non minified js file"
+        source="1400"
+        destination="1410"
+        handler=".upgrades.from_1400_to_1410"
+        profile="collective.editablemenu:default" />
+
 </configure>

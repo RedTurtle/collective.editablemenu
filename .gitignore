@@ -13,6 +13,7 @@ buildout-cache/
 develop-eggs/
 lib/
 include/
+node_modules/
 parts/
 src/*
 !src/collective

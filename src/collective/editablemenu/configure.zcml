@@ -38,6 +38,13 @@
       description="Clean registry from old field for the collective.editablemenu add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+  <genericsetup:registerProfile
+      name="from_1400_to_1410"
+      title="collective.editablemenu: remove old js"
+      directory="profiles/from_1400_to_1410"
+      description="Remove non minified js resource."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
   <genericsetup:importStep
       name="collective.editablemenu-postInstall"
       title="collective.editablemenu post_install import step"

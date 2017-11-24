@@ -75,6 +75,7 @@ class IMenuEntrySubitem(Interface):
 class MenuEntrySubitem(object):
     """ """
 
+
 registerFactoryAdapter(IMenuEntrySubitem, MenuEntrySubitem)
 
 
