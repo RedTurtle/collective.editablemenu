@@ -92,6 +92,9 @@
           </div>
         </div>
       </fieldset>
+      <fieldset>
+        <legend>Create new</legend>
+      </fieldset>
     </div>
   </div>
 

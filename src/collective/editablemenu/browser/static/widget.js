@@ -118,11 +118,10 @@
     $('#add-menu-item-button').click(addItemButtonClick);
 
     function removeItem(evt) {
-      console.log('TEST');
+      evt.preventDefault();
       $(evt.target)
         .closest('li')
         .remove();
-      evt.preventDefault();
     }
     $('.custom-settings-editor').on('click', '.remove-item-button', removeItem);
   });
