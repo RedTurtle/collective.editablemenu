@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone import api
+from plone.memoize import view
 from z3c.form import widget
 from z3c.form.browser.textarea import TextAreaWidget
 from z3c.form.interfaces import IFieldWidget, IFormLayer
@@ -35,10 +36,9 @@ class EditableMenuSettingsWidget(TextAreaWidget):
             value
         ) for key, value in json.loads(json_settings).iteritems()]
 
-    # def render(self):
-    #     import pdb
-    #     pdb.set_trace()
-    #     return super(EditableMenuSettingsWidget, self).render()
+    @view.memoize
+    def get_portal_url(self):
+        return api.portal.get().absolute_url()
 
 
 @adapter(IField, IFormLayer)

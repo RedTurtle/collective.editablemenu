@@ -1,10 +1,12 @@
 {
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "overrides": [{
-        "files": "*.scss",
-        "options": {
-            "tabWidth": 4
-        }
-    }]
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": "*.scss",
+      "options": {
+        "tabWidth": 4
+      }
+    }
+  ]
 }

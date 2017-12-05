@@ -13,6 +13,7 @@ module.exports = function(grunt) {
         files: {
           // 'destination': 'source'
           'editablemenu.css': 'sass/editablemenu.scss',
+          'widget.css': 'sass/widget.scss',
         },
       },
     },
@@ -38,6 +39,7 @@ module.exports = function(grunt) {
         files: {
           // 'editablemenu.min.js': ['editablemenu.min.js'],
           'editablemenu.min.js': ['editablemenu.js'],
+          'widget.min.js': ['widget.js'],
         },
       },
     },
@@ -64,7 +66,7 @@ module.exports = function(grunt) {
         tasks: ['sass', 'postcss'],
       },
       scripts: {
-        files: ['editablemenu.js'],
+        files: ['editablemenu.js', 'widget.js'],
         tasks: [/*'requirejs',*/ 'uglify'],
       },
     },

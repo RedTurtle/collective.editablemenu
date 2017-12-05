@@ -2,6 +2,7 @@
 from collective.editablemenu import _
 from collective.editablemenu.browser.interfaces import IEditableMenuSettings
 from plone.app.registry.browser import controlpanel
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class EditableMenuSettingsEditForm(controlpanel.RegistryEditForm):
@@ -16,3 +17,4 @@ class EditableMenuSettingsView(controlpanel.ControlPanelFormWrapper):
     """Sitesearch settings control panel.
     """
     form = EditableMenuSettingsEditForm
+    index = ViewPageTemplateFile('templates/controlpanel.pt')
