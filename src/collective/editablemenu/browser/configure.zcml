@@ -7,9 +7,10 @@
     i18n_domain="collective.editablemenu">
 
   <!-- Publish static files -->
-  <browser:resourceDirectory
+  <plone:static
     name="collective.editablemenu"
     directory="static"
+    type="plone"
   />
 
   <!-- VIEWLETS -->

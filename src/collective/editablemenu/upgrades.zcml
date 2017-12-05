@@ -44,4 +44,12 @@
         handler=".upgrades.from_1400_to_1410"
         profile="collective.editablemenu:default" />
 
+  <gs:upgradeStep
+        title="Upgrade collective.editablemenu 2000"
+        description="Move to resource registry"
+        source="*"
+        destination="2000"
+        handler=".upgrades.to_2000"
+        profile="collective.editablemenu:default" />
+
 </configure>

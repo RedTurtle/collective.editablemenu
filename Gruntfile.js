@@ -12,8 +12,8 @@ module.exports = function(grunt) {
       build: {
         files: {
           // 'destination': 'source'
-          'editablemenu.css': 'sass/editablemenu.scss',
-          'widget.css': 'sass/widget.scss',
+          'dist/editablemenu.css': 'sass/editablemenu.scss',
+          'dist/widget.css': 'sass/widget.scss',
         },
       },
     },
@@ -27,19 +27,26 @@ module.exports = function(grunt) {
         ],
       },
       build: {
-        src: '*.css',
+        src: 'dist/*.css',
       },
     },
     uglify: {
-      build: {
+      editablemenu: {
         options: {
           sourceMap: true,
           sourceMapIncludeSources: false,
         },
         files: {
-          // 'editablemenu.min.js': ['editablemenu.min.js'],
-          'editablemenu.min.js': ['editablemenu.js'],
-          'widget.min.js': ['widget.js'],
+          'dist/editablemenu.min.js': ['dist/editablemenu.js'],
+        },
+      },
+      widget: {
+        options: {
+          sourceMap: true,
+          sourceMapIncludeSources: false,
+        },
+        files: {
+          'dist/widget.min.js': ['dist/widget.js'],
         },
       },
     },
@@ -53,9 +60,25 @@ module.exports = function(grunt) {
             jquery: 'empty:',
           },
           wrapShim: true,
-          name: './editablemenu.js',
+          name: './js/editablemenu.js',
           exclude: ['jquery'],
-          out: './editablemenu.min.js',
+          out: './dist/editablemenu.js',
+          optimize: 'none',
+        },
+      },
+      widget: {
+        options: {
+          baseUrl: './',
+          generateSourceMaps: true,
+          preserveLicenseComments: false,
+          paths: {
+            jquery: 'empty:',
+            'pat-registry': 'empty:',
+          },
+          wrapShim: true,
+          name: './js/widget.js',
+          exclude: ['jquery', 'pat-registry'],
+          out: './dist/widget.js',
           optimize: 'none',
         },
       },
@@ -65,15 +88,19 @@ module.exports = function(grunt) {
         files: ['sass/**/*.scss'],
         tasks: ['sass', 'postcss'],
       },
-      scripts: {
-        files: ['editablemenu.js', 'widget.js'],
-        tasks: [/*'requirejs',*/ 'uglify'],
+      editablemenu: {
+        files: ['js/editablemenu.js'],
+        tasks: ['requirejs:editablemenu', 'uglify:editablemenu'],
+      },
+      widget: {
+        files: ['js/widget.js'],
+        tasks: ['requirejs:widget', 'uglify:widget'],
       },
     },
     browserSync: {
       html: {
         bsFiles: {
-          src: ['*.css'],
+          src: ['dist/*.css'],
         },
         options: {
           watchTask: true,
@@ -86,7 +113,7 @@ module.exports = function(grunt) {
       },
       plone: {
         bsFiles: {
-          src: ['*.css'],
+          src: ['dist/*.css'],
         },
         options: {
           watchTask: true,
@@ -103,7 +130,7 @@ module.exports = function(grunt) {
   // CWD to theme folder
   grunt.file.setBase('./src/collective/editablemenu/browser/static');
 
-  grunt.registerTask('compile', ['sass', 'postcss', /*'requirejs',*/ 'uglify']);
+  grunt.registerTask('compile', ['sass', 'postcss', 'requirejs', 'uglify']);
   grunt.registerTask('default', ['watch']);
   grunt.registerTask('bsync', ['browserSync:html', 'watch']);
   grunt.registerTask('plone-bsync', ['browserSync:plone', 'watch']);

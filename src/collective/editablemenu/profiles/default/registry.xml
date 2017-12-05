@@ -1,3 +1,43 @@
+<?xml version="1.0"?>
 <registry>
-    <records interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings" />
+  <records interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings" />
+  <!-- RESOURCES -->
+  <records prefix="plone.resources/editablemenu"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+    <value key="js">++plone++collective.editablemenu/dist/editablemenu.js</value>
+    <value key="css">
+      <element>++plone++collective.editablemenu/dist/editablemenu.css</element>
+    </value>
+  </records>
+  <records prefix="plone.resources/editablemenu-widget"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+    <value key="js">++plone++collective.editablemenu/dist/widget.js</value>
+    <value key="css">
+      <element>++plone++collective.editablemenu/dist/widget.css</element>
+    </value>
+  </records>
+  <!-- BUNDLES -->
+  <records prefix="plone.bundles/editablemenu-bundle"
+           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="enabled">True</value>
+    <value key="resources">
+      <element>editablemenu</element>
+    </value>
+    <value key="compile">True</value>
+    <value key="jscompilation">++plone++collective.editablemenu/dist/editablemenu.min.js</value>
+    <value key="csscompilation">++plone++collective.editablemenu/dist/editablemenu.css</value>
+    <value key="last_compilation">2019-11-26 00:00:00</value>
+    <value key="merge_with">default</value>
+  </records>
+  <records prefix="plone.bundles/editablemenu-widget-bundle"
+           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="enabled">False</value>
+    <value key="resources">
+      <element>editablemenu-widget</element>
+    </value>
+    <value key="compile">True</value>
+    <value key="jscompilation">++plone++collective.editablemenu/dist/widget.min.js</value>
+    <value key="csscompilation">++plone++collective.editablemenu/dist/widget.css</value>
+    <value key="last_compilation">2019-11-26 00:00:00</value>
+  </records>
 </registry>

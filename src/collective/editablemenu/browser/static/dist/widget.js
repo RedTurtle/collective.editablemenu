@@ -1,5 +1,5 @@
-(function($) {
-  $(document).ready(function() {
+require(['jquery', 'pat-registry'], function($, Registry) {
+  $(function() {
     // I thought these could have been useful, but actually they look
     // like they are not. I'm leaving these here for now, just in case...
     //
@@ -125,4 +125,9 @@
     }
     $('.custom-settings-editor').on('click', '.remove-item-button', removeItem);
   });
-})(jQuery);
+});
+
+define("js/widget.js", function(){});
+
+
+//# sourceMappingURL=widget.js.map

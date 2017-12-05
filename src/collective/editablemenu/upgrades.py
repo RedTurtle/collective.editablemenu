@@ -77,10 +77,18 @@ def from_1300_to_1400(context):
 def from_1400_to_1410(context):
     logger.info('Upgrading collective.editablemenu to version 1410')
     setup_tool = getToolByName(context, 'portal_setup')
-    setup_tool.runImportStepFromProfile(default_profile, 'jsregistry')
     setup_tool.runAllImportStepsFromProfile(
         'profile-collective.editablemenu:from_1400_to_1410')
     logger.info("Removed non minified js file")
+
+
+def to_2000(context):
+    logger.info('Upgrading collective.editablemenu to version 2000')
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile(default_profile, 'plone.app.registry')
+    setup_tool.runAllImportStepsFromProfile(
+        'profile-collective.editablemenu:to_2000')
+    logger.info('Moved to resource registry')
 
 
 def generate_new_settings_for_1400():

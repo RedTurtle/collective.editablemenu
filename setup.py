@@ -26,12 +26,14 @@ setup(
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.3",
         "Framework :: Plone :: 5.0",
+        "Framework :: Plone :: 5.1",
+        "Programming Language :: JavaScript",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords='Python Plone',
     author='RedTurtle Technology',
@@ -45,6 +47,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'plone.api',
+        'Products.CMFPlone>=5.0b2.dev0',
         'setuptools',
     ],
     extras_require={

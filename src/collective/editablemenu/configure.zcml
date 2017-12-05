@@ -45,6 +45,13 @@
       description="Remove non minified js resource."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+  <genericsetup:registerProfile
+      name="to_2000"
+      title="collective.editablemenu: move to resource registry"
+      directory="profiles/to_2000"
+      description="Move static assets to resource registry."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
   <genericsetup:importStep
       name="collective.editablemenu-postInstall"
       title="collective.editablemenu post_install import step"

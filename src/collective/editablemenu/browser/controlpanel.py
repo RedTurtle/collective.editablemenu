@@ -2,11 +2,11 @@
 from collective.editablemenu import _
 from collective.editablemenu.browser.interfaces import IEditableMenuSettings
 from plone.app.registry.browser import controlpanel
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.CMFPlone.resources import add_bundle_on_request
 
 
 class EditableMenuSettingsEditForm(controlpanel.RegistryEditForm):
-    """Media settings form.
+    """Editablemenu settings form.
     """
     schema = IEditableMenuSettings
     id = "EditableMenuSettingsForm"
@@ -14,7 +14,10 @@ class EditableMenuSettingsEditForm(controlpanel.RegistryEditForm):
 
 
 class EditableMenuSettingsView(controlpanel.ControlPanelFormWrapper):
-    """Sitesearch settings control panel.
+    """Editablemenu settings control panel.
     """
     form = EditableMenuSettingsEditForm
-    index = ViewPageTemplateFile('templates/controlpanel.pt')
+
+    def __call__(self):
+        add_bundle_on_request(self.request, 'editablemenu-widget-bundle')
+        return super(EditableMenuSettingsView, self).__call__()
