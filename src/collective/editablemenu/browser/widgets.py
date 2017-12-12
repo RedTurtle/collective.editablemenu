@@ -21,20 +21,43 @@ class EditableMenuSettingsWidget(TextAreaWidget):
     target_field = "textarea"
 
     @property
+    def json_settings(self):
+        support_view = api.content.get_view(
+            name='menu_support_view',
+            context=self.context,
+            request=self.request,
+        )
+        return support_view.menu_settings
+
+    @property
+    def settings_titles(self):
+        if not self.json_settings:
+            return ''
+        support_view = api.content.get_view(
+            name='menu_support_view',
+            context=self.context,
+            request=self.request,
+        )
+        settings = json.loads(self.json_settings)
+        return json.dumps({
+            key: support_view.find_path_title(key) for key in settings.keys()
+        })
+
+    @property
     def menu_settings(self):
         support_view = api.content.get_view(
             name='menu_support_view',
             context=self.context,
             request=self.request,
         )
-        json_settings = support_view.menu_settings
-        if not json_settings:
+        if not self.json_settings:
             return []
+        settings = json.loads(self.json_settings)
         return [(
             key,
             support_view.find_path_title(key),
             value
-        ) for key, value in json.loads(json_settings).iteritems()]
+        ) for key, value in settings.iteritems()]
 
     @view.memoize
     def get_portal_url(self):
