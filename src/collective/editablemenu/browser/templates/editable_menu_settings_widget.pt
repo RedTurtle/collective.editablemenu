@@ -4,7 +4,7 @@
   <div id="root"
        data-settings="${view/json_settings}"
        data-titles="${view/settings_titles}" />
-  <div class="custom-settings-editor"
+  <!--! <div class="custom-settings-editor"
        tal:define="settings view/menu_settings">
     <nav class="menus-nav"
          role="tablist">
@@ -110,7 +110,7 @@
         </div>
       </fieldset>
     </tal:fieldsets>
-  </div>
+  </div> -->
 
   <!--! <div id="panel-group-template">
     <div class="panel panel-default">

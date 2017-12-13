@@ -1,8 +1,4 @@
-require(['jquery', 'pat-registry', 'react-widget'], function(
-  $,
-  registry,
-  widget
-) {
+require(['jquery', 'react-widget'], function($, widget) {
   $(function() {
     widget.app();
     // I thought these could have been useful, but actually they look

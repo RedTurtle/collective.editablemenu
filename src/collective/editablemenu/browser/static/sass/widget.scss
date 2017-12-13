@@ -73,10 +73,9 @@
     font-size: 1.125em;
     color: inherit;
 
-    #content-core & > a {
+    > a {
         color: inherit;
         text-decoration: none;
-        border-bottom: none;
         padding: 10px 15px;
         display: block;
 
@@ -91,6 +90,9 @@
                 border-bottom-color: transparent;
             }
         }
+    }
+    #content-core & > a {
+        border-bottom: none;
     }
 }
 
@@ -207,6 +209,10 @@ fieldset {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+body > li.menu-item {
+    list-style: none;
 }
 
 .tab-content > label {

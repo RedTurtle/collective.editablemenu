@@ -50,20 +50,6 @@ module.exports = function(grunt) {
         },
       },
     },
-    rename: {
-      widget: {
-        files: [
-          {
-            src: ['js/widget/build/static/js/main.*.js'],
-            dest: 'js/widget/build/static/js/main.js',
-          },
-          {
-            src: ['js/widget/build/static/js/main.*.js.map'],
-            dest: 'js/widget/build/static/js/main.js.map',
-          },
-        ],
-      },
-    },
     requirejs: {
       editablemenu: {
         options: {
@@ -87,12 +73,11 @@ module.exports = function(grunt) {
           preserveLicenseComments: false,
           paths: {
             jquery: 'empty:',
-            'pat-registry': 'empty:',
             'react-widget': './js/widget/build/static/js/main',
           },
           wrapShim: true,
           name: './js/widget.js',
-          exclude: ['jquery', 'pat-registry'],
+          exclude: ['jquery'],
           out: './dist/widget.js',
           optimize: 'none',
         },
@@ -108,12 +93,8 @@ module.exports = function(grunt) {
         tasks: ['requirejs:editablemenu', 'uglify:editablemenu'],
       },
       widget: {
-        files: ['js/widget.js'],
+        files: ['js/widget.js', 'js/widget/build/static/**/*.js'],
         tasks: ['requirejs:widget', 'uglify:widget'],
-      },
-      reactwidget: {
-        files: ['js/widget/build/static/**/*.js'],
-        tasks: ['rename', 'requirejs:widget', 'uglify:widget'],
       },
     },
     browserSync: {
@@ -149,13 +130,7 @@ module.exports = function(grunt) {
   // CWD to theme folder
   grunt.file.setBase('./src/collective/editablemenu/browser/static');
 
-  grunt.registerTask('compile', [
-    'sass',
-    'postcss',
-    'rename',
-    'requirejs',
-    'uglify',
-  ]);
+  grunt.registerTask('compile', ['sass', 'postcss', 'requirejs', 'uglify']);
   grunt.registerTask('default', ['watch']);
   grunt.registerTask('bsync', ['browserSync:html', 'watch']);
   grunt.registerTask('plone-bsync', ['browserSync:plone', 'watch']);

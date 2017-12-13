@@ -2,19 +2,21 @@ import React from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 
 const MenuItem = ({
-  index,
-  tab_title = '',
-  navigation_folder = '',
-  additional_columns = '',
-  simple_link = '',
-  condition = '',
+  idx,
+  tab_title,
+  navigation_folder,
+  additional_columns,
+  simple_link,
+  condition,
+  removeItemFromThisMenu,
+  updateItemInThisMenu,
 }) => {
   const menu_id = tab_title.replace(/\s/, '-').toLowerCase();
   const collapse_id = `collapse-${menu_id}`;
   const heading_id = `heading-${menu_id}`;
 
   return (
-    <li>
+    <li className="menu-item">
       <div className="panel panel-default">
         <div className="panel-heading" role="tab" id={heading_id}>
           <h4 className="panel-title">
@@ -31,6 +33,7 @@ const MenuItem = ({
           <button
             type="button"
             className="plone-btn plone-btn-danger remove-item-button"
+            onClick={() => removeItemFromThisMenu(idx)}
           >
             <img
               alt="Remove this menu entry"
@@ -48,7 +51,13 @@ const MenuItem = ({
             <label>
               <p>Tab title</p>
               <p>Insert the title of this tab.</p>
-              <input type="text" value={tab_title} name={`title-${index}`} />
+              <input
+                type="text"
+                value={tab_title}
+                name={`title-${idx}`}
+                key={`title-${idx}`}
+                onChange={(e) => updateItemInThisMenu(idx, 'tab_title', e.target.value)}
+              />
             </label>
             <label>
               <p>Navigation folder</p>
@@ -59,7 +68,9 @@ const MenuItem = ({
               <input
                 type="text"
                 value={navigation_folder}
-                name={`navfolder-${index}`}
+                name={`navfolder-${idx}`}
+                key={`navfolder-${idx}`}
+                onChange={(e) => updateItemInThisMenu(idx, 'navigation_folder', e.target.value)}
               />
             </label>
             <label>
@@ -71,7 +82,9 @@ const MenuItem = ({
               <input
                 type="text"
                 value={additional_columns}
-                name={`additional-${index}`}
+                name={`additional-${idx}`}
+                key={`additional-${idx}`}
+                onChange={(e) => updateItemInThisMenu(idx, 'additional_columns', e.target.value)}
               />
             </label>
             <label>
@@ -81,7 +94,13 @@ const MenuItem = ({
                 settings and you will see just a single link in menu without
                 submenu.
               </p>
-              <input type="text" value={simple_link} name={`simple-${index}`} />
+              <input
+                type="text"
+                value={simple_link}
+                name={`simple-${idx}`}
+                key={`simple-${idx}`}
+                onChange={(e) => updateItemInThisMenu(idx, 'simple_link', e.target.value)}
+              />
             </label>
             <label>
               <p>Condition</p>
@@ -93,7 +112,9 @@ const MenuItem = ({
               <input
                 type="text"
                 value={condition}
-                name={`condition-${index}`}
+                name={`condition-${idx}`}
+                key={`condition-${idx}`}
+                onChange={(e) => updateItemInThisMenu(idx, 'condition', e.target.value)}
               />
             </label>
           </div>
@@ -101,6 +122,16 @@ const MenuItem = ({
       </div>
     </li>
   );
+};
+
+MenuItem.defaultProps = {
+  tab_title: '',
+  navigation_folder: '',
+  additional_columns: '',
+  simple_link: '',
+  condition: '',
+  removeItemFromThisMenu: () => {},
+  updateItemInThisMenu: () => {},
 };
 
 export default SortableElement(MenuItem);
