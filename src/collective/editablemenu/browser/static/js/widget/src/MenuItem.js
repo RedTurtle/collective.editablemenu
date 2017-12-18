@@ -10,10 +10,14 @@ const MenuItem = ({
   condition,
   removeItemFromThisMenu,
   updateItemInThisMenu,
+  menuId,
+  portalUrl,
+  translate,
 }) => {
-  const menu_id = tab_title.replace(/\s/, '-').toLowerCase();
-  const collapse_id = `collapse-${menu_id}`;
-  const heading_id = `heading-${menu_id}`;
+  const idFromName = tab_title.replace(/\s/g, '-').toLowerCase();
+  const idToUse = tab_title === 'New' ? `new-${idx}` : idFromName;
+  const collapse_id = `collapse-${menuId}-${idToUse}`;
+  const heading_id = `heading-${menuId}-${idToUse}`;
 
   return (
     <li className="menu-item">
@@ -36,8 +40,10 @@ const MenuItem = ({
             onClick={() => removeItemFromThisMenu(idx)}
           >
             <img
-              alt="Remove this menu entry"
-              src="++plone++collective.editablemenu/delete_tab.png"
+              alt={translate('remove_menu_item', 'Remove this menu entry')}
+              src={`${
+                portalUrl
+              }/++plone++collective.editablemenu/delete_tab.png`}
             />
           </button>
         </div>
@@ -49,72 +55,104 @@ const MenuItem = ({
         >
           <div className="panel-body">
             <label>
-              <p>Tab title</p>
-              <p>Insert the title of this tab.</p>
+              <p className="title">
+                {translate('tab_title_label', 'Tab title')}
+              </p>
+              <p className="help">
+                {translate('tab_title_help', 'Insert the title of this tab.')}
+              </p>
               <input
                 type="text"
                 value={tab_title}
-                name={`title-${idx}`}
-                key={`title-${idx}`}
-                onChange={(e) => updateItemInThisMenu(idx, 'tab_title', e.target.value)}
+                name={`title-${menuId}-${idx}`}
+                key={`title-${menuId}-${idx}`}
+                onChange={e =>
+                  updateItemInThisMenu(idx, 'tab_title', e.target.value)
+                }
               />
             </label>
             <label>
-              <p>Navigation folder</p>
-              <p>
-                Insert a path of the folder that should list its contents in the
-                menu.
+              <p className="title">
+                {translate('navigation_folder_label', 'Navigation folder')}
+              </p>
+              <p className="help">
+                {translate(
+                  'navigation_folder_help',
+                  'Insert a path of the folder that should list its contents in the menu.'
+                )}
               </p>
               <input
                 type="text"
                 value={navigation_folder}
-                name={`navfolder-${idx}`}
-                key={`navfolder-${idx}`}
-                onChange={(e) => updateItemInThisMenu(idx, 'navigation_folder', e.target.value)}
+                name={`navfolder-${menuId}-${idx}`}
+                key={`navfolder-${menuId}-${idx}`}
+                onChange={e =>
+                  updateItemInThisMenu(idx, 'navigation_folder', e.target.value)
+                }
               />
             </label>
             <label>
-              <p>Additional columns</p>
-              <p>
-                Insert a path of the folder that contains pages for additional
-                static columns.
+              <p className="title">
+                {translate('additional_columns_label', 'Additional columns')}
+              </p>
+              <p className="help">
+                {translate(
+                  'additional_columns_help',
+                  'Insert a path of the folder that contains pages for additional static columns.'
+                )}
               </p>
               <input
                 type="text"
                 value={additional_columns}
-                name={`additional-${idx}`}
-                key={`additional-${idx}`}
-                onChange={(e) => updateItemInThisMenu(idx, 'additional_columns', e.target.value)}
+                name={`additional-${menuId}-${idx}`}
+                key={`additional-${menuId}-${idx}`}
+                onChange={e =>
+                  updateItemInThisMenu(
+                    idx,
+                    'additional_columns',
+                    e.target.value
+                  )
+                }
               />
             </label>
             <label>
-              <p>Simple link</p>
-              <p>
-                Insert a path of an element; this will override previous
-                settings and you will see just a single link in menu without
-                submenu.
+              <p className="title">
+                {translate('simple_link_label', 'Simple link')}
+              </p>
+              <p className="help">
+                {translate(
+                  'simple_link_help',
+                  'Insert a path of an element; this will override previous settings and you will see just a single link in menu without submenu.'
+                )}
               </p>
               <input
                 type="text"
                 value={simple_link}
-                name={`simple-${idx}`}
-                key={`simple-${idx}`}
-                onChange={(e) => updateItemInThisMenu(idx, 'simple_link', e.target.value)}
+                name={`simple-${menuId}-${idx}`}
+                key={`simple-${menuId}-${idx}`}
+                onChange={e =>
+                  updateItemInThisMenu(idx, 'simple_link', e.target.value)
+                }
               />
             </label>
             <label>
-              <p>Condition</p>
-              <p>
-                Insert condition (you can use variables like object,portal,
-                request, here, member... See complete list here:
-                http://docs.plone.org/develop/plone/functionality/expressions.html#expression-variables)
+              <p className="title">
+                {translate('condition_label', 'Condition')}
+              </p>
+              <p className="help">
+                {translate(
+                  'condition_help',
+                  'Insert condition (you can use variables like object, portal, request, here, member... See complete list here: http://docs.plone.org/develop/plone/functionality/expressions.html#expression-variables)'
+                )}
               </p>
               <input
                 type="text"
                 value={condition}
-                name={`condition-${idx}`}
-                key={`condition-${idx}`}
-                onChange={(e) => updateItemInThisMenu(idx, 'condition', e.target.value)}
+                name={`condition-${menuId}-${idx}`}
+                key={`condition-${menuId}-${idx}`}
+                onChange={e =>
+                  updateItemInThisMenu(idx, 'condition', e.target.value)
+                }
               />
             </label>
           </div>
@@ -132,6 +170,9 @@ MenuItem.defaultProps = {
   condition: '',
   removeItemFromThisMenu: () => {},
   updateItemInThisMenu: () => {},
+  menuId: 'menu-new-x',
+  portalUrl: '',
+  translate: (key, defaultMessage) => defaultMessage,
 };
 
 export default SortableElement(MenuItem);

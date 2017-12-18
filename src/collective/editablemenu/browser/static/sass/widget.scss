@@ -44,6 +44,25 @@
 .panel-body {
     padding: 15px;
     @include clearfix;
+
+    > label {
+        display: block;
+        font-weight: 400;
+
+        + label {
+            padding-top: 0.75em;
+            margin-top: 1em;
+            border-top: 1px solid #eee;
+        }
+    }
+    .title {
+        font-weight: 600;
+        margin-bottom: 0.2em;
+    }
+    input[type='text'] {
+        width: 50%;
+        min-width: 220px;
+    }
 }
 
 .panel-heading {
@@ -86,6 +105,8 @@
         }
         &:focus,
         &:hover {
+            background-color: transparentize($color: black, $amount: 0.97);
+
             span {
                 border-bottom-color: transparent;
             }
@@ -168,7 +189,6 @@
             }
             &.active:hover {
                 color: #696969;
-                background-color: transparent;
             }
             &:focus {
                 outline-style: none;
@@ -225,8 +245,15 @@ body > li.menu-item {
     }
 
     > input {
-        max-width: 220px;
+        width: 50%;
+        min-width: 220px;
     }
+}
+
+.remove-menu-wrapper {
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
 }
 
 #panel-group-template,
