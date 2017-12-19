@@ -1,4 +1,5 @@
 import React from 'react';
+import FaPlus from 'react-icons/lib/fa/plus';
 
 const NavBar = ({
   settings,
@@ -42,7 +43,7 @@ const NavBar = ({
         addNewMenu();
       }}
     >
-      <span className="fa fa-plus" />
+      <FaPlus />
       <span className="sr-only">{translate('add_menu', 'Add new menu')}</span>
     </a>
   </nav>

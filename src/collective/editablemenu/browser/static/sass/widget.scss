@@ -38,7 +38,6 @@
     border: 1px solid transparent;
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    position: relative;
 }
 
 .panel-body {
@@ -69,6 +68,7 @@
     border-bottom: 1px solid transparent;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    position: relative;
 
     > .dropdown .dropdown-toggle {
         color: inherit;
@@ -77,7 +77,7 @@
 
 .remove-item-button {
     position: absolute;
-    top: 5px;
+    top: calc(50% - 17px);
     right: 8px;
 
     img {

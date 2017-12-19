@@ -9,6 +9,8 @@ Changelog
   [pnicolli]
 - plone.protect js script was being added to the submenu html, now it's removed manually from the async response.
   [pnicolli]
+- Moved configuration format to using a json string
+  [daniele-andreotti]
 - Completely new controlpanel layout
   [pnicolli]
 

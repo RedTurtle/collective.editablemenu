@@ -6,7 +6,9 @@ require(['jquery', 'react-widget'], function($, widget) {
       portalUrl.concat('/plonejsi18n?domain=collective.editablemenu.widget')
     )
       .done(function(data) {
-        translations = data;
+        if (data) {
+          translations = data;
+        }
       })
       .always(function() {
         widget.app(portalUrl, translations);
