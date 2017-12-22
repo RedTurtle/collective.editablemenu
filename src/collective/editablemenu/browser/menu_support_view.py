@@ -159,7 +159,7 @@ class MenuSupportView(BrowserView):
             return []
         if not folder_path.startswith("/"):
             folder_path = "/" + folder_path
-        folder = self.get_folder
+        folder = self.get_folder(folder_path)
         if not folder:
             return []
         # return folder contents not excluded from navigation
