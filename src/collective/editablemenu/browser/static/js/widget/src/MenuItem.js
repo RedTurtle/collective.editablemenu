@@ -14,7 +14,10 @@ const MenuItem = ({
   portalUrl,
   translate,
 }) => {
-  const idFromName = tab_title.replace(/\s/g, '-').toLowerCase();
+  const idFromName = tab_title
+    .replace(/\s/g, '-')
+    .replace(/[^a-zA-Z0-9-]/g, '')
+    .toLowerCase();
   const idToUse = tab_title === 'New' ? `new-${idx}` : idFromName;
   const collapse_id = `collapse-${menuId}-${idToUse}`;
   const heading_id = `heading-${menuId}-${idToUse}`;
