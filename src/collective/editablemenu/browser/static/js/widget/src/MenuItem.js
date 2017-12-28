@@ -44,7 +44,9 @@ const MenuItem = ({
           >
             <img
               alt={translate('remove_menu_item', 'Remove this menu entry')}
-              src={`${portalUrl}/++plone++collective.editablemenu/delete_tab.png`}
+              src={`${
+                portalUrl
+              }/++plone++collective.editablemenu/delete_tab.png`}
             />
           </button>
         </div>
