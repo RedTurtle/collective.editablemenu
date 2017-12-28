@@ -27,13 +27,14 @@ require(['jquery', 'react-widget'], function($, widget) {
             settings[section_name].push({
               navigation_folder: $item.find('input[name^="navfolder"]').val(),
               simple_link: $item.find('input[name^="simple"]').val(),
-              tab_title: $item.find('input[name^="title"]').val(),
+              tab_title: $item.find('textarea').val(),
               additional_columns: $item.find('input[name^="additional"]').val(),
               condition: $item.find('input[name^="condition"]').val(),
             });
           });
         }
       });
+      debugger;
       $('#form-widgets-menu_tabs_json').text(JSON.stringify(settings));
     }
     $('#form-buttons-save').click(handleSave);

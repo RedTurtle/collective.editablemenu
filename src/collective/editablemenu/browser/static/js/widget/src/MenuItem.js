@@ -44,9 +44,7 @@ const MenuItem = ({
           >
             <img
               alt={translate('remove_menu_item', 'Remove this menu entry')}
-              src={`${
-                portalUrl
-              }/++plone++collective.editablemenu/delete_tab.png`}
+              src={`${portalUrl}/++plone++collective.editablemenu/delete_tab.png`}
             />
           </button>
         </div>
@@ -64,10 +62,8 @@ const MenuItem = ({
               <p className="help">
                 {translate('tab_title_help', 'Insert the title of this tab.')}
               </p>
-              <input
-                type="text"
+              <textarea
                 value={tab_title}
-                name={`title-${menuId}-${idx}`}
                 key={`title-${menuId}-${idx}`}
                 onChange={e =>
                   updateItemInThisMenu(idx, 'tab_title', e.target.value)
