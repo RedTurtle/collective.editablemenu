@@ -14,7 +14,10 @@ const MenuItem = ({
   portalUrl,
   translate,
 }) => {
-  const idFromName = tab_title.replace(/\s/g, '-').toLowerCase();
+  const idFromName = tab_title
+    .replace(/\s/g, '-')
+    .replace(/[^a-zA-Z0-9-]/g, '')
+    .toLowerCase();
   const idToUse = tab_title === 'New' ? `new-${idx}` : idFromName;
   const collapse_id = `collapse-${menuId}-${idToUse}`;
   const heading_id = `heading-${menuId}-${idToUse}`;
@@ -41,9 +44,7 @@ const MenuItem = ({
           >
             <img
               alt={translate('remove_menu_item', 'Remove this menu entry')}
-              src={`${
-                portalUrl
-              }/++plone++collective.editablemenu/delete_tab.png`}
+              src={`${portalUrl}/++plone++collective.editablemenu/delete_tab.png`}
             />
           </button>
         </div>
