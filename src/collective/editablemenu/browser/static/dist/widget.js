@@ -36,7 +36,6 @@ require(['jquery', 'react-widget'], function($, widget) {
           });
         }
       });
-      debugger;
       $('#form-widgets-menu_tabs_json').text(JSON.stringify(settings));
     }
     $('#form-buttons-save').click(handleSave);
