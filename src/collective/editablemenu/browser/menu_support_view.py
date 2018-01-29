@@ -52,7 +52,7 @@ class MenuSupportView(BrowserView):
     def choose_site_menu_config(self, settings):
         path = '/'.join(self.context.getPhysicalPath())
         root_path = self.get_root_site
-        if self.context.aq_parent.id == root_path:
+        if self.context.id == root_path:
             path = '/'
         else:
             path = path.split(root_path)[1]

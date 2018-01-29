@@ -13,6 +13,8 @@ Changelog
   [daniele-andreotti]
 - Completely new controlpanel layout
   [pnicolli]
+- Fix choose_site_menu_config method to take the right path
+  [fdelia]
 
 
 0.10.2 (2017-09-13)
