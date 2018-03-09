@@ -47,6 +47,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'plone.api',
+        'plone.directives.form',
         'Products.CMFPlone>=5.0b2.dev0',
         'setuptools',
     ],

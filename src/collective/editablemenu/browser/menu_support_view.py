@@ -100,7 +100,7 @@ class MenuSupportView(BrowserView):
             # this text is used inside a link, so i can't use portal_transorms
             # because it wraps all inside a <p> tag.
             # I wrap every row inside a span, so they can be easily styled
-            rows = ["<span>%s</span>" % x for x in tab_title.split("\r\n")]
+            rows = ["<span>%s</span>" % x for x in tab_title.split("\n")]
             # tab_dict['title'] = "<br/>".join(rows)
             tab_dict['title'] = "".join(rows)
 
