@@ -9,8 +9,8 @@ class EditableMenuSettingsEditForm(controlpanel.RegistryEditForm):
     """Editablemenu settings form.
     """
     schema = IEditableMenuSettings
-    id = "EditableMenuSettingsForm"
-    label = _(u"Editable Menu Settings")
+    id = 'EditableMenuSettingsForm'
+    label = _(u'Editable Menu Settings')
 
 
 class EditableMenuSettingsView(controlpanel.ControlPanelFormWrapper):

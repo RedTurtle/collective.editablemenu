@@ -3,22 +3,24 @@ from plone import api
 from plone.memoize import view
 from z3c.form import widget
 from z3c.form.browser.textarea import TextAreaWidget
-from z3c.form.interfaces import IFieldWidget, IFormLayer
+from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFormLayer
 from z3c.form.interfaces import ITextAreaWidget
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import implementsOnly
 from zope.schema.interfaces import IField
+
 import json
 
 
 class IEditableMenuSettingsWidget(ITextAreaWidget):
-    "Marker Interface"
+    """Marker Interface"""
 
 
 class EditableMenuSettingsWidget(TextAreaWidget):
     implementsOnly(IEditableMenuSettingsWidget)
-    target_field = "textarea"
+    target_field = 'textarea'
 
     @property
     def json_settings(self):
@@ -67,5 +69,5 @@ class EditableMenuSettingsWidget(TextAreaWidget):
 @adapter(IField, IFormLayer)
 @implementer(IFieldWidget)
 def EditableMenuSettingsFieldWidget(field, request):
-    "Factory for EditableMenuSettingsWidget."
+    """Factory for EditableMenuSettingsWidget."""
     return widget.FieldWidget(field, EditableMenuSettingsWidget(request))
