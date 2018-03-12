@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-12-19 10:41+0000\n"
+"POT-Creation-Date: 2018-03-12 14:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,10 +17,6 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.editablemenu\n"
 
-#: ../configure.zcml:40
-msgid "Clean registry from old field for the collective.editablemenu add-on."
-msgstr ""
-
 #: ../browser/controlpanel.py:13
 msgid "Editable Menu Settings"
 msgstr ""
@@ -32,22 +28,6 @@ msgstr ""
 
 #: ../browser/templates/submenu_detail_view.pt:26
 msgid "Explore all the contents of this section"
-msgstr ""
-
-#: ../configure.zcml:26
-msgid "Installs the collective.editablemenu add-on."
-msgstr ""
-
-#: ../configure.zcml:54
-msgid "Move static assets to resource registry."
-msgstr ""
-
-#: ../configure.zcml:47
-msgid "Remove non minified js resource."
-msgstr ""
-
-#: ../configure.zcml:33
-msgid "Uninstalls the collective.editablemenu add-on."
 msgstr ""
 
 #. Default: "Insert a path of the folder that contains pages for additional static columns."
@@ -63,26 +43,6 @@ msgstr ""
 #. Default: "Close"
 #: ../browser/templates/submenu_detail_view.pt:43
 msgid "close_label"
-msgstr ""
-
-#: ../configure.zcml:26
-msgid "collective.editablemenu"
-msgstr ""
-
-#: ../configure.zcml:40
-msgid "collective.editablemenu: clean"
-msgstr ""
-
-#: ../configure.zcml:54
-msgid "collective.editablemenu: move to resource registry"
-msgstr ""
-
-#: ../configure.zcml:47
-msgid "collective.editablemenu: remove old js"
-msgstr ""
-
-#: ../configure.zcml:33
-msgid "collective.editablemenu: uninstall"
 msgstr ""
 
 #. Default: "Insert condition (you can use variables like object,portal, request, here, member... See complete list here: http://docs.plone.org/develop/plone/functionality/expressions.html#expression-variables)"
@@ -134,3 +94,4 @@ msgstr ""
 #: ../browser/interfaces.py:27
 msgid "tab_title_label"
 msgstr ""
+

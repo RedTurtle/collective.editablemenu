@@ -8,6 +8,7 @@
   <includeDependencies package="." />
 
   <i18n:registerTranslations directory="locales" />
+
   <permission
         id="collective.editablemenu.permissions.ManageSettings"
         title="collective.editablemenu: Manage Settings"
