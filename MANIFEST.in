@@ -2,9 +2,12 @@ graft src/collective
 graft docs
 include *.cfg *.rst *.in
 include *.py
+include *.js
+include *.json
 include .coveragerc
 recursive-include docs *
 recursive-include src *
 global-exclude *pyc
 include .editorconfig
 include .gitattributes
+
