@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-0.11.0 (unreleased)
--------------------
+1.0.0 (2018-03-12)
+------------------
 
 - Fix zcml condition for registering the global_sections viewlet. It was adding two different viewlets simultaneously on Plone 5, now one of those is gone.
   [pnicolli]
@@ -45,7 +45,7 @@ Changelog
 - Add simple "not expansible" link in menu [lucabel]
 - Add possibility to condition tab visibility the same way portal_tabs did it [lucabel]
 - Add Plone5 compatibility (no resourse registry)
-  [cekk]
+Â  [cekk]
 
 
 0.9.0 (2016-03-15)
