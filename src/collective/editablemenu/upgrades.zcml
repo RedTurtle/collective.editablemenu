@@ -28,4 +28,28 @@
         handler=".upgrades.from_1200_to_1300"
         profile="collective.editablemenu:default" />
 
+  <gs:upgradeStep
+        title="Upgrade collective.editablemenu 1400"
+        description="collective.editablemenu upgrade step"
+        source="1300"
+        destination="1400"
+        handler=".upgrades.from_1300_to_1400"
+        profile="collective.editablemenu:default" />
+
+  <gs:upgradeStep
+        title="Upgrade collective.editablemenu 1410"
+        description="Remove non minified js file"
+        source="1400"
+        destination="1410"
+        handler=".upgrades.from_1400_to_1410"
+        profile="collective.editablemenu:default" />
+
+  <gs:upgradeStep
+        title="Upgrade collective.editablemenu 2000"
+        description="Move to resource registry"
+        source="*"
+        destination="2000"
+        handler=".upgrades.to_2000"
+        profile="collective.editablemenu:default" />
+
 </configure>

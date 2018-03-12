@@ -8,5 +8,5 @@
 
 domain=collective.editablemenu
 
-i18ndude rebuild-pot --pot $domain.pot --create $domain ../
+i18ndude rebuild-pot --pot $domain.pot --exclude "node_modules" --create $domain ../
 i18ndude sync --pot $domain.pot */LC_MESSAGES/$domain.po

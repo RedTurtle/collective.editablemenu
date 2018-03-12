@@ -4,6 +4,6 @@
 
 <object name="portal_javascripts">
   <javascript
-    id="++resource++collective.editablemenu/editablemenu.js"
+    id="++resource++collective.editablemenu/editablemenu.min.js"
     remove="True"/>
 </object>

@@ -31,11 +31,37 @@
       description="Uninstalls the collective.editablemenu add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+  <genericsetup:registerProfile
+      name="from_1300_to_1400"
+      title="collective.editablemenu: clean"
+      directory="profiles/from_1300_to_1400"
+      description="Clean registry from old field for the collective.editablemenu add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <genericsetup:registerProfile
+      name="from_1400_to_1410"
+      title="collective.editablemenu: remove old js"
+      directory="profiles/from_1400_to_1410"
+      description="Remove non minified js resource."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <genericsetup:registerProfile
+      name="to_2000"
+      title="collective.editablemenu: move to resource registry"
+      directory="profiles/to_2000"
+      description="Move static assets to resource registry."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
   <genericsetup:importStep
       name="collective.editablemenu-postInstall"
       title="collective.editablemenu post_install import step"
       description="Post install import step from collective.editablemenu"
       handler=".setuphandlers.post_install">
   </genericsetup:importStep>
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="collective.editablemenu-hiddenprofiles"
+      />
 
 </configure>

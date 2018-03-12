@@ -1,0 +1,62 @@
+# React widget translations
+# Piero Nicolli <piero.nicolli@redturtle.it>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"POT-Creation-Date: 2017-12-18 15:00+0100\n"
+"PO-Revision-Date: 2017-12-18 15:00+0100\n"
+"Last-Translator: Piero Nicolli <piero.nicolli@redturtle.it>\n"
+"Language-Team: RedTurtle <sviluppoplone@redturtle.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: it\n"
+"Language-Name: Italiano\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.editablemenu.widget\n"
+
+msgid "additional_columns_help"
+msgstr "Inserisci il percorso di una cartella che contiene un elenco di pagine per le colonne aggiuntive del tab."
+
+msgid "additional_columns_label"
+msgstr "Colonne aggiuntive"
+
+msgid "condition_help"
+msgstr "Inserire una condizione di visibilità del tab (si possono usare variabili come 'object', 'portal', 'request', 'here', 'member', etc... Se ne può vedere una lista qui: http://docs.plone.org/develop/plone/functionality/expressions.html#expression-variables)"
+
+msgid "condition_label"
+msgstr "Condizione"
+
+msgid "navigation_folder_help"
+msgstr "Inserisci il percorso della cartella che conterrà gli element ida mostrare nel menu."
+
+msgid "navigation_folder_label"
+msgstr "Cartella di navigazione"
+
+msgid "simple_link_help"
+msgstr "Inserire un percorso interno o un link esterno al sito; questo sovrascriverà le altre impostazioni e la voce di menù sara cliccabile senza aprire un sottomenu"
+
+msgid "simple_link_label"
+msgstr "Link Semplice"
+
+msgid "tab_title_help"
+msgstr "Inserisci il titolo del tab."
+
+msgid "tab_title_label"
+msgstr "Titolo tab"
+
+msgid "remove_menu"
+msgstr "Rimuovi questo menù"
+
+msgid "remove_menu_item"
+msgstr "Rimuovi questa voce di menù"
+
+msgid "add_menu"
+msgstr "Aggiungi un nuovo menù"
+
+msgid "add_menu_item"
+msgstr "Aggiungi un elemento"
+
+msgid "path_label"
+msgstr "Percorso della radice"

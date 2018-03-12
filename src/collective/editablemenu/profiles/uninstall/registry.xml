@@ -1,5 +1,18 @@
 <registry>
-    <record interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings"
-            field="menu_tabs"
-            delete="True"/>
+  <records interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings"
+           remove="True"/>
+  <!-- RESOURCES -->
+  <records prefix="plone.resources/editablemenu"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'
+           remove="True" />
+  <records prefix="plone.resources/editablemenu-widget"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'
+           remove="True" />
+  <!-- BUNDLES -->
+  <records prefix="plone.bundles/editablemenu-bundle"
+           interface='Products.CMFPlone.interfaces.IBundleRegistry'
+           remove="True" />
+  <records prefix="plone.bundles/editablemenu-widget-bundle"
+           interface='Products.CMFPlone.interfaces.IBundleRegistry'
+           remove="True" />
 </registry>

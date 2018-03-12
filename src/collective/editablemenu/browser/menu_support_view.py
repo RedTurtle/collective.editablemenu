@@ -1,23 +1,54 @@
 # -*- coding: utf-8 -*-
-from Products.Five import BrowserView
-from plone import api
-from collective.editablemenu import logger
-from plone.memoize import view
-from Products.CMFCore.interfaces import IFolderish
-from Products.CMFCore.Expression import Expression, getExprContext
 from AccessControl import Unauthorized
+from collective.editablemenu import logger
+from collective.editablemenu.browser.interfaces import IEditableMenuSettings
+from plone import api
+from plone.api.exc import InvalidParameterError
+from plone.memoize import view
+from Products.CMFCore.Expression import Expression
+from Products.CMFCore.Expression import getExprContext
+from Products.CMFCore.interfaces import IFolderish
+from Products.Five import BrowserView
+
+import json
 
 
 class MenuSupportView(BrowserView):
     """
     """
-    registry = "collective.editablemenu.browser.interfaces." + \
-        "IEditableMenuSettings.menu_tabs"
+    # registry = 'collective.editablemenu.browser.interfaces.' + \
+    #     "IEditableMenuSettings.menu_tabs_json"
 
     @property
     @view.memoize
     def menu_settings(self):
-        return api.portal.get_registry_record(self.registry)
+        try:
+            return api.portal.get_registry_record(
+                'menu_tabs_json',
+                interface=IEditableMenuSettings)
+        except (InvalidParameterError, KeyError):
+            return ''
+
+    @property
+    @view.memoize
+    def get_root_site(self):
+        return ''.join(api.portal.get().getPhysicalPath())
+
+    @view.memoize
+    def find_path_title(self, path):
+        if not path:
+            return ''
+        if path == '/':
+            return api.portal.get().Title()
+        search_path = '/{0}{1}'.format(
+            api.portal.get().getId(),
+            path,
+        )
+        results = api.content.find(depth=0, path=search_path)
+        if len(results) > 0:
+            return results[0].Title
+        else:
+            return ''
 
     def exclude_from_nav(self, item):
         try:
@@ -27,28 +58,52 @@ class MenuSupportView(BrowserView):
             # DX Item
             return getattr(item, 'exclude_from_nav', False)
 
+    def choose_site_menu_config(self, settings):
+        path = '/'.join(self.context.getPhysicalPath())
+        root_path = self.get_root_site
+        if self.context.id == root_path:
+            path = '/'
+        else:
+            path = path.split(root_path)[1]
+
+        if not path:
+            return '/'
+        sites_path = settings.keys()
+        not_found = True
+        while not_found:
+            for site_path in sites_path:
+                if path == site_path:
+                    return site_path
+            path = '/'.join(path.split('/')[:-1])
+            if not path:
+                return '/'
+
     def get_menu_tabs(self):
         context = self.context.aq_inner
-        context_path = "/".join(context.getPhysicalPath())
-        settings = self.menu_settings
+        context_path = '/'.join(context.getPhysicalPath())
+        if not self.menu_settings:
+            return []
+        settings = json.loads(self.menu_settings)
         if not settings:
             return []
         results = []
 
-        for i, tab_settings in enumerate(settings):
+        candidate_site = self.choose_site_menu_config(settings)
+
+        for i, tab_settings in enumerate(settings[candidate_site]):
             # evaluate condition
-            condition = tab_settings.condition or ''
+            condition = tab_settings.get('condition', '')
             expression = Expression(condition)
             expression_context = getExprContext(self.context, self.context)
             value = expression(expression_context)
 
-            if isinstance(value, basestring) and value.strip() == "":
+            if isinstance(value, basestring) and value.strip() == '':
                 value = True
 
             if not value:
                 continue
 
-            tab_title = getattr(tab_settings, "tab_title", '')
+            tab_title = tab_settings.get('tab_title', '').encode('utf-8')
             if not tab_title:
                 continue
 
@@ -56,9 +111,9 @@ class MenuSupportView(BrowserView):
             # this text is used inside a link, so i can't use portal_transorms
             # because it wraps all inside a <p> tag.
             # I wrap every row inside a span, so they can be easily styled
-            rows = ["<span>%s</span>" % x for x in tab_title.split("\r\n")]
-            # tab_dict['title'] = "<br/>".join(rows)
-            tab_dict['title'] = "".join(rows)
+            rows = tab_title.replace('\r', '').split('\n')
+            rows = ['<span>{0}</span>'.format(x) for x in rows]
+            tab_dict['title'] = ''.join(rows)
 
             navigation_folder = self.get_navigation_folder(tab_settings)
             # need to do something better
@@ -68,9 +123,9 @@ class MenuSupportView(BrowserView):
             if navigation_folder:
                 tab_dict['url'] = navigation_folder.absolute_url()
                 tab_dict['selected'] = context_path.startswith(
-                    "/".join(navigation_folder.getPhysicalPath()))
-            if tab_settings.simple_link:
-                tab_dict['url'] = self.fixLink(tab_settings.simple_link)
+                    '/'.join(navigation_folder.getPhysicalPath()))
+            if tab_settings.get('simple_link', ''):
+                tab_dict['url'] = self.fixLink(tab_settings.get('simple_link'))
                 tab_dict['clickandgo'] = True
             results.append(tab_dict)
         return results
@@ -78,20 +133,23 @@ class MenuSupportView(BrowserView):
     def fixLink(self, link):
         if link.startswith('http'):
             return link
-        return "{}/{}".format(
+        return '{0}/{1}'.format(
             api.portal.get().absolute_url(),
-            link.lstrip("/")
+            link.lstrip('/')
         )
 
     @view.memoize
+    def get_object(self, folder_path):
+        return api.content.get(path=folder_path.encode('utf-8'))
+
     def get_navigation_folder(self, tab_settings):
-        folder_path = getattr(tab_settings, "navigation_folder", "")
+        folder_path = tab_settings.get('navigation_folder', '')
         if not folder_path:
             return None
-        if not folder_path.startswith("/"):
-            folder_path = "/" + folder_path
+        if not folder_path.startswith('/'):
+            folder_path = '/' + folder_path
         try:
-            obj = api.content.get(path=folder_path.encode('utf-8'))
+            obj = self.get_object(folder_path)
         except Unauthorized:
             return '__skip_this_folder__'
         # don't want to check for other exception! need to know if this menu
@@ -99,17 +157,20 @@ class MenuSupportView(BrowserView):
         return obj
 
     @view.memoize
+    def get_folder(self, folder_path):
+        return api.content.get(path=folder_path.encode('utf-8'))
+
     def get_additional_columns(self, tab_settings):
         """
         return additional columns set in the settings,
         except the items excluded from nav
         """
-        folder_path = getattr(tab_settings, "additional_columns", [])
+        folder_path = tab_settings.get('additional_columns', [])
         if not folder_path:
             return []
-        if not folder_path.startswith("/"):
-            folder_path = "/" + folder_path
-        folder = api.content.get(path=folder_path.encode('utf-8'))
+        if not folder_path.startswith('/'):
+            folder_path = '/' + folder_path
+        folder = self.get_folder(folder_path)
         if not folder:
             return []
         # return folder contents not excluded from navigation
@@ -140,18 +201,20 @@ class SubMenuDetailView(MenuSupportView):
                 tab_id = int(tab_id)
             except ValueError:
                 logger.error(
-                    "Invalid index number " +
-                    "(%s). Unable to retrieve configuration." % tab_id
+                    'Invalid index number ' +
+                    '({0}). Unable to retrieve configuration.'.format(tab_id)
                 )
                 return None
-        settings = self.menu_settings
+        settings = json.loads(self.menu_settings)
         if not settings:
             return None
         try:
-            return settings[tab_id]
+            candidate_site = self.choose_site_menu_config(settings)
+            return settings[candidate_site][tab_id]
         except IndexError:
             logger.error(
-                "Index(%s) not found in menu settings. Unable to retrieve configuration." % tab_id  # noqa
+                'Index({0}) not found in menu settings.'
+                ' Unable to retrieve configuration.'.format(tab_id)
             )
             return None
         return None
@@ -162,11 +225,11 @@ class SubMenuDetailView(MenuSupportView):
             return []
         results = []
         context = self.context.aq_inner
-        context_path = "/".join(context.getPhysicalPath())
+        context_path = '/'.join(context.getPhysicalPath())
         if IFolderish.providedBy(navigation_folder):
             for item in navigation_folder.listFolderContents():
                 if not self.exclude_from_nav(item):
-                    item_path = "/".join(item.getPhysicalPath())
+                    item_path = '/'.join(item.getPhysicalPath())
                     result_dict = {
                         'title': item.Title(),
                         'description': item.Description() or item.Title(),
@@ -182,7 +245,7 @@ class SubMenuDetailView(MenuSupportView):
             return []
         results = []
         for item in additional_columns:
-            text = ""
+            text = ''
             try:
                 # AT
                 text = item.getText()
