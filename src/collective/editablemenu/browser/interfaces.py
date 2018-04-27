@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from .widgets import EditableMenuSettingsFieldWidget
 from collective.editablemenu import _
-from plone.directives import form
+from plone.autoform import directives as form
 from plone.registry.field import PersistentField
 from plone.supermodel import model
 from z3c.form.object import registerFactoryAdapter
