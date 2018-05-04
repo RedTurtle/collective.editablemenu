@@ -63,6 +63,14 @@ When you are editing a menu configuration different from the main site configura
 
 Nevertheless, keep in mind that no changes will be saved to the configuration of any menu, until you click the blue *Save* button at the botton of the control panel.
 
+Events
+------
+
+Three different custom events will be fired from the menu links:
+
+- `editablemenu.submenu.opened`: when the menu finishes sliding down
+- `editablemenu.submenu.closed`: when the menu finishes sliding up
+- `editablemenu.submenu.loaded`: when the menu finishes loading new content
 
 Installation
 ------------
