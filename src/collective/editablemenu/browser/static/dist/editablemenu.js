@@ -1,30 +1,18 @@
 require(['jquery'], function($) {
   $(function() {
+    var customEvents = {
+      closed: 'editablemenu.submenu.closed',
+      loaded: 'editablemenu.submenu.loaded',
+      opened: 'editablemenu.submenu.opened',
+    };
+
     $(document).click(function(event) {
       if (!$(event.target).closest('.globalnavWrapper').length) {
         $('.globalnavWrapper #submenu-details').slideUp();
         $('.tabOpen').removeClass('tabOpen');
       }
     });
-    //$('a.menuTabLink').blur(function(e) {
-    //  /*when a menutab link loses the focus, set the focus to the first
-    //  submenu link. Except if the event is a "close menu" event.
-    //  */
-    //  if ($(e.relatedTarget).attr('class') === 'closeSubmenuLink') {
-    //    $(this).focus();
-    //    return;
-    //  }
-    //  var tabid = $(this).data().tabid;
-    //  if (tabid !== undefined) {
-    //    var submenu_links = $('.globalnavWrapper .submenu-' + tabid + ' a');
-    //    if ((submenu_links.length !== 0) && ($('.globalnavWrapper #submenu-details').is(':visible'))) {
-    //      e.preventDefault();
-    //      //set the focus to first element in the submenu
-    //      $(submenu_links[0]).focus();
-    //      return;
-    //    }
-    //  }
-    //});
+
     $('a.menuTabLink').click(function(e) {
       if ($(e.currentTarget).hasClass('clickandgo')) {
         return true;
@@ -40,7 +28,9 @@ require(['jquery'], function($) {
       if (container.hasClass('tabOpen')) {
         //close the submenu
         $('.tabOpen').removeClass('tabOpen');
-        submenu.slideUp();
+        submenu.slideUp(400, function() {
+          $this.trigger(customEvents.closed);
+        });
         return;
       }
       //else, we need to open a menu
@@ -50,16 +40,13 @@ require(['jquery'], function($) {
         var submenu_tabid = parseInt(submenu.attr('class').slice(8), 10);
         if (submenu_tabid === tabid) {
           //we reopen the already loaded submenu
-          submenu.slideDown();
+          submenu.slideDown(400, function() {
+            $this.trigger(customEvents.opened);
+          });
           return;
         }
       }
       var baseUrl = $('body').data().baseUrl;
-      if (!baseUrl) {
-        //plone4
-        baseUrl = portal_url;
-      }
-      // var baseUrl = portal_url ? portal_url : $('body').data().baseUrl;
       $.get(baseUrl + '/@@submenu_detail_view?tab_id=' + tabid, function(data) {
         var scriptRegex = /<script.*?id="protect-script".*?<\/script>/g;
         var newData = data.replace(scriptRegex, '');
@@ -70,32 +57,32 @@ require(['jquery'], function($) {
         ).html(newData);
         if ($(result_html).children().length === 0) {
           //no results.
+          $this.trigger(customEvents.loaded);
           return;
         }
         if (submenu.length !== 0) {
           //we need to remove old submenu and replace with new
           if (submenu.is(':visible')) {
             submenu.fadeOut('fast').remove();
-            //$('.globalnavWrapper').append(result_html);
             container.append(result_html);
-            $('.globalnavWrapper #submenu-details').fadeIn();
+            $('.globalnavWrapper #submenu-details').fadeIn(400, function() {
+              $this.trigger(customEvents.loaded);
+            });
           } else {
             submenu.remove();
-            //$('.globalnavWrapper').append(result_html);
             container.append(result_html);
-            $('.globalnavWrapper #submenu-details').slideDown();
+            $('.globalnavWrapper #submenu-details').slideDown(400, function() {
+              $this.trigger(customEvents.loaded);
+              $this.trigger(customEvents.opened);
+            });
           }
         } else {
-          //$('.globalnavWrapper').append(result_html);
           container.append(result_html);
-          $('.globalnavWrapper #submenu-details').slideDown();
+          $('.globalnavWrapper #submenu-details').slideDown(400, function() {
+            $this.trigger(customEvents.loaded);
+            $this.trigger(customEvents.opened);
+          });
         }
-
-        // var submenu_links = $('.globalnavWrapper #submenu-details a');
-        // if (submenu_links.length !== 0) {
-        //   // set the focus to first element in the submenu
-        //   $(submenu_links[0]).focus();
-        // }
       });
     });
     $('#portal-top').on('click', '.submenuDetailsContent a', function() {
@@ -103,11 +90,12 @@ require(['jquery'], function($) {
     });
     $('.globalnavWrapper').on('click', 'a.closeSubmenuLink', function(e) {
       e.preventDefault();
-      $('.tabOpen').each(function() {
-        $(this).removeClass('tabOpen');
+      var $this = $(this);
+      $('.tabOpen').removeClass('tabOpen');
+      $('.globalnavWrapper #submenu-details').slideUp(400, function() {
+        $this.trigger(customEvents.closed);
       });
-      $('.globalnavWrapper #submenu-details').slideUp();
-      var parent = $($(this).parents('#submenu-details'));
+      var parent = $($this.parents('#submenu-details'));
       if (parent.length === 0) {
         return;
       }
