@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.2 (unreleased)
+1.1.0 (2018-05-15)
 ------------------
 
 - Added custom events when the menu is opened, closed and loaded
