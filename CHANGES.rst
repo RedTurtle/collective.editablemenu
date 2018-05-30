@@ -2,10 +2,12 @@ Changelog
 =========
 
 
-1.1.1 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+Breaking:
+- Rewrote menu templates to improve accessibility
+  [pnicolli]
 
 
 1.1.0 (2018-05-15)

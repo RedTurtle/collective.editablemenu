@@ -11,38 +11,30 @@
                   navigation_folder nocall:subitems/navigation_folder|nothing;">
   <div class="submenuDetailsContent">
     <div tal:condition="dynamic_items" class="submenuDynamicWrapper">
-      <h5 class="dynamicSectionLabel"
-         i18n:translate="dynamic_section_label">
-        In this section
-      </h5>
-      <ul class="submenuDynamicItems">
-        <li tal:repeat="item dynamic_items">
-          <a tal:attributes="href item/url;
-                             title item/description;
-                             class python:item.get('selected') and 'subitem subitemSelected' or 'subitem'"
+      <ul class="submenuDynamicItems" role="menu">
+        <li role="none" tal:repeat="item dynamic_items">
+          <a role="menuitem"
+             href="${item/url}"
+             title="${item/description}"
+             class="subitem ${python: item.get('selected') and 'subitemSelected' or ''}"
              tal:content="item/title" />
         </li>
       </ul>
       <a class="dynamicSectionExploreLabel"
-         tal:attributes="href navigation_folder/absolute_url;
-                         title string:Explore all the contents of this section"
+         href="${navigation_folder/absolute_url}"
+         title="Explore all the contents of this section"
          i18n:translate=""
-         i18n:attributes="title;"
+         i18n:attributes="title"
          tal:condition="navigation_folder">
         Explore all the contents of this section
       </a>
     </div>
     <div tal:condition="static_items" class="submenuStaticWrapper">
       <tal:items tal:repeat="item static_items">
-        <div tal:attributes="class string:${item/id} staticItem">
+        <div class="${item/id} staticItem">
           <p tal:replace="structure item/text" />
         </div>
       </tal:items>
-    </div>
-    <div class="closeSubmenu">
-      <a class="closeSubmenuLink"
-         i18n:translate="close_label"
-         href="#">Close</a>
     </div>
   </div>
 </body>
