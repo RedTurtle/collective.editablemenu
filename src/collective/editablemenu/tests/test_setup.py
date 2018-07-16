@@ -5,7 +5,7 @@ from collective.editablemenu.testing import COLLECTIVE_EDITABLEMENU_INTEGRATION_
 from plone import api
 from plone.browserlayer import utils
 
-import unittest2 as unittest
+import unittest
 
 
 class TestSetup(unittest.TestCase):

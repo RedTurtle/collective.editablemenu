@@ -16,9 +16,12 @@ import json
 class MenuSupportView(BrowserView):
     """
     """
+<<<<<<< HEAD
 
     # registry = 'collective.editablemenu.browser.interfaces.' + \
     #     "IEditableMenuSettings.menu_tabs_json"
+=======
+>>>>>>> add test suite (robot and integration)
 
     @property
     @view.memoize
@@ -87,11 +90,7 @@ class MenuSupportView(BrowserView):
         results = []
 
         candidate_site = self.choose_site_menu_config(settings)
-
-        if candidate_site not in settings:
-            return results
-
-        for i, tab_settings in enumerate(settings[candidate_site]):
+        for i, tab_settings in enumerate(settings.get(candidate_site, [])):
             # evaluate condition
             condition = tab_settings.get('condition', '')
             expression = Expression(condition)
@@ -159,7 +158,10 @@ class MenuSupportView(BrowserView):
 
     @view.memoize
     def get_folder(self, folder_path):
-        return api.content.get(path=folder_path.encode('utf-8'))
+        try:
+            return api.content.get(path=folder_path.encode('utf-8'))
+        except Unauthorized:
+            return None
 
     def get_additional_columns(self, tab_settings):
         """
@@ -256,7 +258,7 @@ class SubMenuDetailView(MenuSupportView):
                 # DX
                 text = getattr(item, 'text', None)
                 if text:
-                    text = text.output
+                    text = getattr(text, 'output', text)
             if text:
                 results.append({'id': item.getId(), 'text': text})
         return results
