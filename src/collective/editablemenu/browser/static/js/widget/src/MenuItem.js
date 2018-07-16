@@ -64,6 +64,7 @@ const MenuItem = ({
               </p>
               <textarea
                 value={tab_title}
+                name={`tabtitle-${menuId}-${idx}`}
                 key={`title-${menuId}-${idx}`}
                 onChange={e =>
                   updateItemInThisMenu(idx, 'tab_title', e.target.value)

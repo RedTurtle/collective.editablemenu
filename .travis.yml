@@ -1,18 +1,24 @@
 language: python
-python:
-  - 2.7
+python: 2.7
+sudo: false
+cache:
+  pip: true
+  directories:
+    - eggs
+env:
+  # - PLONE_VERSION=4.3.x
+  - PLONE_VERSION=5.0.x
+  - PLONE_VERSION=5.1.x
 install:
-  - mkdir -p buildout-cache/{eggs,downloads}
-  - python bootstrap-buildout.py -c travis.cfg
-  - bin/buildout -Nc travis.cfg
+  - virtualenv -p `which python` .
+  - bin/pip install -r requirements.txt
+  - sed -ie "s#test-5.1.x#test-$PLONE_VERSION#" buildout.cfg
+  - bin/buildout -N -t 5
 script:
   - bin/code-analysis
-  - bin/test
-  - bin/createcoverage
+  - bin/test --all
 after_success:
-  - pip install coveralls
+  - bin/test-coverage
+  - bin/createcoverage
+  - pip install coverage==3.7.1 coveralls
   - coveralls
-
-notifications:
-  email:
-    - sviluppoplone@redturtle.it
