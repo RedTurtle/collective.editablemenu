@@ -9,10 +9,6 @@ env:
   # - PLONE_VERSION=4.3.x
   - PLONE_VERSION=5.0.x
   - PLONE_VERSION=5.1.x
-before_install:  
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.16.0/geckodriver-v0.16.0-linux64.tar.gz 
-  - mkdir geckodriver && tar zxvf geckodriver-v0.16.0-linux64.tar.gz -C geckodriver 
-  - export PATH=$PATH:$PWD/geckodriver 
 install:
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt
@@ -29,3 +25,6 @@ after_success:
   - bin/createcoverage
   - pip install coverage==3.7.1 coveralls
   - coveralls
+
+
+  curl -s -X POST http://localhost:8080/orma/@login -H 'Accept: application/json' -H 'Content-Type: application/json' --data-raw '{"login": "admin", "password": "rerplone!"}'
