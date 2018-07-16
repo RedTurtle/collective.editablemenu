@@ -25,6 +25,3 @@ after_success:
   - bin/createcoverage
   - pip install coverage==3.7.1 coveralls
   - coveralls
-
-
-  curl -s -X POST http://localhost:8080/orma/@login -H 'Accept: application/json' -H 'Content-Type: application/json' --data-raw '{"login": "admin", "password": "rerplone!"}'

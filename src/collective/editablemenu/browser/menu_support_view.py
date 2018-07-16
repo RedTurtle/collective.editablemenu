@@ -16,12 +16,6 @@ import json
 class MenuSupportView(BrowserView):
     """
     """
-<<<<<<< HEAD
-
-    # registry = 'collective.editablemenu.browser.interfaces.' + \
-    #     "IEditableMenuSettings.menu_tabs_json"
-=======
->>>>>>> add test suite (robot and integration)
 
     @property
     @view.memoize

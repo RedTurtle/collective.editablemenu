@@ -25,6 +25,7 @@ Breaking:
 - Fix menu render when there are no settings for the current folder
   [cekk]
 - Add initial test suite (functional and acceptance)
+- Add test suite (functional and acceptance)
   [cekk]
 
 1.1.0 (2018-05-15)
