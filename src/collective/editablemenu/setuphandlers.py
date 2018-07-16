@@ -18,7 +18,9 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
-    if context.readDataFile('collectiveeditablemenu_default.txt') is None:
-        return
-
     # Do something during the installation of this package
+
+
+def uninstall(context):
+    """Uninstall script"""
+    # Do something at the end of the uninstallation of this package.

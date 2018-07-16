@@ -14,17 +14,8 @@
   />
 
   <!-- VIEWLETS -->
-  <browser:viewlet
-    zcml:condition="not-have plone-5"
-    name="plone.global_sections"
-    manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
-    class=".viewlets.CustomGlobalSectionsViewlet"
-    layer="collective.editablemenu.interfaces.ICollectiveEditablemenuLayer"
-    permission="zope2.View"
-  />
 
   <browser:viewlet
-    zcml:condition="have plone-5"
     name="plone.global_sections"
     manager="plone.app.layout.viewlets.interfaces.IMainNavigation"
     class=".viewlets.CustomGlobalSectionsViewlet"
