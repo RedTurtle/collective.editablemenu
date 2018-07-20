@@ -1,4 +1,4 @@
-collective.editablemenu Copyright 2018, RedTurtle Technology
+collective.editablemenu Copyright 2015-2018, RedTurtle Technology
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License version 2
