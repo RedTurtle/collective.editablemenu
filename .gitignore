@@ -13,6 +13,7 @@ bin/
 buildout-cache/
 develop-eggs/
 lib/
+local/
 include/
 node_modules/
 parts/
@@ -24,3 +25,4 @@ htmlcov/
 *.log
 output.xml
 *.swp
+pip-selfcheck.json
