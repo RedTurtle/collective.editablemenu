@@ -5,22 +5,17 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-long_description = (
-    open('README.rst').read()
-    + '\n' +
-    'Contributors\n'
-    '============\n'
-    + '\n' +
-    open('CONTRIBUTORS.rst').read()
-    + '\n' +
-    open('CHANGES.rst').read()
-    + '\n')
+long_description = '\n\n'.join([
+    open('README.rst').read(),
+    open('CONTRIBUTORS.rst').read(),
+    open('CHANGES.rst').read(),
+])
 
 
 setup(
     name='collective.editablemenu',
-    version='1.1.1.dev0',
-    description="A customizable editable menu",
+    version='2.0.0.dev0',
+    description="A customizable dropdown menu",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -28,6 +23,7 @@ setup(
         "Framework :: Plone",
         "Framework :: Plone :: 5.0",
         "Framework :: Plone :: 5.1",
+        "Intended Audience :: Developers",
         "Programming Language :: JavaScript",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
@@ -35,7 +31,7 @@ setup(
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords='Python Plone',
+    keywords='Python Plone Dropdown Menu Editable Customizable',
     author='RedTurtle Technology',
     author_email='sviluppoplone@redturtle.it',
     url='https://github.com/RedTurtle/collective.editablemenu',
