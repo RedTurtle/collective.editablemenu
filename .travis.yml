@@ -1,14 +1,23 @@
 language: python
-python:
-  - 2.7
+python: 2.7
+sudo: false
+cache:
+  pip: true
+  directories:
+    - eggs
+env:
+  matrix:
+    - PLONE_VERSION=5.1.x
+    - PLONE_VERSION=5.0.x
+before_install:
+  - mkdir -p $HOME/buildout-cache/{eggs,downloads}
+  - pip install -r requirements.txt
 install:
-  - mkdir -p buildout-cache/{eggs,downloads}
-  - python bootstrap-buildout.py -c travis.cfg
-  - bin/buildout -Nc travis.cfg
+  - sed -ie "s#plone-x.x.x.cfg#plone-$PLONE_VERSION.cfg#" travis.cfg
+  - buildout -Nt 3 -c travis.cfg
 script:
   - bin/code-analysis
   - bin/test
-  - bin/createcoverage
 after_success:
   - pip install coveralls
   - coveralls
