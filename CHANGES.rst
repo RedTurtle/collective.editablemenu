@@ -12,6 +12,9 @@ Breaking:
 1.2.0 (unreleased)
 ------------------
 
+1.2.0 (unreleased)
+------------------
+
 - Remove unused old code
   [cekk]
 - Fix menu render when there are no settings for the current folder
