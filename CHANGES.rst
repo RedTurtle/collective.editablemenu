@@ -8,6 +8,7 @@ Changelog
 Breaking:
 - Rewrote menu templates to improve accessibility
   [pnicolli]
+- Handled aria-expanded and ESC keypress event via ES [nzambello]
 
 
 1.1.0 (2018-05-15)
