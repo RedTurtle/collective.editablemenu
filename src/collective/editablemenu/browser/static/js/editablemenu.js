@@ -1,4 +1,4 @@
-require(['jquery'], function($) {
+require(['jquery', 'mousetrap'], function($, mousetrap) {
   $(function() {
     var customEvents = {
       closed: 'editablemenu.submenu.closed',
@@ -9,7 +9,17 @@ require(['jquery'], function($) {
     $(document).click(function(event) {
       if (!$(event.target).closest('.globalnavWrapper').length) {
         $('.globalnavWrapper #submenu-details').slideUp();
+        $('.tabOpen a').attr('aria-expanded', false);
         $('.tabOpen').removeClass('tabOpen');
+      }
+    });
+
+    mousetrap.bind('esc', function() {
+      if ($('.tabOpen').length > 0) {
+        $('.tabOpen a').attr('aria-expanded', false);
+        $('.tabOpen a.menuTabLink').trigger(customEvents.closed);
+        $('.tabOpen').removeClass('tabOpen');
+        $('.globalnavWrapper #submenu-details').slideUp();
       }
     });
 
@@ -27,6 +37,7 @@ require(['jquery'], function($) {
       }
       if (container.hasClass('tabOpen')) {
         //close the submenu
+        $('.tabOpen a').attr('aria-expanded', false);
         $('.tabOpen').removeClass('tabOpen');
         submenu.slideUp(400, function() {
           $this.trigger(customEvents.closed);
@@ -34,8 +45,10 @@ require(['jquery'], function($) {
         return;
       }
       //else, we need to open a menu
+      $('.tabOpen a').attr('aria-expanded', false);
       $('.tabOpen').removeClass('tabOpen');
       container.addClass('tabOpen');
+      container.find('a').attr('aria-expanded', true);
       if (submenu.length === 1) {
         var submenu_tabid = parseInt(submenu.attr('class').slice(8), 10);
         if (submenu_tabid === tabid) {
@@ -91,6 +104,7 @@ require(['jquery'], function($) {
     $('.globalnavWrapper').on('click', 'a.closeSubmenuLink', function(e) {
       e.preventDefault();
       var $this = $(this);
+      $('.tabOpen a').attr('aria-expanded', false);
       $('.tabOpen').removeClass('tabOpen');
       $('.globalnavWrapper #submenu-details').slideUp(400, function() {
         $this.trigger(customEvents.closed);

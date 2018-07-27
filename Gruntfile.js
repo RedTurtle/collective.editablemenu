@@ -58,6 +58,7 @@ module.exports = function(grunt) {
           preserveLicenseComments: false,
           paths: {
             jquery: 'empty:',
+            mousetrap: './../../../../../node_modules/mousetrap/mousetrap',
           },
           wrapShim: true,
           name: './js/editablemenu.js',

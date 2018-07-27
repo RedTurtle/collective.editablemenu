@@ -26,5 +26,8 @@
     "stylelint": "^8.2.0",
     "stylelint-config-prettier": "^2.0.0",
     "stylelint-config-recommended": "^1.0.0"
+  },
+  "dependencies": {
+    "mousetrap": "^1.6.2"
   }
 }
