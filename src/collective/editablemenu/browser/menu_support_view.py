@@ -16,6 +16,7 @@ import json
 class MenuSupportView(BrowserView):
     """
     """
+
     # registry = 'collective.editablemenu.browser.interfaces.' + \
     #     "IEditableMenuSettings.menu_tabs_json"
 
@@ -24,8 +25,8 @@ class MenuSupportView(BrowserView):
     def menu_settings(self):
         try:
             return api.portal.get_registry_record(
-                'menu_tabs_json',
-                interface=IEditableMenuSettings)
+                'menu_tabs_json', interface=IEditableMenuSettings
+            )
         except (InvalidParameterError, KeyError):
             return ''
 
@@ -40,10 +41,7 @@ class MenuSupportView(BrowserView):
             return ''
         if path == '/':
             return api.portal.get().Title()
-        search_path = '/{0}{1}'.format(
-            api.portal.get().getId(),
-            path,
-        )
+        search_path = '/{0}{1}'.format(api.portal.get().getId(), path)
         results = api.content.find(depth=0, path=search_path)
         if len(results) > 0:
             return results[0].Title
@@ -90,6 +88,9 @@ class MenuSupportView(BrowserView):
 
         candidate_site = self.choose_site_menu_config(settings)
 
+        if candidate_site not in settings:
+            return results
+
         for i, tab_settings in enumerate(settings[candidate_site]):
             # evaluate condition
             condition = tab_settings.get('condition', '')
@@ -123,7 +124,8 @@ class MenuSupportView(BrowserView):
             if navigation_folder:
                 tab_dict['url'] = navigation_folder.absolute_url()
                 tab_dict['selected'] = context_path.startswith(
-                    '/'.join(navigation_folder.getPhysicalPath()))
+                    '/'.join(navigation_folder.getPhysicalPath())
+                )
             if tab_settings.get('simple_link', ''):
                 tab_dict['url'] = self.fixLink(tab_settings.get('simple_link'))
                 tab_dict['clickandgo'] = True
@@ -134,8 +136,7 @@ class MenuSupportView(BrowserView):
         if link.startswith('http'):
             return link
         return '{0}/{1}'.format(
-            api.portal.get().absolute_url(),
-            link.lstrip('/')
+            api.portal.get().absolute_url(), link.lstrip('/')
         )
 
     @view.memoize
@@ -175,14 +176,14 @@ class MenuSupportView(BrowserView):
             return []
         # return folder contents not excluded from navigation
         return filter(
-            lambda x: not self.exclude_from_nav(x),
-            folder.listFolderContents()
+            lambda x: not self.exclude_from_nav(x), folder.listFolderContents()
         )
 
 
 class SubMenuDetailView(MenuSupportView):
     """
     """
+
     def get_menu_subitems(self, tab_id=None):
         if tab_id is None:
             tab_id = self.request.form.get('tab_id')
@@ -191,9 +192,11 @@ class SubMenuDetailView(MenuSupportView):
         settings = self.get_selected_tab(tab_id)
         if not settings:
             return {}
-        return {'navigation_folder': self.get_navigation_folder(settings),
-                'dynamic_items': self.get_dynamic_items(settings),
-                'static_items': self.get_static_items(settings)}
+        return {
+            'navigation_folder': self.get_navigation_folder(settings),
+            'dynamic_items': self.get_dynamic_items(settings),
+            'static_items': self.get_static_items(settings),
+        }
 
     def get_selected_tab(self, tab_id):
         if isinstance(tab_id, str):
@@ -201,8 +204,8 @@ class SubMenuDetailView(MenuSupportView):
                 tab_id = int(tab_id)
             except ValueError:
                 logger.error(
-                    'Invalid index number ' +
-                    '({0}). Unable to retrieve configuration.'.format(tab_id)
+                    'Invalid index number '
+                    + '({0}). Unable to retrieve configuration.'.format(tab_id)
                 )
                 return None
         settings = json.loads(self.menu_settings)
@@ -234,7 +237,7 @@ class SubMenuDetailView(MenuSupportView):
                         'title': item.Title(),
                         'description': item.Description() or item.Title(),
                         'url': item.absolute_url(),
-                        'selected': context_path.startswith(item_path)
+                        'selected': context_path.startswith(item_path),
                     }
                     results.append(result_dict)
         return results
@@ -255,8 +258,5 @@ class SubMenuDetailView(MenuSupportView):
                 if text:
                     text = text.output
             if text:
-                results.append({
-                    'id': item.getId(),
-                    'text': text
-                })
+                results.append({'id': item.getId(), 'text': text})
         return results
