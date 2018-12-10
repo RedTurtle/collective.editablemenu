@@ -5,7 +5,8 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Don't break the viewlet if the context is not in the structure mapping.
+  [cekk]
 
 
 2.0.0 (2018-10-11)
