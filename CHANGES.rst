@@ -2,12 +2,16 @@ Changelog
 =========
 
 
-2.0.1 (unreleased)
+2.1.0 (unreleased)
 ------------------
 
 - Don't break the viewlet if the context is not in the structure mapping.
   [cekk]
 
+Breaking:
+- Remove unused classes/interfaces for old-style registry entries from code.
+  See the README for upgrading informations (only if you came from < 0.10.0).
+  [cekk]
 
 2.0.0 (2018-10-11)
 ------------------

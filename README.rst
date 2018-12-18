@@ -95,6 +95,49 @@ This add-on has been tested on Plone versions 5.0 and 5.1.
 For Plone 4 compatibility, use version 0.10.2 (a dedicated branch is coming soon...)
 
 
+
+Upgrading old versions
+----------------------
+
+From 2.1.0 version, we drop an old unused configuration that has been replaced since 2.0.0.
+To do this, we needed to delete some unused code/interfaces.
+
+If you have very old versions of this product (< 0.10.0) you should install 2.0.0 version and perform upgrade-steps, before installing the latest one.
+
+
+Development
+-----------
+
+In this product there are several static resources:
+
+- sass styles
+- React app for the configuration menu
+- Js for the rendered menu
+
+To compile the widget configuration app:
+
+Go to `src/collective/editablemenu/browser/static/js/widget` folder.
+
+Then install dependencies:
+
+    yarn
+
+
+And finally compile React app:
+
+    yarn build
+
+After that, you need compile all the resources and bundle them for resource registries bundles:
+
+Go in the project's root and install dependencies for Grunt:
+
+    npm install
+
+And finally compile and uglify the resources:
+
+    npm run compile
+
+
 Contribute
 ----------
 
