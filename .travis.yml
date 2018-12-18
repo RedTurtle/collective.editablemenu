@@ -22,7 +22,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 script:
   - bin/code-analysis
-  - bin/test --all
+  - bin/test
 after_success:
   - bin/test-coverage
   - bin/createcoverage
