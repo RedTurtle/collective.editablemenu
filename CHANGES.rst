@@ -2,12 +2,16 @@ Changelog
 =========
 
 
-2.0.1 (unreleased)
+2.1.0 (unreleased)
 ------------------
 
 - Don't break the viewlet if the context is not in the structure mapping.
   [cekk]
 
+Breaking:
+- Remove unused classes/interfaces for old-style registry entries from code.
+  See the README for upgrading informations (only if you came from < 0.10.0).
+  [cekk]
 
 2.0.0 (2018-10-11)
 ------------------
@@ -17,6 +21,16 @@ Breaking:
   [pnicolli]
 - Handled aria-expanded and ESC keypress event via ES [nzambello]
 
+1.2.0 (unreleased)
+------------------
+
+- Remove unused old code
+  [cekk]
+- Fix menu render when there are no settings for the current folder
+  [cekk]
+- Add initial test suite (functional and acceptance)
+- Add test suite (functional and acceptance)
+  [cekk]
 
 1.1.0 (2018-05-15)
 ------------------

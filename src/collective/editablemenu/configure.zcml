@@ -17,21 +17,28 @@
   <include package=".browser" />
   <include file="upgrades.zcml" />
 
+<genericsetup:registerProfile
+      name="default"
+      title="Editable menu"
+      directory="profiles/default"
+      description="Installs Editable menu."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.post_install"
+      />
 
   <genericsetup:registerProfile
-      name="default"
-      title="collective.editablemenu"
-      directory="profiles/default"
-      description="Installs the collective.editablemenu add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-  <genericsetup:registerProfile
       name="uninstall"
-      title="collective.editablemenu: uninstall"
+      title="Editable menu: uninstall"
       directory="profiles/uninstall"
-      description="Uninstalls the collective.editablemenu add-on."
+      description="Uninstalls Editable menu."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.uninstall"
       />
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="collective.editablemenu-hiddenprofiles" />
+
   <genericsetup:registerProfile
       name="from_1300_to_1400"
       title="collective.editablemenu: clean"
@@ -53,16 +60,6 @@
       description="Move static assets to resource registry."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <genericsetup:importStep
-      name="collective.editablemenu-postInstall"
-      title="collective.editablemenu post_install import step"
-      description="Post install import step from collective.editablemenu"
-      handler=".setuphandlers.post_install">
-  </genericsetup:importStep>
 
-  <utility
-      factory=".setuphandlers.HiddenProfiles"
-      name="collective.editablemenu-hiddenprofiles"
-      />
 
 </configure>

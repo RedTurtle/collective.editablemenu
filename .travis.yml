@@ -1,18 +1,30 @@
 language: python
-python:
-  - 2.7
+python: 2.7
+sudo: false
+cache:
+  pip: true
+  directories:
+    - eggs
+    - downloads
+env:
+  - PLONE_VERSION=5.0.x
+  - PLONE_VERSION=5.1.x
 install:
-  - mkdir -p buildout-cache/{eggs,downloads}
-  - python bootstrap-buildout.py -c travis.cfg
-  - bin/buildout -Nc travis.cfg
+  - virtualenv -p `which python` .
+  - bin/pip install -r requirements.txt
+  - sed -ie "s#test-5.1.x#test-$PLONE_VERSION#" buildout.cfg
+  - bin/buildout -N -t 5
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz
+  - tar -xzf geckodriver-v0.20.1-linux64.tar.gz -C bin
+  - export PATH=$(pwd)/bin:$PATH
+before_script:  
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 script:
   - bin/code-analysis
   - bin/test
-  - bin/createcoverage
 after_success:
-  - pip install coveralls
+  - bin/test-coverage
+  - bin/createcoverage
+  - pip install coverage==3.7.1 coveralls
   - coveralls
-
-notifications:
-  email:
-    - sviluppoplone@redturtle.it
