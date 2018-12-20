@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.1.0 (unreleased)
+2.1.0 (2018-12-20)
 ------------------
 
 - Don't break the viewlet if the context is not in the structure mapping.
