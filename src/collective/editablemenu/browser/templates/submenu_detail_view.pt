@@ -25,7 +25,7 @@
          title="Explore all the contents of this section"
          i18n:translate=""
          i18n:attributes="title"
-         tal:condition="navigation_folder">
+         tal:condition="python: navigation_folder">
         Explore all the contents of this section
       </a>
     </div>

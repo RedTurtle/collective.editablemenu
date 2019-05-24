@@ -5,7 +5,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed submenu_detail_view.pt so that condition do not call folder object.
+  [eikichi18]
 
 
 2.1.0 (2018-12-20)
