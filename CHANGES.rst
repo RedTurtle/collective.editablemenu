@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.1.1 (unreleased)
+2.1.1 (2019-05-24)
 ------------------
 
 - Fixed submenu_detail_view.pt so that condition do not call folder object.
