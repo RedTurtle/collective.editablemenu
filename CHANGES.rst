@@ -16,6 +16,7 @@ Changelog
   [cekk]
 
 Breaking:
+
 - Remove unused classes/interfaces for old-style registry entries from code.
   See the README for upgrading informations (only if you came from < 0.10.0).
   [cekk]
@@ -24,6 +25,7 @@ Breaking:
 ------------------
 
 Breaking:
+
 - Rewrote menu templates to improve accessibility
   [pnicolli]
 - Handled aria-expanded and ESC keypress event via ES [nzambello]
@@ -96,7 +98,7 @@ Breaking:
 - Add simple "not expansible" link in menu [lucabel]
 - Add possibility to condition tab visibility the same way portal_tabs did it [lucabel]
 - Add Plone5 compatibility (no resourse registry)
-Â  [cekk]
+  [cekk]
 
 
 0.9.0 (2016-03-15)
