@@ -207,10 +207,10 @@ class SubMenuDetailView(MenuSupportView):
             try:
                 tab_id = int(tab_id)
             except ValueError:
-                logger.error(
-                    'Invalid index number '
-                    + '({0}). Unable to retrieve configuration.'.format(tab_id)
+                msg = 'Invalid index number ({0}). Unable to retrieve configuration.'.format(  # noqa
+                    tab_id
                 )
+                logger.error()
                 return None
         settings = json.loads(self.menu_settings)
         if not settings:
