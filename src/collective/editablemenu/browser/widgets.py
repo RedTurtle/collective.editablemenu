@@ -8,18 +8,19 @@ from z3c.form.interfaces import IFormLayer
 from z3c.form.interfaces import ITextAreaWidget
 from zope.component import adapter
 from zope.interface import implementer
-from zope.interface import implementsOnly
+from zope.interface import implementer_only
 from zope.schema.interfaces import IField
 
 import json
+import six
 
 
 class IEditableMenuSettingsWidget(ITextAreaWidget):
     """Marker Interface"""
 
 
+@implementer_only(IEditableMenuSettingsWidget)
 class EditableMenuSettingsWidget(TextAreaWidget):
-    implementsOnly(IEditableMenuSettingsWidget)
     target_field = 'textarea'
 
     @property
@@ -41,9 +42,9 @@ class EditableMenuSettingsWidget(TextAreaWidget):
             request=self.request,
         )
         settings = json.loads(self.json_settings)
-        return json.dumps({
-            key: support_view.find_path_title(key) for key in settings.keys()
-        })
+        return json.dumps(
+            {key: support_view.find_path_title(key) for key in settings.keys()}
+        )
 
     @property
     def menu_settings(self):
@@ -55,11 +56,10 @@ class EditableMenuSettingsWidget(TextAreaWidget):
         if not self.json_settings:
             return []
         settings = json.loads(self.json_settings)
-        return [(
-            key,
-            support_view.find_path_title(key),
-            value
-        ) for key, value in settings.iteritems()]
+        return [
+            (key, support_view.find_path_title(key), value)
+            for key, value in six.iteritems(settings)
+        ]
 
     @view.memoize
     def get_portal_url(self):

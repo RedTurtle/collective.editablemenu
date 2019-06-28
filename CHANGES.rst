@@ -2,10 +2,11 @@ Changelog
 =========
 
 
-2.1.2 (unreleased)
+2.2.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add python3 support.
+  [cekk]
 
 
 2.1.1 (2019-05-24)

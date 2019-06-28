@@ -5,11 +5,13 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-long_description = '\n\n'.join([
-    open('README.rst').read(),
-    open('CONTRIBUTORS.rst').read(),
-    open('CHANGES.rst').read(),
-])
+long_description = '\n\n'.join(
+    [
+        open('README.rst').read(),
+        open('CONTRIBUTORS.rst').read(),
+        open('CHANGES.rst').read(),
+    ]
+)
 
 
 setup(
@@ -21,12 +23,16 @@ setup(
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Plone",
+        "Framework :: Plone :: Addon",
         "Framework :: Plone :: 5.0",
         "Framework :: Plone :: 5.1",
-        "Intended Audience :: Developers",
-        "Programming Language :: JavaScript",
+        "Framework :: Plone :: 5.2",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: JavaScript",
+        "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "Topic :: Software Development :: Libraries :: Python Modules",
@@ -56,7 +62,7 @@ setup(
             'plone.testing>=5.0.0',
             'plone.app.contenttypes',
             'plone.app.robotframework[debug]',
-        ],
+        ]
     },
     entry_points="""
     [z3c.autoinclude.plugin]
