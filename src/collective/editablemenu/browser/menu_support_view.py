@@ -11,6 +11,7 @@ from Products.CMFCore.interfaces import IFolderish
 from Products.Five import BrowserView
 
 import json
+import six
 
 
 class MenuSupportView(BrowserView):
@@ -63,7 +64,7 @@ class MenuSupportView(BrowserView):
 
         if not path:
             return '/'
-        sites_path = settings.keys()
+        sites_path = list(settings.keys())
         not_found = True
         while not_found:
             for site_path in sites_path:
@@ -91,13 +92,14 @@ class MenuSupportView(BrowserView):
             expression_context = getExprContext(self.context, self.context)
             value = expression(expression_context)
 
-            if isinstance(value, basestring) and value.strip() == '':
+            if isinstance(value, six.string_types) and value.strip() == '':
                 value = True
 
             if not value:
                 continue
-
-            tab_title = tab_settings.get('tab_title', '').encode('utf-8')
+            tab_title = tab_settings.get('tab_title', '')
+            if six.PY2 and isinstance(tab_title, six.text_type):
+                tab_title = tab_title.encode('utf8')
             if not tab_title:
                 continue
 
@@ -134,7 +136,9 @@ class MenuSupportView(BrowserView):
 
     @view.memoize
     def get_object(self, folder_path):
-        return api.content.get(path=folder_path.encode('utf-8'))
+        if six.PY2 and isinstance(folder_path, six.text_type):
+            folder_path = folder_path.encode('utf8')
+        return api.content.get(path=folder_path)
 
     def get_navigation_folder(self, tab_settings):
         folder_path = tab_settings.get('navigation_folder', '')
@@ -152,8 +156,10 @@ class MenuSupportView(BrowserView):
 
     @view.memoize
     def get_folder(self, folder_path):
+        if six.PY2 and isinstance(folder_path, six.text_type):
+            folder_path = folder_path.encode('utf8')
         try:
-            return api.content.get(path=folder_path.encode('utf-8'))
+            return api.content.get(path=folder_path)
         except Unauthorized:
             return None
 
@@ -171,9 +177,11 @@ class MenuSupportView(BrowserView):
         if not folder:
             return []
         # return folder contents not excluded from navigation
-        return filter(
-            lambda x: not self.exclude_from_nav(x), folder.listFolderContents()
-        )
+        return [
+            x
+            for x in folder.listFolderContents()
+            if not self.exclude_from_nav(x)
+        ]
 
 
 class SubMenuDetailView(MenuSupportView):

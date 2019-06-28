@@ -3,6 +3,7 @@ from collective.editablemenu import logger
 from plone import api
 
 import json
+import six
 
 
 default_profile = 'profile-collective.editablemenu:default'
@@ -51,4 +52,4 @@ def generate_new_settings_for_1400():
     for item in menu_items:
         tabs_item.append(item.__dict__)
     menu_config.update({'/': tabs_item})
-    return unicode(json.dumps(menu_config))
+    return six.text_type(json.dumps(menu_config))
