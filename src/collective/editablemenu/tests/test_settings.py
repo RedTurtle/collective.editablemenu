@@ -45,8 +45,8 @@ class TestGlobalSettings(unittest.TestCase):
             ]
         }
         value = json.dumps(self.settings)
-        if six.PY2 and isinstance(value, six.text_type):
-            value = value.encode('utf8')
+        if six.PY2:
+            value = value.decode('utf8')
         api.portal.set_registry_record(
             'menu_tabs_json', value, interface=IEditableMenuSettings
         )
@@ -107,8 +107,8 @@ class TestGlobalSettings(unittest.TestCase):
         new_settings = self.settings.copy()
         new_settings['/'][0]['navigation_folder'] = '/folder'
         value = json.dumps(new_settings)
-        if six.PY2 and isinstance(value, six.text_type):
-            value = value.encode('utf8')
+        if six.PY2:
+            value = value.decode('utf8')
         api.portal.set_registry_record(
             'menu_tabs_json', value, interface=IEditableMenuSettings
         )
@@ -136,8 +136,8 @@ class TestGlobalSettings(unittest.TestCase):
         new_settings = self.settings.copy()
         new_settings['/'][0]['additional_columns'] = '/folder'
         value = json.dumps(new_settings)
-        if six.PY2 and isinstance(value, six.text_type):
-            value = value.encode('utf8')
+        if six.PY2:
+            value = value.decode('utf8')
         api.portal.set_registry_record(
             'menu_tabs_json', value, interface=IEditableMenuSettings
         )
@@ -189,8 +189,8 @@ class TestGlobalSettings(unittest.TestCase):
             ],
         }
         value = json.dumps(settings)
-        if six.PY2 and isinstance(value, six.text_type):
-            value = value.encode('utf8')
+        if six.PY2:
+            value = value.decode('utf8')
         api.portal.set_registry_record(
             'menu_tabs_json', value, interface=IEditableMenuSettings
         )
@@ -198,8 +198,8 @@ class TestGlobalSettings(unittest.TestCase):
         self.assertEqual(self.support_view.get_menu_tabs(), [])
         # re-set settings as default for these tests
         value = json.dumps(self.settings)
-        if six.PY2 and isinstance(value, six.text_type):
-            value = value.encode('utf8')
+        if six.PY2:
+            value = value.decode('utf8')
         api.portal.set_registry_record(
             'menu_tabs_json', value, interface=IEditableMenuSettings
         )
