@@ -210,7 +210,7 @@ class SubMenuDetailView(MenuSupportView):
                 msg = 'Invalid index number ({0}). Unable to retrieve configuration.'.format(  # noqa
                     tab_id
                 )
-                logger.error()
+                logger.error(msg)
                 return None
         settings = json.loads(self.menu_settings)
         if not settings:
