@@ -8,9 +8,16 @@
 <body tal:define="subitems view/get_menu_subitems;
                   dynamic_items subitems/dynamic_items|nothing;
                   static_items subitems/static_items|nothing;
-                  navigation_folder nocall:subitems/navigation_folder|nothing;">
+                  navigation_folder nocall:subitems/navigation_folder|nothing;
+                  intro_text subitems/intro_text|nothing;
+                  section_link subitems/section_link|nothing;">
   <div class="submenuDetailsContent">
     <div tal:condition="dynamic_items" class="submenuDynamicWrapper">
+      <h5 class="dynamicSectionLabel"
+          tal:condition="python: navigation_folder and intro_text"
+          tal:content="intro_text">
+        In this section
+      </h5>
       <ul class="submenuDynamicItems" role="menu">
         <li role="none" tal:repeat="item dynamic_items">
           <a role="menuitem"
@@ -22,10 +29,8 @@
       </ul>
       <a class="dynamicSectionExploreLabel"
          href="${navigation_folder/absolute_url}"
-         title="Explore all the contents of this section"
-         i18n:translate=""
-         i18n:attributes="title"
-         tal:condition="python: navigation_folder">
+         tal:condition="python: navigation_folder and section_link"
+         tal:content="section_link">
         Explore all the contents of this section
       </a>
     </div>

@@ -85,7 +85,9 @@ class MenuSupportView(BrowserView):
         results = []
 
         candidate_site = self.choose_site_menu_config(settings)
-        for i, tab_settings in enumerate(settings.get(candidate_site, [])):
+        site_info = settings.get(candidate_site, {})
+        site_tabs = site_info.get('items', [])
+        for i, tab_settings in enumerate(site_tabs):
             # evaluate condition
             condition = tab_settings.get('condition', '')
             expression = Expression(condition)
@@ -124,6 +126,10 @@ class MenuSupportView(BrowserView):
             if tab_settings.get('simple_link', ''):
                 tab_dict['url'] = self.fixLink(tab_settings.get('simple_link'))
                 tab_dict['clickandgo'] = True
+            if tab_settings.get('intro_text', ''):
+                tab_dict['intro_text'] = tab_settings['intro_text']
+            if tab_settings.get('section_link', ''):
+                tab_dict['section_link'] = tab_settings['section_link']
             results.append(tab_dict)
         return results
 
@@ -200,6 +206,8 @@ class SubMenuDetailView(MenuSupportView):
             'navigation_folder': self.get_navigation_folder(settings),
             'dynamic_items': self.get_dynamic_items(settings),
             'static_items': self.get_static_items(settings),
+            'intro_text': settings.get('intro_text', ''),
+            'section_link': settings.get('section_link', ''),
         }
 
     def get_selected_tab(self, tab_id):
@@ -217,7 +225,7 @@ class SubMenuDetailView(MenuSupportView):
             return None
         try:
             candidate_site = self.choose_site_menu_config(settings)
-            return settings[candidate_site][tab_id]
+            return settings[candidate_site]['items'][tab_id]
         except IndexError:
             logger.error(
                 'Index({0}) not found in menu settings.'

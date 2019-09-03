@@ -4,7 +4,7 @@
     i18n_domain="collective.editablemenu">
 
   <!-- Upgrade steps -->
-  
+
   <gs:upgradeStep
         title="Upgrade collective.editablemenu 1400"
         description="collective.editablemenu upgrade step"
@@ -27,6 +27,14 @@
         source="*"
         destination="2000"
         handler=".upgrades.to_2000"
+        profile="collective.editablemenu:default" />
+
+  <gs:upgradeStep
+        title="Upgrade collective.editablemenu 2100"
+        description="Refactor registry json"
+        source="*"
+        destination="2100"
+        handler=".upgrades.to_2100"
         profile="collective.editablemenu:default" />
 
 </configure>

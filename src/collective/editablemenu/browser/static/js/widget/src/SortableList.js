@@ -21,7 +21,6 @@ const SortableList = ({
           menuId,
           portalUrl,
           translate,
-          index: conf_idx,
           idx: conf_idx,
         }}
       />

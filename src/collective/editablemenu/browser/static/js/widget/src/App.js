@@ -39,7 +39,10 @@ class App extends Component {
     this.setState(state => ({
       settings: {
         ...state.settings,
-        [item]: arrayMove(state.settings[item], oldIndex, newIndex),
+        [item]: {
+          ...state.settings[item],
+          items: arrayMove(state.settings[item].items, oldIndex, newIndex),
+        },
       },
     }));
   };
@@ -48,9 +51,12 @@ class App extends Component {
     this.setState(state => ({
       settings: {
         ...state.settings,
-        [item]: state.settings[item]
-          .slice(0, idx)
-          .concat(state.settings[item].slice(idx + 1)),
+        [item]: {
+          ...state.settings[item],
+          items: state.settings[item].items
+            .slice(0, idx)
+            .concat(state.settings[item].items.slice(idx + 1)),
+        },
       },
     }));
   };
@@ -59,15 +65,18 @@ class App extends Component {
     this.setState(state => ({
       settings: {
         ...state.settings,
-        [item]: state.settings[item]
-          .slice(0, idx)
-          .concat([
-            {
-              ...state.settings[item][idx],
-              [key]: value,
-            },
-          ])
-          .concat(state.settings[item].slice(idx + 1)),
+        [item]: {
+          ...state.settings[item],
+          items: state.settings[item].items
+            .slice(0, idx)
+            .concat([
+              {
+                ...state.settings[item].items[idx],
+                [key]: value,
+              },
+            ])
+            .concat(state.settings[item].items.slice(idx + 1)),
+        },
       },
     }));
   };
@@ -76,15 +85,18 @@ class App extends Component {
     this.setState(state => ({
       settings: {
         ...state.settings,
-        [item]: state.settings[item].concat([
-          {
-            tab_title: 'New',
-            navigation_folder: '',
-            additional_columns: '',
-            simple_link: '',
-            condition: 'python: True',
-          },
-        ]),
+        [item]: {
+          ...state.settings[item],
+          items: state.settings[item].items.concat([
+            {
+              tab_title: 'New',
+              navigation_folder: '',
+              additional_columns: '',
+              simple_link: '',
+              condition: 'python: True',
+            },
+          ]),
+        },
       },
     }));
   };
@@ -107,15 +119,17 @@ class App extends Component {
       return {
         settings: {
           ...state.settings,
-          [`/new${freeIdx}`]: [
-            {
-              tab_title: 'New',
-              navigation_folder: '',
-              additional_columns: '',
-              simple_link: '',
-              condition: 'python: True',
-            },
-          ],
+          [`/new${freeIdx}`]: {
+            items: [
+              {
+                tab_title: 'New',
+                navigation_folder: '',
+                additional_columns: '',
+                simple_link: '',
+                condition: 'python: True',
+              },
+            ],
+          },
         },
         titles: {
           ...state.titles,
@@ -139,6 +153,8 @@ class App extends Component {
   };
 
   render() {
+    const { active, settings, titles } = this.state;
+
     return (
       <div className="custom-settings-editor">
         <NavBar
@@ -147,8 +163,8 @@ class App extends Component {
           addNewMenu={this.addNewMenu}
           translate={this.translate}
         />
-        {Object.keys(this.state.settings).map((item, idx) => {
-          const menuId = this.state.titles[item] || item;
+        {Object.keys(settings).map((item, idx) => {
+          const menuId = titles[item] || item;
           const idToUse = menuId
             .replace(/\//g, '')
             .replace(/\s/g, '-')
@@ -158,11 +174,11 @@ class App extends Component {
               id={`menu-${idToUse}`}
               key={`menu-${idToUse}`}
               role="tabpanel"
-              {...(this.state.active === idx ? { className: 'active' } : {})}
+              {...(active === idx ? { className: 'active' } : {})}
             >
               <legend>{menuId}</legend>
               <div className="tab-content">
-                <label>
+                <label className="path-label">
                   <span>{this.translate('path_label', 'Path')}</span>
                   <input
                     type="text"
@@ -176,7 +192,7 @@ class App extends Component {
                     portalUrl={this.props.portalUrl}
                     menuId={idToUse}
                     translate={this.translate}
-                    items={this.state.settings[item]}
+                    items={settings[item].items}
                     removeItemFromThisMenu={this.removeMenuItem(item)}
                     updateItemInThisMenu={this.updateMenuItem(item)}
                     onSortEnd={this.onSortEnd(item)}

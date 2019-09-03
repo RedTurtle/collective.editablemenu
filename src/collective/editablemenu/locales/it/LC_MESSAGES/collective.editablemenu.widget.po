@@ -60,3 +60,15 @@ msgstr "Aggiungi un elemento"
 
 msgid "path_label"
 msgstr "Percorso della radice"
+
+msgid "section_intro_label"
+msgstr "Testo introduttivo del sottomenu"
+
+msgid "section_intro_help"
+msgstr "Testo mostrato in cima al sottomenu quando viene generato automaticamente da una cartella. Non viene mostrato se la cartella di navigazione non è impostata."
+
+msgid "section_link_label"
+msgstr "Testo del link alla cartella"
+
+msgid "section_link_help"
+msgstr "Testo del link che porta alla cartella usata per generare automaticamente il contenuto del sottomenu. Non viene mostrato se la cartella di navigazione non è impostata."
