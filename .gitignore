@@ -12,6 +12,7 @@
 bin/
 buildout-cache/
 develop-eggs/
+eggs/
 lib/
 local/
 include/

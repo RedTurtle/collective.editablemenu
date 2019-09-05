@@ -27,22 +27,24 @@ class TestGlobalSettings(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         login(self.portal, TEST_USER_NAME)
         self.settings = {
-            '/': [
-                {
-                    'navigation_folder': '',
-                    'simple_link': '',
-                    'tab_title': 'Foo',
-                    'additional_columns': '',
-                    'condition': 'python: True',
-                },
-                {
-                    'navigation_folder': '',
-                    'simple_link': '',
-                    'tab_title': 'Bar',
-                    'additional_columns': '',
-                    'condition': 'python: True',
-                },
-            ]
+            '/': {
+                'items': [
+                    {
+                        'navigation_folder': '',
+                        'simple_link': '',
+                        'tab_title': 'Foo',
+                        'additional_columns': '',
+                        'condition': 'python: True',
+                    },
+                    {
+                        'navigation_folder': '',
+                        'simple_link': '',
+                        'tab_title': 'Bar',
+                        'additional_columns': '',
+                        'condition': 'python: True',
+                    },
+                ],
+            },
         }
         value = json.dumps(self.settings)
         if six.PY2:
@@ -90,7 +92,9 @@ class TestGlobalSettings(unittest.TestCase):
         """ test if submenu view returns the right values """
         example_submenu = {
             'dynamic_items': [],
+            'intro_text': '',
             'navigation_folder': None,
+            'section_link': '',
             'static_items': [],
         }
         self.assertEqual(self.submenu_view.get_menu_subitems(), {})
@@ -105,7 +109,7 @@ class TestGlobalSettings(unittest.TestCase):
         is correctly populated
         """
         new_settings = self.settings.copy()
-        new_settings['/'][0]['navigation_folder'] = '/folder'
+        new_settings['/']['items'][0]['navigation_folder'] = '/folder'
         value = json.dumps(new_settings)
         if six.PY2:
             value = value.decode('utf8')
@@ -134,7 +138,7 @@ class TestGlobalSettings(unittest.TestCase):
         is correctly populated
         """
         new_settings = self.settings.copy()
-        new_settings['/'][0]['additional_columns'] = '/folder'
+        new_settings['/']['items'][0]['additional_columns'] = '/folder'
         value = json.dumps(new_settings)
         if six.PY2:
             value = value.decode('utf8')
@@ -162,31 +166,35 @@ class TestGlobalSettings(unittest.TestCase):
 
     def test_dont_broke_if_root_path_is_not_set(self):
         settings = {
-            '/foo': [
-                {
-                    'navigation_folder': '',
-                    'simple_link': '',
-                    'tab_title': 'Foo',
-                    'additional_columns': '',
-                    'condition': 'python: True',
-                },
-                {
-                    'navigation_folder': '',
-                    'simple_link': '',
-                    'tab_title': 'Bar',
-                    'additional_columns': '',
-                    'condition': 'python: True',
-                },
-            ],
-            '/xyz': [
-                {
-                    'navigation_folder': '',
-                    'simple_link': '',
-                    'tab_title': 'XYZ',
-                    'additional_columns': '',
-                    'condition': 'python: True',
-                }
-            ],
+            '/foo': {
+                'items': [
+                    {
+                        'navigation_folder': '',
+                        'simple_link': '',
+                        'tab_title': 'Foo',
+                        'additional_columns': '',
+                        'condition': 'python: True',
+                    },
+                    {
+                        'navigation_folder': '',
+                        'simple_link': '',
+                        'tab_title': 'Bar',
+                        'additional_columns': '',
+                        'condition': 'python: True',
+                    },
+                ],
+            },
+            '/xyz': {
+                'items': [
+                    {
+                        'navigation_folder': '',
+                        'simple_link': '',
+                        'tab_title': 'XYZ',
+                        'additional_columns': '',
+                        'condition': 'python: True',
+                    },
+                ],
+            },
         }
         value = json.dumps(settings)
         if six.PY2:
