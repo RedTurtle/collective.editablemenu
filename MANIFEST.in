@@ -1,9 +1,10 @@
 graft src/collective
+prune src/collective/editablemenu/browser/static/js/widget/node_modules
 graft docs
 include *.cfg *.rst *.in
 include *.py
-include *.js
-include *.json
+exclude Gruntfile.js
+exclude *.json
 include .coveragerc
 recursive-include docs *
 recursive-include src *
