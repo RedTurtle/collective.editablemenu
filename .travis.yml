@@ -55,3 +55,7 @@ after_success:
   - bin/python -m coverage.pickle2json
   - bin/pip install -q coveralls
   - coveralls
+
+branches:
+  only:
+    - master
