@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.3.0 (unreleased)
+2.3.0 (2019-09-10)
 ------------------
 
 - Added the options to customize dynamic sections labels
