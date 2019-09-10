@@ -13,5 +13,5 @@ class IEditableMenuSettings(model.Schema):
     menu_tabs_json = schema.Text(
         title=_('config_tabs_label', u'Menu configuration.'),
         required=False,
-        default=u'{"/":[]}',
+        default=u'{"/":{"items":[]}}',
     )

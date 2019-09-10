@@ -43,6 +43,31 @@ def to_2000(context):
     logger.info('Moved to resource registry')
 
 
+def to_2100(context):
+    """Previously, the settings object had the form
+    {
+      '/': [...],
+    }
+    Now it is like this
+    {
+      '/': {
+        'items': [...]
+      }
+    }
+    This allows for more customizations in the future
+    """
+    logger.info('Upgrading collective.editablemenu to version 2100')
+    menu_config = api.portal.get_registry_record(REGISTRY_NAME)
+    settings = json.loads(menu_config)
+    for key in settings.keys():
+        site_tabs = settings[key]
+        settings[key] = {
+            'items': site_tabs
+        }
+    new_config = six.text_type(json.dumps(settings))
+    api.portal.set_registry_record(REGISTRY_NAME, new_config)
+
+
 def generate_new_settings_for_1400():
     """
     """

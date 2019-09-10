@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-03-12 14:55+0000\n"
+"POT-Creation-Date: 2019-09-03 15:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,16 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.editablemenu\n"
 
+#: ../configure.zcml:48
+msgid "Clean registry from old field for the collective.editablemenu add-on."
+msgstr ""
+
 #: ../browser/controlpanel.py:13
 msgid "Editable Menu Settings"
+msgstr ""
+
+#: ../configure.zcml:27
+msgid "Editable menu"
 msgstr ""
 
 #: ../profiles/default/controlpanel.xml
@@ -26,72 +34,39 @@ msgstr ""
 msgid "Editable menu configuration"
 msgstr ""
 
-#: ../browser/templates/submenu_detail_view.pt:26
-msgid "Explore all the contents of this section"
+#: ../configure.zcml:36
+msgid "Editable menu: uninstall"
 msgstr ""
 
-#. Default: "Insert a path of the folder that contains pages for additional static columns."
-#: ../browser/interfaces.py:46
-msgid "additional_columns_help"
+#: ../configure.zcml:27
+msgid "Installs Editable menu."
 msgstr ""
 
-#. Default: "Additional columns"
-#: ../browser/interfaces.py:45
-msgid "additional_columns_label"
+#: ../configure.zcml:62
+msgid "Move static assets to resource registry."
 msgstr ""
 
-#. Default: "Close"
-#: ../browser/templates/submenu_detail_view.pt:43
-msgid "close_label"
+#: ../configure.zcml:55
+msgid "Remove non minified js resource."
 msgstr ""
 
-#. Default: "Insert condition (you can use variables like object,portal, request, here, member... See complete list here: http://docs.plone.org/develop/plone/functionality/expressions.html#expression-variables)"
-#: ../browser/interfaces.py:65
-msgid "condition_help"
+#: ../configure.zcml:36
+msgid "Uninstalls Editable menu."
 msgstr ""
 
-#. Default: "Condition"
-#: ../browser/interfaces.py:64
-msgid "condition_label"
+#: ../configure.zcml:48
+msgid "collective.editablemenu: clean"
+msgstr ""
+
+#: ../configure.zcml:62
+msgid "collective.editablemenu: move to resource registry"
+msgstr ""
+
+#: ../configure.zcml:55
+msgid "collective.editablemenu: remove old js"
 msgstr ""
 
 #. Default: "Menu configuration."
-#: ../browser/interfaces.py:89
+#: ../browser/interfaces.py:14
 msgid "config_tabs_label"
 msgstr ""
-
-#. Default: "In this section"
-#: ../browser/templates/submenu_detail_view.pt:14
-msgid "dynamic_section_label"
-msgstr ""
-
-#. Default: "Insert a path of the folder that should list its contents in the menu."
-#: ../browser/interfaces.py:37
-msgid "navigation_folder_help"
-msgstr ""
-
-#. Default: "Navigation folder"
-#: ../browser/interfaces.py:36
-msgid "navigation_folder_label"
-msgstr ""
-
-#. Default: "Insert a path of an element; this will override previous settings and you will see just a single link in menu without submenu."
-#: ../browser/interfaces.py:55
-msgid "simple_link_help"
-msgstr ""
-
-#. Default: "Simple Link"
-#: ../browser/interfaces.py:54
-msgid "simple_link_label"
-msgstr ""
-
-#. Default: "Insert the title of this tab."
-#: ../browser/interfaces.py:28
-msgid "tab_title_help"
-msgstr ""
-
-#. Default: "Tab title"
-#: ../browser/interfaces.py:27
-msgid "tab_title_label"
-msgstr ""
-

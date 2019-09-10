@@ -19,17 +19,23 @@ require(['jquery', 'react-widget'], function($, widget) {
       var settings = {};
       $('.custom-settings-editor fieldset').each(function() {
         var $section = $(this);
-        var section_name = $section.find('.tab-content > label > input').val();
+        var section_name = $section
+          .find('.tab-content > .path-label > input')
+          .val();
         if (section_name) {
-          settings[section_name] = [];
+          settings[section_name] = {
+            items: [],
+          };
           $section.find('.menu-configuration > ul > li').each(function() {
             var $item = $(this);
-            settings[section_name].push({
+            settings[section_name].items.push({
               navigation_folder: $item.find('input[name^="navfolder"]').val(),
               simple_link: $item.find('input[name^="simple"]').val(),
               tab_title: $item.find('textarea').val(),
               additional_columns: $item.find('input[name^="additional"]').val(),
               condition: $item.find('input[name^="condition"]').val(),
+              intro_text: $item.find('input[name^="intro"]').val(),
+              section_link: $item.find('input[name^="section-link"]').val(),
             });
           });
         }

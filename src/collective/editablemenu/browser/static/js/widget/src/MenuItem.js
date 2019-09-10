@@ -8,6 +8,8 @@ const MenuItem = ({
   additional_columns,
   simple_link,
   condition,
+  intro_text,
+  section_link,
   removeItemFromThisMenu,
   updateItemInThisMenu,
   menuId,
@@ -44,7 +46,9 @@ const MenuItem = ({
           >
             <img
               alt={translate('remove_menu_item', 'Remove this menu entry')}
-              src={`${portalUrl}/++plone++collective.editablemenu/delete_tab.png`}
+              src={`${
+                portalUrl
+              }/++plone++collective.editablemenu/delete_tab.png`}
             />
           </button>
         </div>
@@ -152,6 +156,46 @@ const MenuItem = ({
                 key={`condition-${menuId}-${idx}`}
                 onChange={e =>
                   updateItemInThisMenu(idx, 'condition', e.target.value)
+                }
+              />
+            </label>
+            <label>
+              <p className="title">
+                {translate('section_intro_label', 'Submenu heading')}
+              </p>
+              <p className="help">
+                {translate(
+                  'section_intro_help',
+                  'Text shown at the top of the submenu when using navigation folder based menu generation.'
+                )}
+              </p>
+              <input
+                type="text"
+                value={intro_text}
+                name={`intro-${menuId}-${idx}`}
+                key={`intro-${menuId}-${idx}`}
+                onChange={e =>
+                  updateItemInThisMenu(idx, 'intro_text', e.target.value)
+                }
+              />
+            </label>
+            <label>
+              <p className="title">
+                {translate('section_link_label', 'Section link text')}
+              </p>
+              <p className="help">
+                {translate(
+                  'section_link_help',
+                  'Text shown in the link at the bottom of the submenu when using navigation folder based menu generation.'
+                )}
+              </p>
+              <input
+                type="text"
+                value={section_link}
+                name={`section-link-${menuId}-${idx}`}
+                key={`section-link-${menuId}-${idx}`}
+                onChange={e =>
+                  updateItemInThisMenu(idx, 'section_link', e.target.value)
                 }
               />
             </label>
