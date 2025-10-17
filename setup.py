@@ -46,9 +46,6 @@ setup(
     python_requires=">=3.11",
     zip_safe=False,
     install_requires=[
-        "plone.api",
-        "Products.CMFPlone>=5.0b2.dev0",
-        "Products.GenericSetup>=1.8.2",
         "setuptools",
     ],
     extras_require={
@@ -58,9 +55,9 @@ setup(
             # Remove if your package shall be part of coredev.
             # plone_coredev tests as of 2016-04-01.
             "plone.testing>=5.0.0",
-            "plone.app.contenttypes",
-            "plone.app.robotframework[debug]",
-        ]
+            "plone.app.contenttypes[test]",
+            "plone.restapi[test]",
+        ],
     },
     entry_points="""
     [z3c.autoinclude.plugin]
