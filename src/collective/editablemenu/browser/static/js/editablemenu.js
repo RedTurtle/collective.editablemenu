@@ -72,7 +72,11 @@ $(function() {
     const baseUrl = document.body.dataset.baseUrl || '';
     $.get(baseUrl + '/@@submenu_detail_view?tab_id=' + tabid, function(data) {
       const scriptRegex = /<script.*?id="protect-script".*?<\/script>/g;
-      const newData = data.replace(scriptRegex, '');
+      let prevData, newData = data;
+      do {
+        prevData = newData;
+        newData = newData.replace(scriptRegex, '');
+      } while (newData !== prevData);
       const $oldSubmenu = $('#mainnavigation #submenu-details');
 
       // Se il contenuto ricevuto è vuoto, non fare nulla e chiudi il menu
