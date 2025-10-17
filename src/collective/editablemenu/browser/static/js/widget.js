@@ -1,47 +1,41 @@
-require(['jquery', 'react-widget'], function($, widget) {
-  $(function() {
-    var portalUrl = $('body').data('portalUrl');
-    var translations = {};
-    $.getJSON(
-      portalUrl.concat('/plonejsi18n?domain=collective.editablemenu.widget')
-    )
-      .done(function(data) {
-        if (data) {
-          translations = data;
-        }
-      })
-      .always(function() {
-        widget.app(portalUrl, translations);
-      });
+// js/widget.js
 
-    // SAVE
-    function handleSave() {
-      var settings = {};
-      $('.custom-settings-editor fieldset').each(function() {
-        var $section = $(this);
-        var section_name = $section
-          .find('.tab-content > .path-label > input')
-          .val();
-        if (section_name) {
-          settings[section_name] = {
-            items: [],
-          };
-          $section.find('.menu-configuration > ul > li').each(function() {
-            var $item = $(this);
-            settings[section_name].items.push({
-              navigation_folder: $item.find('input[name^="navfolder"]').val(),
-              simple_link: $item.find('input[name^="simple"]').val(),
-              tab_title: $item.find('textarea').val(),
-              additional_columns: $item.find('input[name^="additional"]').val(),
-              condition: $item.find('input[name^="condition"]').val(),
-              intro_text: $item.find('input[name^="intro"]').val(),
-              section_link: $item.find('input[name^="section-link"]').val(),
-            });
-          });
-        }
-      });
-      $('#form-widgets-menu_tabs_json').text(JSON.stringify(settings));
-    }
-    $('#form-buttons-save').click(handleSave);
-  });
+import $ from 'jquery';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+// Importa il componente React principale che hai spostato
+import App from './widget-react/App'; // Assicurati che il percorso sia corretto
+
+// Questo sostituisce la vecchia funzione widget.app()
+function initializeReactWidget(portalUrl, translations) {
+  const container = document.getElementById(
+    'form-widgets-menu_tabs_json-editor'
+  );
+  if (container) {
+    const root = ReactDOM.createRoot(container);
+    root.render(
+      <React.StrictMode>
+        <App portalUrl={portalUrl} translations={translations} />
+      </React.StrictMode>
+    );
+  }
+}
+
+$(function() {
+  const portalUrl = document.body.dataset.portalUrl || '';
+  let translations = {};
+
+  $.getJSON(
+    portalUrl.concat('/plonejsi18n?domain=collective.editablemenu.widget')
+  )
+    .done(function(data) {
+      if (data) {
+        translations = data;
+      }
+    })
+    .always(function() {
+      // Inizializza l'app React
+      initializeReactWidget(portalUrl, translations);
+    });
 });

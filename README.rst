@@ -114,29 +114,18 @@ In this product there are several static resources:
 - React app for the configuration menu
 - Js for the rendered menu
 
-To compile the widget configuration app:
 
-Go to `src/collective/editablemenu/browser/static/js/widget` folder.
+Go in the project's root and install dependencies::
 
-Then install dependencies:
+    > npm install
 
-    yarn
+If you need to develop it, run::
 
+    > npm run start
 
-And finally compile React app:
-
-    yarn build
-
-After that, you need compile all the resources and bundle them for resource registries bundles:
-
-Go in the project's root and install dependencies for Grunt:
-
-    npm install
-
-And finally compile and uglify the resources:
-
-    npm run compile
-
+Otherwise, if you need a production build, run::
+    
+    > npm run build
 
 Contribute
 ----------

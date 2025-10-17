@@ -4,7 +4,7 @@
   <div id="root"
        data-settings="${view/json_settings}"
        data-titles="${view/settings_titles}" />
-
+  <div id="${view/id}-editor" />
   <textarea
     id="" name="" class="" cols="" rows=""
     tabindex="" disabled="" readonly="" accesskey=""

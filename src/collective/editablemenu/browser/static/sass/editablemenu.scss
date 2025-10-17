@@ -1,1 +1,23 @@
 #portal-globalnav li a span:not(:last-of-type) { display: block; }
+
+#mainnavigation {
+
+    ul#portal-globalnav {
+        li {
+            a {
+                color: #fff;
+            }
+
+            #submenu-details {
+                position: absolute;
+                z-index: 999;
+                left: 0;
+                width: 100%;
+                padding: 1em 4em;
+                border-top: 3px solid #213d72;
+                border-bottom: 2px solid #00819f;
+                background-color: #f6f2ed;
+            }
+        }
+    }
+}

@@ -36,5 +36,11 @@
         destination="2100"
         handler=".upgrades.to_2100"
         profile="collective.editablemenu:default" />
-
+  <gs:upgradeStep
+        title="Upgrade collective.editablemenu 3000"
+        description="Plone 6"
+        source="2100"
+        destination="3000"
+        handler=".upgrades.to_3000"
+        profile="collective.editablemenu:default" />
 </configure>

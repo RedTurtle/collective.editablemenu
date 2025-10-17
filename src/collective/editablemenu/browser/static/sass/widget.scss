@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 @mixin clearfix() {
     &:before,
     &:after {
@@ -75,17 +77,6 @@
     }
 }
 
-.remove-item-button {
-    position: absolute;
-    top: calc(50% - 17px);
-    right: 8px;
-
-    img {
-        height: 1.125em;
-        width: auto;
-    }
-}
-
 .panel-title {
     margin-top: 0;
     margin-bottom: 0;
@@ -105,7 +96,7 @@
         }
         &:focus,
         &:hover {
-            background-color: transparentize($color: black, $amount: 0.97);
+            background-color: color.adjust(black, $alpha: -0.97);
 
             span {
                 border-bottom-color: transparent;
@@ -121,23 +112,14 @@
     @include panel-variant(#ddd, #333, #f5f5f5, #ddd);
 }
 
-.collapse {
-    display: none;
-
-    &.in {
-        display: block;
-    }
+.accordion-header {
+    display: flex;
+    align-items: center;
 }
 
-.collapsing {
-    position: relative;
-    height: 0;
-    overflow: hidden;
-    transition-property: height visibility;
-    transition-duration: 0.35s;
-    transition-timing-function: ease;
+.accordion-button {
+    flex-grow: 1; // Fa crescere il testo per riempire lo spazio
 }
-
 .custom-settings-editor {
     background: #fff;
     padding: 6px 12px;

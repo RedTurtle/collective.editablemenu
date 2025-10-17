@@ -4,7 +4,7 @@
   <nav aria-label="Navigation"
        i18n:attributes="aria-label heading_sections"
        class="globalnavWrapper">
-    <ul role="menubar" id="portal-globalnav">
+    <ul role="menubar" id="portal-globalnav" class="editable-menu">
       <tal:tabs tal:repeat="tab menu_tabs">
         <li tal:define="tid python: tab.get('index');
                         clickandgo python: tab.get('clickandgo');
@@ -12,7 +12,7 @@
                         tab_title python: tab.get('title')"
             tal:condition="tab_title"
             id="portaltab-${tid}"
-            class="${python:tab.get('selected') and 'selected' or 'plain'}">
+            class="${python:tab.get('selected') and 'selected' or 'plain'} editable-menu-li">
           <a href="${python: tab_url or '#'}"
              data-tabid="${tid}"
              class="menuTabLink ${python: clickandgo and 'clickandgo' or ''}"

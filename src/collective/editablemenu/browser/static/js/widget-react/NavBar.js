@@ -1,5 +1,5 @@
 import React from 'react';
-import FaPlus from 'react-icons/lib/fa/plus';
+import { FaPlus } from 'react-icons/fa';
 
 const NavBar = ({
   settings,
@@ -23,7 +23,7 @@ const NavBar = ({
           aria-controls={`menu-${idToUse}`}
           className={`tab-control ${active === idx ? 'active' : ''}`}
           key={`menu-${idToUse}`}
-          onClick={evt => {
+          onClick={(evt) => {
             evt.preventDefault();
             setActive(idx);
           }}
@@ -38,7 +38,7 @@ const NavBar = ({
       className="add-menu-button"
       key="menu-new"
       title={translate('add_menu', 'Add new menu')}
-      onClick={evt => {
+      onClick={(evt) => {
         evt.preventDefault();
         addNewMenu();
       }}

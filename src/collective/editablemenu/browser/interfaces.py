@@ -7,11 +7,11 @@ from zope import schema
 
 
 class IEditableMenuSettings(model.Schema):
-    """Settings used in the control panel for cookiecosent: unified panel
-    """
+    """Settings used in the control panel for cookiecosent: unified panel"""
+
     form.widget(menu_tabs_json=EditableMenuSettingsFieldWidget)
     menu_tabs_json = schema.Text(
-        title=_('config_tabs_label', u'Menu configuration.'),
+        title=_("config_tabs_label", "Menu configuration."),
         required=False,
-        default=u'{"/":{"items":[]}}',
+        default='{"/":[]}',
     )

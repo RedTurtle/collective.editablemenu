@@ -58,6 +58,12 @@
       description="Move static assets to resource registry."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-
+  <genericsetup:registerProfile
+      name="to_3000"
+      title="Plone 6"
+      directory="profiles/to_3000"
+      description="Migrate to plone 6."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
 
 </configure>
