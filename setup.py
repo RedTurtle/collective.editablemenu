@@ -43,7 +43,7 @@ setup(
     namespace_packages=["collective"],
     package_dir={"": "src"},
     include_package_data=True,
-    python_requires=">=3.11",
+    python_requires=">=3.10",
     zip_safe=False,
     install_requires=[
         "setuptools",
