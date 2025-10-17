@@ -55,13 +55,13 @@ A new tab has been created with a temporary title */new1*, this is not going to 
 
 The path has to be set to the path that you want the root of the new menu to be. For example, if you want a different menu to be used for a subsite, set the *path* field to the subsite root path.
 
-A first menu entry is automatically created for you at this time, with teh default name "New". Click it to open it and start editing.
+A first menu entry is automatically created for you at this time, with the default name "New". Click it to open it and start editing.
 
 When you are editing a menu configuration different from the main site configuration, you will see an additional red button at the bottom of the screen, saying "Remove this menu". This removes the whole tab.
 
 **BEWARE**: removing a menu means losing everything you wrote in it so far.
 
-Nevertheless, keep in mind that no changes will be saved to the configuration of any menu, until you click the blue *Save* button at the botton of the control panel.
+Nevertheless, keep in mind that no changes will be saved to the configuration of any menu, until you click the blue *Save* button at the bottom of the control panel.
 
 Events
 ------

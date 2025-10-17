@@ -1,22 +1,21 @@
-# -*- coding: utf-8 -*-
 """Installer for the collective.editablemenu package."""
 
 from setuptools import find_packages
 from setuptools import setup
 
 
-long_description = '\n\n'.join(
+long_description = "\n\n".join(
     [
-        open('README.rst').read(),
-        open('CONTRIBUTORS.rst').read(),
-        open('CHANGES.rst').read(),
+        open("README.rst").read(),
+        open("CONTRIBUTORS.rst").read(),
+        open("CHANGES.rst").read(),
     ]
 )
 
 
 setup(
-    name='collective.editablemenu',
-    version='2.3.1.dev0',
+    name="collective.editablemenu",
+    version="2.3.1.dev0",
     description="A customizable dropdown menu",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -37,31 +36,31 @@ setup(
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords='Python Plone Dropdown Menu Editable Customizable',
-    author='RedTurtle Technology',
-    author_email='sviluppoplone@redturtle.it',
-    url='https://github.com/RedTurtle/collective.editablemenu',
-    license='GPL version 2',
-    packages=find_packages('src', exclude=['ez_setup']),
-    namespace_packages=['collective'],
-    package_dir={'': 'src'},
+    keywords="Python Plone Dropdown Menu Editable Customizable",
+    author="RedTurtle Technology",
+    author_email="sviluppoplone@redturtle.it",
+    url="https://github.com/RedTurtle/collective.editablemenu",
+    license="GPL version 2",
+    packages=find_packages("src", exclude=["ez_setup"]),
+    namespace_packages=["collective"],
+    package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'plone.api',
-        'Products.CMFPlone>=5.0b2.dev0',
-        'Products.GenericSetup>=1.8.2',
-        'setuptools',
+        "plone.api",
+        "Products.CMFPlone>=5.0b2.dev0",
+        "Products.GenericSetup>=1.8.2",
+        "setuptools",
     ],
     extras_require={
-        'test': [
-            'plone.app.testing',
+        "test": [
+            "plone.app.testing",
             # Plone KGS does not use this version, because it would break
             # Remove if your package shall be part of coredev.
             # plone_coredev tests as of 2016-04-01.
-            'plone.testing>=5.0.0',
-            'plone.app.contenttypes',
-            'plone.app.robotframework[debug]',
+            "plone.testing>=5.0.0",
+            "plone.app.contenttypes",
+            "plone.app.robotframework[debug]",
         ]
     },
     entry_points="""

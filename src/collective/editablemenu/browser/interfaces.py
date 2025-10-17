@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from .widgets import EditableMenuSettingsFieldWidget
 from collective.editablemenu import _
 from plone.autoform import directives as form

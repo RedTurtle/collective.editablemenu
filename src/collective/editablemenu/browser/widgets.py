@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.memoize import view
 from z3c.form import widget
@@ -12,7 +11,6 @@ from zope.interface import implementer_only
 from zope.schema.interfaces import IField
 
 import json
-import six
 
 
 class IEditableMenuSettingsWidget(ITextAreaWidget):
@@ -21,12 +19,12 @@ class IEditableMenuSettingsWidget(ITextAreaWidget):
 
 @implementer_only(IEditableMenuSettingsWidget)
 class EditableMenuSettingsWidget(TextAreaWidget):
-    target_field = 'textarea'
+    target_field = "textarea"
 
     @property
     def json_settings(self):
         support_view = api.content.get_view(
-            name='menu_support_view',
+            name="menu_support_view",
             context=self.context,
             request=self.request,
         )
@@ -35,9 +33,9 @@ class EditableMenuSettingsWidget(TextAreaWidget):
     @property
     def settings_titles(self):
         if not self.json_settings:
-            return ''
+            return ""
         support_view = api.content.get_view(
-            name='menu_support_view',
+            name="menu_support_view",
             context=self.context,
             request=self.request,
         )
@@ -49,7 +47,7 @@ class EditableMenuSettingsWidget(TextAreaWidget):
     @property
     def menu_settings(self):
         support_view = api.content.get_view(
-            name='menu_support_view',
+            name="menu_support_view",
             context=self.context,
             request=self.request,
         )
@@ -58,7 +56,7 @@ class EditableMenuSettingsWidget(TextAreaWidget):
         settings = json.loads(self.json_settings)
         return [
             (key, support_view.find_path_title(key), value)
-            for key, value in six.iteritems(settings)
+            for key, value in settings.items()
         ]
 
     @view.memoize

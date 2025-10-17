@@ -9,6 +9,7 @@
 .Python
 .history/
 .settings/
+.tox/
 bin/
 buildout-cache/
 develop-eggs/

@@ -1,18 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
   <records interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings"
-           remove="True"/>
+           remove="True"
+  />
   <!-- RESOURCES -->
-  <records prefix="plone.resources/editablemenu"
-           interface='Products.CMFPlone.interfaces.IResourceRegistry'
-           remove="True" />
-  <records prefix="plone.resources/editablemenu-widget"
-           interface='Products.CMFPlone.interfaces.IResourceRegistry'
-           remove="True" />
+  <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+           prefix="plone.resources/editablemenu"
+           remove="True"
+  />
+  <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+           prefix="plone.resources/editablemenu-widget"
+           remove="True"
+  />
   <!-- BUNDLES -->
-  <records prefix="plone.bundles/editablemenu-bundle"
-           interface='Products.CMFPlone.interfaces.IBundleRegistry'
-           remove="True" />
-  <records prefix="plone.bundles/editablemenu-widget-bundle"
-           interface='Products.CMFPlone.interfaces.IBundleRegistry'
-           remove="True" />
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/editablemenu-bundle"
+           remove="True"
+  />
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/editablemenu-widget-bundle"
+           remove="True"
+  />
 </registry>

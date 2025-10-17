@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
 from collective.editablemenu import logger
 from collective.editablemenu.browser.interfaces import IEditableMenuSettings
@@ -38,7 +37,7 @@ class MenuSupportView(BrowserView):
             return ""
         if path == "/":
             return api.portal.get().Title()
-        search_path = "/{0}{1}".format(api.portal.get().getId(), path)
+        search_path = f"/{api.portal.get().getId()}{path}"
         results = api.content.find(depth=0, path=search_path)
         if len(results) > 0:
             return results[0].Title
@@ -93,13 +92,13 @@ class MenuSupportView(BrowserView):
             expression_context = getExprContext(self.context, self.context)
             value = expression(expression_context)
 
-            if isinstance(value, six.string_types) and value.strip() == "":
+            if isinstance(value, str) and value.strip() == "":
                 value = True
 
             if not value:
                 continue
             tab_title = tab_settings.get("tab_title", "")
-            if six.PY2 and isinstance(tab_title, six.text_type):
+            if six.PY2 and isinstance(tab_title, str):
                 tab_title = tab_title.encode("utf8")
             if not tab_title:
                 continue
@@ -109,7 +108,7 @@ class MenuSupportView(BrowserView):
             # because it wraps all inside a <p> tag.
             # I wrap every row inside a span, so they can be easily styled
             rows = tab_title.replace("\r", "").split("\n")
-            rows = ["<span>{0}</span>".format(x) for x in rows]
+            rows = [f"<span>{x}</span>" for x in rows]
             tab_dict["title"] = "".join(rows)
 
             navigation_folder = self.get_navigation_folder(tab_settings)
@@ -135,11 +134,11 @@ class MenuSupportView(BrowserView):
     def fixLink(self, link):
         if link.startswith("http"):
             return link
-        return "{0}/{1}".format(api.portal.get().absolute_url(), link.lstrip("/"))
+        return "{}/{}".format(api.portal.get().absolute_url(), link.lstrip("/"))
 
     @view.memoize
     def get_object(self, folder_path):
-        if six.PY2 and isinstance(folder_path, six.text_type):
+        if six.PY2 and isinstance(folder_path, str):
             folder_path = folder_path.encode("utf8")
         return api.content.get(path=folder_path)
 
@@ -159,7 +158,7 @@ class MenuSupportView(BrowserView):
 
     @view.memoize
     def get_folder(self, folder_path):
-        if six.PY2 and isinstance(folder_path, six.text_type):
+        if six.PY2 and isinstance(folder_path, str):
             folder_path = folder_path.encode("utf8")
         try:
             return api.content.get(path=folder_path)
@@ -207,7 +206,7 @@ class SubMenuDetailView(MenuSupportView):
             try:
                 tab_id = int(tab_id)
             except ValueError:
-                msg = "Invalid index number ({0}). Unable to retrieve configuration.".format(  # noqa
+                msg = "Invalid index number ({}). Unable to retrieve configuration.".format(  # noqa
                     tab_id
                 )
                 logger.error(msg)
@@ -220,7 +219,7 @@ class SubMenuDetailView(MenuSupportView):
             return settings[candidate_site][tab_id]
         except IndexError:
             logger.error(
-                "Index({0}) not found in menu settings."
+                "Index({}) not found in menu settings."
                 " Unable to retrieve configuration.".format(tab_id)
             )
             return None

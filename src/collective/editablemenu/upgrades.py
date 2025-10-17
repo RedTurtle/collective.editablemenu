@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 from collective.editablemenu import logger
 from plone import api
 
 import json
-import six
 
 
 default_profile = "profile-collective.editablemenu:default"
@@ -66,7 +64,7 @@ def to_2100(context):
     for key in settings.keys():
         site_tabs = settings[key]
         settings[key] = {"items": site_tabs}
-    new_config = six.text_type(json.dumps(settings))
+    new_config = str(json.dumps(settings))
     api.portal.set_registry_record(REGISTRY_NAME, new_config)
 
 
@@ -78,7 +76,7 @@ def generate_new_settings_for_1400():
     for item in menu_items:
         tabs_item.append(item.__dict__)
     menu_config.update({"/": tabs_item})
-    return six.text_type(json.dumps(menu_config))
+    return str(json.dumps(menu_config))
 
 
 def to_3000(context):
@@ -97,5 +95,5 @@ def to_3000(context):
     settings = json.loads(menu_config)
     for key in settings.keys():
         settings[key] = settings[key]["items"]
-    new_config = six.text_type(json.dumps(settings))
+    new_config = str(json.dumps(settings))
     api.portal.set_registry_record(REGISTRY_NAME, new_config)

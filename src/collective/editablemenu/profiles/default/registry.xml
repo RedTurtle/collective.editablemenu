@@ -1,8 +1,10 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
   <records interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings" />
 
-  <records interface="plone.base.interfaces.resources.IBundleRegistry" prefix="plone.bundles/editablemenu-bundle">
+  <records interface="plone.base.interfaces.resources.IBundleRegistry"
+           prefix="plone.bundles/editablemenu-bundle"
+  >
     <value key="enabled">True</value>
     <value key="jscompilation">++plone++collective.editablemenu/dist/editablemenu.min.js</value>
     <value key="csscompilation">++plone++collective.editablemenu/dist/editablemenu.min.css</value>
@@ -10,7 +12,9 @@
     <value key="load_defer">False</value>
     <value key="depends">plone</value>
   </records>
-  <records interface="plone.base.interfaces.resources.IBundleRegistry" prefix="plone.bundles/editablemenu-widget-bundle">
+  <records interface="plone.base.interfaces.resources.IBundleRegistry"
+           prefix="plone.bundles/editablemenu-widget-bundle"
+  >
     <value key="enabled">False</value>
     <value key="jscompilation">++plone++collective.editablemenu/dist/widget.min.js</value>
     <value key="csscompilation">++plone++collective.editablemenu/dist/widget.min.css</value>

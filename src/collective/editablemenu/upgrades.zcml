@@ -1,46 +1,52 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:gs="http://namespaces.zope.org/genericsetup"
-    i18n_domain="collective.editablemenu">
+    i18n_domain="collective.editablemenu"
+    >
 
   <!-- Upgrade steps -->
 
   <gs:upgradeStep
-        title="Upgrade collective.editablemenu 1400"
-        description="collective.editablemenu upgrade step"
-        source="1300"
-        destination="1400"
-        handler=".upgrades.from_1300_to_1400"
-        profile="collective.editablemenu:default" />
+      title="Upgrade collective.editablemenu 1400"
+      description="collective.editablemenu upgrade step"
+      profile="collective.editablemenu:default"
+      source="1300"
+      destination="1400"
+      handler=".upgrades.from_1300_to_1400"
+      />
 
   <gs:upgradeStep
-        title="Upgrade collective.editablemenu 1410"
-        description="Remove non minified js file"
-        source="1400"
-        destination="1410"
-        handler=".upgrades.from_1400_to_1410"
-        profile="collective.editablemenu:default" />
+      title="Upgrade collective.editablemenu 1410"
+      description="Remove non minified js file"
+      profile="collective.editablemenu:default"
+      source="1400"
+      destination="1410"
+      handler=".upgrades.from_1400_to_1410"
+      />
 
   <gs:upgradeStep
-        title="Upgrade collective.editablemenu 2000"
-        description="Move to resource registry"
-        source="*"
-        destination="2000"
-        handler=".upgrades.to_2000"
-        profile="collective.editablemenu:default" />
+      title="Upgrade collective.editablemenu 2000"
+      description="Move to resource registry"
+      profile="collective.editablemenu:default"
+      source="*"
+      destination="2000"
+      handler=".upgrades.to_2000"
+      />
 
   <gs:upgradeStep
-        title="Upgrade collective.editablemenu 2100"
-        description="Refactor registry json"
-        source="*"
-        destination="2100"
-        handler=".upgrades.to_2100"
-        profile="collective.editablemenu:default" />
+      title="Upgrade collective.editablemenu 2100"
+      description="Refactor registry json"
+      profile="collective.editablemenu:default"
+      source="*"
+      destination="2100"
+      handler=".upgrades.to_2100"
+      />
   <gs:upgradeStep
-        title="Upgrade collective.editablemenu 3000"
-        description="Plone 6"
-        source="2100"
-        destination="3000"
-        handler=".upgrades.to_3000"
-        profile="collective.editablemenu:default" />
+      title="Upgrade collective.editablemenu 3000"
+      description="Plone 6"
+      profile="collective.editablemenu:default"
+      source="2100"
+      destination="3000"
+      handler=".upgrades.to_3000"
+      />
 </configure>
