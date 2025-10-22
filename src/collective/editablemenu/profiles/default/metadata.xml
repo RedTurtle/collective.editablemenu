@@ -2,5 +2,6 @@
 <metadata>
   <version>3000</version>
   <dependencies>
-</dependencies>
+    <dependency>profile-redturtle.reactbundle:default</dependency>
+  </dependencies>
 </metadata>

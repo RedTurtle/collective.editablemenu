@@ -46,9 +46,7 @@ setup(
     include_package_data=True,
     python_requires=">=3.10",
     zip_safe=False,
-    install_requires=[
-        "setuptools",
-    ],
+    install_requires=["setuptools", "redturtle.reactbundle"],
     extras_require={
         "test": [
             "plone.app.testing",

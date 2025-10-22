@@ -1,4 +1,5 @@
 from collective.editablemenu import logger
+from plone.base.utils import get_installer
 from plone import api
 
 import json
@@ -86,6 +87,10 @@ def to_3000(context):
     context.runImportStepFromProfile(
         "profile-collective.editablemenu:to_3000", "plone.app.registry"
     )
+
+    portal = api.portal.get()
+    installer = get_installer(portal, portal.REQUEST)
+    installer.install_product(product_id="redturtle.reactbundle")
 
     # add new-style bundle
     context.runImportStepFromProfile(default_profile, "plone.app.registry")

@@ -20,7 +20,7 @@
     <value key="csscompilation">++plone++collective.editablemenu/dist/widget.min.css</value>
     <value key="load_async">False</value>
     <value key="load_defer">False</value>
-    <value key="depends">plone</value>
+    <value key="depends">plone,react-bundle</value>
   </records>
 
 </registry>
