@@ -11,7 +11,12 @@
     }
 }
 
-@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+@mixin panel-variant(
+    $border,
+    $heading-text-color,
+    $heading-bg-color,
+    $heading-border
+) {
     border-color: $border;
 
     & > .panel-heading {
@@ -112,14 +117,30 @@
     @include panel-variant(#ddd, #333, #f5f5f5, #ddd);
 }
 
+.accordion {
+    margin-bottom: 2rem;
+}
 .accordion-header {
     display: flex;
     align-items: center;
+    gap: 1rem;
+    margin-top: 0;
+    background-color: #f7f7f7;
+}
+
+.accordion-actions {
+    gap: 1rem;
+    padding-right: 1rem;
 }
 
 .accordion-button {
     flex-grow: 1; // Fa crescere il testo per riempire lo spazio
 }
+
+.accordion-item:first-of-type > .accordion-header .accordion-button {
+    border-top-right-radius: 0 !important;
+}
+
 .custom-settings-editor {
     background: #fff;
     padding: 6px 12px;
