@@ -9,6 +9,9 @@
     --editablemenu-submenu-link-hover-background: none;
     --editablemenu-submenu-link-decoration: none;
     --editablemenu-submenu-link-hover-decoration: underline;
+    --editablemenu-submenu-item-border: none;
+    --editablemenu-submenu-mobile-item-active: var(--bs-primary);
+    --editablemenu-submenu-mobile-item-active-color: #fff;
 }
 
 #portal-globalnav li a span:not(:last-of-type) {
@@ -37,7 +40,7 @@
                 background-color: var(--editablemenu-submenu-background);
 
                 .submenuStaticWrapper,
-                .submenuDetailsContent {
+                .submenuDynamicWrapper {
                     --bs-navbar-nav-link-padding-x: 0;
 
                     display: flex;
@@ -47,15 +50,36 @@
                     align-items: flex-start;
                     justify-content: space-evenly;
                     padding: 0;
-                    gap: 4em;
 
                     .staticItem {
                         flex: 1 1 25%;
                         border: none;
                         text-align: left;
+                        padding: 0 2em;
 
                         @media (max-width: 1199px) {
                             flex: 1 1 33.33%;
+                        }
+
+                        h3 {
+                            font-size: 1em;
+
+                            a {
+                                padding: 0;
+                                color: var(--bs-heading-color);
+                                text-align: left;
+                                font-weight: bold;
+
+                                &:hover,
+                                &:focus {
+                                    text-decoration: var(
+                                        --editablemenu-submenu-link-hover-decoration
+                                    );
+                                    background-color: var(
+                                        --editablemenu-submenu-link-hover-background
+                                    );
+                                }
+                            }
                         }
                     }
 
@@ -102,6 +126,111 @@
                                     text-decoration: var(
                                         --editablemenu-submenu-link-hover-decoration
                                     );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1199px) {
+        --editablemenu-submenu-item-border: 1px solid #e5e0db;
+
+        //#mobile-menu,
+        #offcanvasNavbar {
+            .offcanvas-header {
+                padding: 10px 20px;
+
+                &.justify-content-end {
+                    justify-content: flex-start;
+                }
+
+                .btn-close {
+                    font-size: 36px;
+                    margin: 0;
+                    --bs-btn-close-opacity: 1;
+                }
+            }
+            .offcanvas-body {
+                #portal-globalnav {
+                    background-color: var(--editablemenu-submenu-background);
+                }
+            }
+            ul {
+                margin: 0;
+
+                li {
+                    text-align: left;
+                    display: flex;
+                    flex-direction: column;
+                    border-bottom: var(--editablemenu-submenu-item-border);
+                    border-right: none;
+
+                    a {
+                        text-align: left !important;
+                        display: flex !important;
+                        width: 100%;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 15px 30px !important;
+                    }
+
+                    &.current,
+                    &:hover,
+                    &.current:hover :focus,
+                    &.current:focus,
+                    &.tabOpen {
+                        background-color: var(
+                            --editablemenu-submenu-mobile-item-active
+                        );
+                        border-bottom: unset;
+
+                        a {
+                            color: var(
+                                --editablemenu-submenu-mobile-item-active-color
+                            );
+                        }
+                    }
+
+                    #submenu-details {
+                        --editablemenu-submenu-border-bottom: none;
+                        padding: 0;
+                        position: unset;
+
+                        .submenuStaticWrapper {
+                            display: flex;
+                            flex-direction: column;
+                            padding: 0;
+
+                            .staticItem {
+                                border: none;
+                                text-align: left;
+                                padding: 0;
+                                flex: 1 1 100%;
+                                width: 100%;
+                                h3 {
+                                    padding-left: 0;
+                                    padding-right: 0;
+                                    margin: 0;
+                                    border-bottom: var(
+                                        --editablemenu-submenu-item-border
+                                    );
+                                }
+
+                                ul {
+                                    li {
+                                        border-bottom: var(
+                                            --editablemenu-submenu-item-border
+                                        );
+                                        padding: 0;
+
+                                        a {
+                                            display: inline;
+                                            padding: 10px 2em !important;
+                                        }
+                                    }
                                 }
                             }
                         }
