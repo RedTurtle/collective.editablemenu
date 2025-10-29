@@ -1,11 +1,28 @@
-#portal-globalnav li a span:not(:last-of-type) { display: block; }
+:root {
+    --editablemenu-submenu-border-top: none;
+    --editablemenu-submenu-border-bottom: none;
+    --editablemenu-submenu-box-shadow: none;
+    --editablemenu-submenu-background: #f6f2ed;
+    --editablemenu-submenu-active-item: var(--bs-link-hover-color);
+    --editablemenu-submenu-link-color: var(--bs-link-color);
+    --editablemenu-submenu-link-hover-color: var(--bs-link-hover-color);
+    --editablemenu-submenu-link-hover-background: none;
+    --editablemenu-submenu-link-decoration: none;
+    --editablemenu-submenu-link-hover-decoration: underline;
+}
 
+#portal-globalnav li a span:not(:last-of-type) {
+    display: block;
+}
+#portal-globalnav-wrapper {
+    position: relative;
+}
 #mainnavigation {
-
     ul#portal-globalnav {
-        li {
-            a {
-                color: #fff;
+        > li {
+            position: unset;
+            > a {
+                color: var(--bs-navbar-color);
             }
 
             #submenu-details {
@@ -13,10 +30,83 @@
                 z-index: 999;
                 left: 0;
                 width: 100%;
-                padding: 1em 4em;
-                border-top: 3px solid #213d72;
-                border-bottom: 2px solid #00819f;
-                background-color: #f6f2ed;
+                padding: 1em 5em;
+                border-top: var(--editablemenu-submenu-border-top);
+                border-bottom: var(--editablemenu-submenu-border-bottom);
+                box-shadow: var(--editablemenu-submenu-box-shadow);
+                background-color: var(--editablemenu-submenu-background);
+
+                .submenuStaticWrapper,
+                .submenuDetailsContent {
+                    --bs-navbar-nav-link-padding-x: 0;
+
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-content: stretch;
+                    align-items: flex-start;
+                    justify-content: space-evenly;
+                    padding: 0;
+                    gap: 4em;
+
+                    .staticItem {
+                        flex: 1 1 25%;
+                        border: none;
+                        text-align: left;
+
+                        @media (max-width: 1199px) {
+                            flex: 1 1 33.33%;
+                        }
+                    }
+
+                    ul {
+                        padding: 0;
+                        list-style-type: none;
+                        position: unset;
+                        visibility: visible;
+                        opacity: 1;
+                        height: auto;
+
+                        li {
+                            padding: 0.2em 0;
+                            border: none;
+                            background: none;
+                            text-align: left;
+                            letter-spacing: normal;
+                            color: var(--editablemenu-submenu-link-color);
+
+                            &.current {
+                                color: var(--editablemenu-submenu-active-item);
+                            }
+
+                            &:hover,
+                            &:active,
+                            &:focus {
+                                color: var(
+                                    --editablemenu-submenu-link-hover-color
+                                );
+                            }
+
+                            a {
+                                display: inline;
+                                color: currentColor;
+                                text-decoration: var(
+                                    --editablemenu-submenu-link-decoration
+                                );
+                                &:hover,
+                                &:active,
+                                &:focus {
+                                    background-color: var(
+                                        --editablemenu-submenu-link-hover-background
+                                    );
+                                    text-decoration: var(
+                                        --editablemenu-submenu-link-hover-decoration
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
