@@ -26,6 +26,18 @@
             position: unset;
             > a {
                 color: var(--bs-navbar-color);
+                &:hover,
+                &:active,
+                &:focus {
+                    color: var(--bs-navbar-hover-color);
+                }
+            }
+
+            &.inPath,
+            &.current {
+                > a {
+                    color: var(--bs-navbar-hover-color);
+                }
             }
 
             #submenu-details {
