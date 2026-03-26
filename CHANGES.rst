@@ -5,7 +5,7 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- Plone 6 compatibility.
+- Plone 6 compatibility. Use 2.x version for Plone < 6.
   [cekk]
 
 
