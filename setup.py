@@ -15,7 +15,7 @@ long_description = "\n\n".join(
 
 setup(
     name="collective.editablemenu",
-    version="2.3.1.dev0",
+    version="3.0.0",
     description="A customizable dropdown menu",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
