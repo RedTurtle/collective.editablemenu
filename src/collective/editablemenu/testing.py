@@ -9,6 +9,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 
 import collective.editablemenu
+import redturtle.reactbundle
 import json
 
 
@@ -17,6 +18,7 @@ class CollectiveEditablemenuLayer(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
+        self.loadZCML(package=redturtle.reactbundle)
         self.loadZCML(package=collective.editablemenu)
 
     def setUpPloneSite(self, portal):
@@ -29,6 +31,7 @@ class CollectiveEditablemenuRobotLayer(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
+        self.loadZCML(package=redturtle.reactbundle)
         self.loadZCML(package=collective.editablemenu)
 
     def setUpPloneSite(self, portal):
