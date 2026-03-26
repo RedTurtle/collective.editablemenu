@@ -5,7 +5,8 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 6 compatibility. Use 2.x version for Plone < 6.
+  [cekk]
 
 
 2.3.0 (2019-09-10)
@@ -38,7 +39,7 @@ Changelog
 Breaking:
 
 - Remove unused classes/interfaces for old-style registry entries from code.
-  See the README for upgrading informations (only if you came from < 0.10.0).
+  See the README for upgrading information (only if you came from < 0.10.0).
   [cekk]
 
 2.0.0 (2018-10-11)
@@ -117,7 +118,7 @@ Breaking:
 - Page template now loaded inside the class to allow easier viewlet cloning [pnicolli]
 - Add simple "not expansible" link in menu [lucabel]
 - Add possibility to condition tab visibility the same way portal_tabs did it [lucabel]
-- Add Plone5 compatibility (no resourse registry)
+- Add Plone5 compatibility (no resource registry)
   [cekk]
 
 

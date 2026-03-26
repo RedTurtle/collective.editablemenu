@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
-    <record interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings"
-            field="menu_tabs"
-            delete="True"/>
+  <record delete="True"
+          field="menu_tabs"
+          interface="collective.editablemenu.browser.interfaces.IEditableMenuSettings"
+  />
 </registry>

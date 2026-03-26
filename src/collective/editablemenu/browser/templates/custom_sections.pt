@@ -1,25 +1,36 @@
-<tal:sections tal:define="menu_tabs view/menu_tabs"
-     tal:condition="menu_tabs"
-     i18n:domain="plone">
-  <nav aria-label="Navigation"
+<tal:sections tal:define="
+                menu_tabs view/menu_tabs;
+              "
+              tal:condition="menu_tabs"
+              i18n:domain="plone"
+>
+  <nav class="globalnavWrapper"
+       aria-label="Navigation"
        i18n:attributes="aria-label heading_sections"
-       class="globalnavWrapper">
-    <ul role="menubar" id="portal-globalnav">
+  >
+    <ul class="editable-menu"
+        id="portal-globalnav"
+        role="menubar"
+    >
       <tal:tabs tal:repeat="tab menu_tabs">
-        <li tal:define="tid python: tab.get('index');
-                        clickandgo python: tab.get('clickandgo');
-                        tab_url python: tab.get('url');
-                        tab_title python: tab.get('title')"
-            tal:condition="tab_title"
+        <li class="${python:tab.get('selected') and 'selected' or 'plain'} editable-menu-li"
             id="portaltab-${tid}"
-            class="${python:tab.get('selected') and 'selected' or 'plain'}">
-          <a href="${python: tab_url or '#'}"
-             data-tabid="${tid}"
-             class="menuTabLink ${python: clickandgo and 'clickandgo' or ''}"
-             aria-haspopup="${python: not clickandgo and 'true' or None}"
+            tal:define="
+              tid python: tab.get('index');
+              clickandgo python: tab.get('clickandgo');
+              tab_url python: tab.get('url');
+              tab_title python: tab.get('title');
+            "
+            tal:condition="tab_title"
+        >
+          <a class="menuTabLink ${python: clickandgo and 'clickandgo' or ''}"
              aria-expanded="${python: not clickandgo and 'false' or None}"
+             aria-haspopup="${python: not clickandgo and 'true' or None}"
+             href="${python: tab_url or '#'}"
              role="${python: not clickandgo and 'menuitem' or None}"
-             tal:content="structure tab/title">
+             data-tabid="${tid}"
+             tal:content="structure tab/title"
+          >
             Tab Name
           </a>
         </li>

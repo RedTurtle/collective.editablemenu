@@ -6,9 +6,11 @@
 .mr.developer.cfg
 .project
 .pydevproject
+.python-version
 .Python
 .history/
 .settings/
+.tox/
 bin/
 buildout-cache/
 develop-eggs/

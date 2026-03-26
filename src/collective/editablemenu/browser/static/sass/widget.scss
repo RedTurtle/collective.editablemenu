@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 @mixin clearfix() {
     &:before,
     &:after {
@@ -9,7 +11,12 @@
     }
 }
 
-@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+@mixin panel-variant(
+    $border,
+    $heading-text-color,
+    $heading-bg-color,
+    $heading-border
+) {
     border-color: $border;
 
     & > .panel-heading {
@@ -75,17 +82,6 @@
     }
 }
 
-.remove-item-button {
-    position: absolute;
-    top: calc(50% - 17px);
-    right: 8px;
-
-    img {
-        height: 1.125em;
-        width: auto;
-    }
-}
-
 .panel-title {
     margin-top: 0;
     margin-bottom: 0;
@@ -105,7 +101,7 @@
         }
         &:focus,
         &:hover {
-            background-color: transparentize($color: black, $amount: 0.97);
+            background-color: color.adjust(black, $alpha: -0.97);
 
             span {
                 border-bottom-color: transparent;
@@ -121,21 +117,28 @@
     @include panel-variant(#ddd, #333, #f5f5f5, #ddd);
 }
 
-.collapse {
-    display: none;
-
-    &.in {
-        display: block;
-    }
+.accordion {
+    margin-bottom: 2rem;
+}
+.accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0;
+    background-color: #f7f7f7;
 }
 
-.collapsing {
-    position: relative;
-    height: 0;
-    overflow: hidden;
-    transition-property: height visibility;
-    transition-duration: 0.35s;
-    transition-timing-function: ease;
+.accordion-actions {
+    gap: 1rem;
+    padding-right: 1rem;
+}
+
+.accordion-button {
+    flex-grow: 1; // Fa crescere il testo per riempire lo spazio
+}
+
+.accordion-item:first-of-type > .accordion-header .accordion-button {
+    border-top-right-radius: 0 !important;
 }
 
 .custom-settings-editor {

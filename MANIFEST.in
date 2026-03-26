@@ -12,3 +12,7 @@ global-exclude *pyc
 include .editorconfig
 include .gitattributes
 include *.txt
+exclude .babelrc
+exclude .python-version
+exclude postcss.config.js
+exclude webpack.config.js
