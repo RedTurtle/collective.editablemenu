@@ -9,8 +9,8 @@ from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 
 import collective.editablemenu
-import redturtle.reactbundle
 import json
+import redturtle.reactbundle
 
 
 class CollectiveEditablemenuLayer(PloneSandboxLayer):
