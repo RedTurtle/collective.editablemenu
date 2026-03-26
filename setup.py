@@ -26,7 +26,6 @@ setup(
         "Framework :: Plone :: 6.1",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: JavaScript",
@@ -44,7 +43,7 @@ setup(
     namespace_packages=["collective"],
     package_dir={"": "src"},
     include_package_data=True,
-    python_requires=">=3.10",
+    python_requires=">=3.11",
     zip_safe=False,
     install_requires=["setuptools", "redturtle.reactbundle"],
     extras_require={
