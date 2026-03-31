@@ -5,7 +5,8 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed styles for current menu item and inPath items. Now they use CSS variables to allow themes to customize them.
+  [giulia-ghisini]
 
 
 3.0.0 (2026-03-26)
