@@ -24,19 +24,40 @@
     ul#portal-globalnav {
         > li {
             position: unset;
+
+            --menu-item-color: var(--bs-navbar-color);
+            --menu-item-bg: var(--bs-navbar-background);
+
             > a {
-                color: var(--bs-navbar-color);
+                color: var(--menu-item-color);
+                background-color: var(--menu-item-bg);
+                // color: var(--bs-navbar-color);
+                // &:hover,
+                // &:active,
+                // &:focus {
+                //     color: var(--bs-navbar-hover-color);
+                // }
+
                 &:hover,
                 &:active,
                 &:focus {
-                    color: var(--bs-navbar-hover-color);
+                    --menu-item-color: var(--bs-navbar-hover-color);
                 }
             }
 
-            &.inPath,
-            &.current {
+            &.current > a {
+                // color: var(--bs-navbar-hover-color);
+                // background-color: var(--bs-navbar-active-background);
+                --menu-item-color: var(--bs-navbar-hover-color);
+                --menu-item-bg: var(--bs-navbar-active-background);
+            }
+
+            &.selected.inPath,
+            .inPath:not(.current) {
                 > a {
-                    color: var(--bs-navbar-hover-color);
+                    //    background-color: var(--bs-navbar-background);
+                    --menu-item-bg: var(--bs-navbar-background);
+                    --menu-item-color: var(--bs-navbar-color);
                 }
             }
 
