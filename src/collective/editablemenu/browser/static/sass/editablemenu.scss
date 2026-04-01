@@ -42,10 +42,11 @@
                 &:active,
                 &:focus {
                     --menu-item-color: var(--bs-navbar-hover-color);
+                    --menu-item-bg: var(--bs-navbar-active-background);
                 }
             }
 
-            &.current > a {
+            &.current > a:not(:hover):not(:active):not(:focus) {
                 // color: var(--bs-navbar-hover-color);
                 // background-color: var(--bs-navbar-active-background);
                 --menu-item-color: var(--bs-navbar-hover-color);
