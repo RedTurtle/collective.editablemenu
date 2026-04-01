@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.0.2 (unreleased)
+3.0.2 (2026-04-01)
 ------------------
 
 - fix styles for menu hover color [giulia]
