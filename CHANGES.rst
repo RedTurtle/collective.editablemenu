@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.0.3 (unreleased)
+3.0.3 (2026-06-23)
 ------------------
 
 - Improve html structure to not break when there are too many menu items.
