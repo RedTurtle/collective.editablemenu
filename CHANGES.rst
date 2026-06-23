@@ -5,7 +5,8 @@ Changelog
 3.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Improve html structure to not break when there are too many menu items.
+  [cekk]
 
 
 3.0.2 (2026-04-01)

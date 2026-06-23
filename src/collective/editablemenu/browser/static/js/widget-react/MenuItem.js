@@ -93,7 +93,6 @@ const MenuItem = ({
             <textarea
               className="form-control"
               value={tab_title}
-              name={`tabtitle-${menuId}-${idx}`}
               id={`tabtitle-${menuId}-${idx}`}
               key={`title-${menuId}-${idx}`}
               onChange={(e) =>
@@ -115,7 +114,6 @@ const MenuItem = ({
               className="form-control"
               type="text"
               value={navigation_folder}
-              name={`navfolder-${menuId}-${idx}`}
               id={`navfolder-${menuId}-${idx}`}
               key={`navfolder-${menuId}-${idx}`}
               onChange={(e) =>
@@ -140,7 +138,6 @@ const MenuItem = ({
               type="text"
               className="form-control"
               value={additional_columns}
-              name={`additional-${menuId}-${idx}`}
               key={`additional-${menuId}-${idx}`}
               id={`additional-${menuId}-${idx}`}
               onChange={(e) =>
@@ -162,7 +159,6 @@ const MenuItem = ({
               className="form-control"
               type="text"
               value={simple_link}
-              name={`simple-${menuId}-${idx}`}
               id={`simple-${menuId}-${idx}`}
               key={`simple-${menuId}-${idx}`}
               onChange={(e) =>
@@ -187,7 +183,6 @@ const MenuItem = ({
               className="form-control"
               type="text"
               value={condition}
-              name={`condition-${menuId}-${idx}`}
               id={`condition-${menuId}-${idx}`}
               key={`condition-${menuId}-${idx}`}
               onChange={(e) =>
@@ -209,7 +204,6 @@ const MenuItem = ({
               className="form-control"
               type="text"
               value={intro_text}
-              name={`intro-${menuId}-${idx}`}
               id={`intro-${menuId}-${idx}`}
               key={`intro-${menuId}-${idx}`}
               onChange={(e) =>
@@ -234,7 +228,6 @@ const MenuItem = ({
               className="form-control"
               type="text"
               value={section_link}
-              name={`section-link-${menuId}-${idx}`}
               id={`section-link-${menuId}-${idx}`}
               key={`section-link-${menuId}-${idx}`}
               onChange={(e) =>

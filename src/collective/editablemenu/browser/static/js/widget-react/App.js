@@ -134,6 +134,18 @@ function App(props) {
     setActive(0);
   };
 
+  const renameMenu = (oldKey) => (e) => {
+    const newKey = e.target.value;
+    const newSettings = Object.fromEntries(
+      Object.entries(settings).map(([k, v]) => (k === oldKey ? [newKey, v] : [k, v]))
+    );
+    const newTitles = Object.fromEntries(
+      Object.entries(titles).map(([k, v]) => (k === oldKey ? [newKey, v] : [k, v]))
+    );
+    setSettings(newSettings);
+    setTitles(newTitles);
+  };
+
   return (
     <div className="custom-settings-editor">
       <NavBar
@@ -163,8 +175,8 @@ function App(props) {
                 <span>{translate('path_label', 'Path')}</span>
                 <input
                   type="text"
-                  defaultValue={item}
-                  name={`path-${idToUse}`}
+                  value={item}
+                  onChange={renameMenu(item)}
                 />
               </label>
               <div className="menu-configuration">
